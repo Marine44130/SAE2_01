@@ -42,7 +42,36 @@
             </HBox>
          </top>
          <left>
-            <VBox prefHeight="581.0" prefWidth="35.0" style="-fx-background-color: #262626;" BorderPane.alignment="CENTER" />
+            <VBox prefHeight="589.0" prefWidth="43.0" style="-fx-background-color: #262626;" BorderPane.alignment="CENTER">
+               <children>
+                  <ImageView fitHeight="44.0" fitWidth="62.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../../../../../../../../../../../Downloads/Ham-removebg-preview.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fitHeight="44.0" fitWidth="53.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../../../../../../../../../../../Downloads/home-removebg-preview(1).png" />
+                     </image>
+                  </ImageView>
+                  <Region prefHeight="398.0" prefWidth="46.0" />
+                  <ImageView fitHeight="23.0" fitWidth="45.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../../../../../../../../../../../Downloads/dayNight-removebg-preview.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fitHeight="41.0" fitWidth="47.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../../../../../../../../../../../Downloads/partage-removebg-preview.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fitHeight="45.0" fitWidth="45.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../../../../../../../../../../../Downloads/save-removebg-preview.png" />
+                     </image>
+                  </ImageView>
+               </children>
+            </VBox>
          </left>
       </BorderPane>
    </children>
