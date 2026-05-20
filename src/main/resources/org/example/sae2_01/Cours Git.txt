@@ -1,0 +1,70 @@
+--Tests unitaire
+assertTrue(arg1)
+assertFalse(arg1)
+assertEquals(arg1, arg2)
+assertDoesNotThrow(arg1)
+assertThrows(arg1,arg2)
+
+--Test parametrer
+jupiter params
+
+@ValueSource
+@CSVSource --> extrait csv
+@NullSource --> execute une fois avec val null
+@EmptySource --> une fois avec une val du bon type, mais vide (list, string)
+
+@duifnx = {huc,fre,rfer}
+
+--GIT
+créer depot
+ajout fichier
+créer commit
+
+commande : 
+
+cd C:\adresse Workspace
+git init
+git add
+git status
+git commit -m "Commit 1 : ajout d'un point d'exclamation"
+
+--Debugeur
+vgtg
+
+--GIT
+git checkout -b yesterday //créer branche
+git add .
+git commit -m "bhfe"
+git checkout now // se deplace sur l'autre branche
+
+
+//localDate
+
+
+Fusionner deux branches sur master (GIT)
+se positionner sur master
+git merge yesterday
+git commit
+gid add .
+git merge now
+resoudre conflit //normal
+git commit
+git add . //rafraichit
+vualllllaaaa fini
+
+suprimer branch inutile
+git branch -d yesterday
+git branch -d now
+
+
+token : lmugitlab_kQncMoWGI5TrtDrsv4FxWm86MQp1OjFxN3YK.01.100uz0iv8
+
+gitignore //ignore fichier qu'on veut pas modifier
+git push --set-upstream origin master //branch
+git push //met a jour sur git lab
+git pull //recupere la version modifier
+
+call stack = liste de méthodes appeler jusqu'à l'endroit ou on se trouve dans l'appli
+
+Stack Trace = leve une exeption et permet de lire le call stack dans l'appli
+
