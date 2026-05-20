@@ -1,78 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.image.Image?>
-<?import javafx.scene.image.ImageView?>
-<?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.Region?>
 <?import javafx.scene.layout.VBox?>
-<?import javafx.scene.text.Font?>
 
 
-<AnchorPane prefHeight="600.0" prefWidth="550.0" xmlns="http://javafx.com/javafx/21.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="CONTROLLER_NAME">
-   <children>
-      <BorderPane layoutX="-5.0" layoutY="-5.0" prefHeight="610.0" prefWidth="553.0">
-         <top>
-            <HBox prefHeight="0.0" prefWidth="554.0" style="-fx-background-color: #DBDBDB;" BorderPane.alignment="CENTER">
-               <children>
-                  <Label alignment="CENTER" prefHeight="34.0" prefWidth="96.0" text="TierList Creator" textAlignment="CENTER">
-                     <font>
-                        <Font size="11.0" />
-                     </font>
-                  </Label>
-                  <Region prefHeight="22.0" prefWidth="381.0" />
-                  <ImageView fitHeight="21.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../../../../../../../../../../../Images/Screenshots/Capture%20d'écran%202026-05-20%20150900.png" />
-                     </image>
-                  </ImageView>
-                  <ImageView fitHeight="21.0" fitWidth="28.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../../../../../../../../../../../Images/Screenshots/Capture%20d'écran%202026-05-20%20150750.png" />
-                     </image>
-                  </ImageView>
-                  <ImageView fitHeight="21.0" fitWidth="33.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../../../../../../../../../../../Images/Screenshots/Capture%20d'écran%202026-05-20%20150810.png" />
-                     </image>
-                  </ImageView>
-               </children>
-            </HBox>
-         </top>
-         <left>
-            <VBox prefHeight="589.0" prefWidth="43.0" style="-fx-background-color: #262626;" BorderPane.alignment="CENTER">
-               <children>
-                  <ImageView fitHeight="44.0" fitWidth="62.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../../../../../../../../../../../../Downloads/Ham-removebg-preview.png" />
-                     </image>
-                  </ImageView>
-                  <ImageView fitHeight="44.0" fitWidth="53.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../../../../../../../../../../../../Downloads/home-removebg-preview(1).png" />
-                     </image>
-                  </ImageView>
-                  <Region prefHeight="398.0" prefWidth="46.0" />
-                  <ImageView fitHeight="23.0" fitWidth="45.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../../../../../../../../../../../../Downloads/dayNight-removebg-preview.png" />
-                     </image>
-                  </ImageView>
-                  <ImageView fitHeight="41.0" fitWidth="47.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../../../../../../../../../../../../Downloads/partage-removebg-preview.png" />
-                     </image>
-                  </ImageView>
-                  <ImageView fitHeight="45.0" fitWidth="45.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../../../../../../../../../../../../Downloads/save-removebg-preview.png" />
-                     </image>
-                  </ImageView>
-               </children>
-            </VBox>
-         </left>
-      </BorderPane>
-   </children>
-</AnchorPane>
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="550.0" xmlns="http://javafx.com/javafx/21.0.1" xmlns:fx="http://javafx.com/fxml/1">
+   <top>
+      <HBox prefHeight="37.0" prefWidth="550.0" style="-fx-background-color: #DBDBDB;" BorderPane.alignment="CENTER" />
+   </top>
+   <left>
+      <VBox prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER" />
+   </left>
+</BorderPane>
