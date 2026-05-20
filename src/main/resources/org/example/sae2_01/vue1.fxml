@@ -3,6 +3,7 @@
 <?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 
 <BorderPane prefHeight="952.0" prefWidth="987.0" style="-fx-background-color: #dcdcdc;" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1">
     <padding>
@@ -14,7 +15,10 @@
             <children>
                 <HBox alignment="CENTER_LEFT" prefHeight="36.0" style="-fx-background-color: #dcdcdc;">
                     <children>
-                        <Label style="-fx-font-size: 31px; -fx-text-fill: #222222;" text="TierList Creator" />
+                        <Label prefHeight="46.0" prefWidth="227.0" style="-fx-font-size: 31px; -fx-text-fill: #222222;" text="Tier-List Creator">
+                     <font>
+                        <Font size="8.0" />
+                     </font></Label>
                         <Region HBox.hgrow="ALWAYS" />
                     </children>
                 </HBox>
