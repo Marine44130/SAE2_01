@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<BorderPane prefHeight="952.0" prefWidth="987.0" style="-fx-background-color: #dcdcdc;" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1">
+    <padding>
+        <Insets bottom="12.0" left="12.0" right="12.0" top="12.0" />
+    </padding>
+
+    <top>
+        <VBox spacing="0.0">
+            <children>
+                <HBox alignment="CENTER_LEFT" prefHeight="36.0" style="-fx-background-color: #dcdcdc;">
+                    <children>
+                        <Label style="-fx-font-size: 31px; -fx-text-fill: #222222;" text="TierList Creator" />
+                        <Region HBox.hgrow="ALWAYS" />
+                    </children>
+                </HBox>
+
+                <HBox prefHeight="58.0" style="-fx-background-color: #3b3b3b;">
+                    <children>
+                        <StackPane prefWidth="96.0" style="-fx-border-color: #00c36d #111111 #111111 #00c36d; -fx-border-width: 1 1 0 1;" />
+                    </children>
+                </HBox>
+            </children>
+        </VBox>
+    </top>
+
+    <left>
+        <VBox alignment="TOP_CENTER" prefWidth="96.0" style="-fx-background-color: #3b3b3b; -fx-border-color: #00c36d #111111 #00c36d #00c36d; -fx-border-width: 0 1 1 1;">
+            <children>
+                <Region prefHeight="560.0" VBox.vgrow="ALWAYS" />
+            </children>
+        </VBox>
+    </left>
+
+    <center>
+        <VBox spacing="0.0">
+            <children>
+                <GridPane VBox.vgrow="ALWAYS">
+                    <columnConstraints>
+                        <ColumnConstraints prefWidth="140.0" />
+                        <ColumnConstraints hgrow="ALWAYS" />
+                    </columnConstraints>
+                    <rowConstraints>
+                        <RowConstraints percentHeight="14.2857" />
+                        <RowConstraints percentHeight="14.2857" />
+                        <RowConstraints percentHeight="14.2857" />
+                        <RowConstraints percentHeight="14.2857" />
+                        <RowConstraints percentHeight="14.2857" />
+                        <RowConstraints percentHeight="14.2857" />
+                        <RowConstraints percentHeight="14.2857" />
+                    </rowConstraints>
+
+                    <children>
+                        <StackPane style="-fx-background-color: #ff3636; -fx-border-color: #111111; -fx-border-width: 0 1 1 0;" GridPane.columnIndex="0" GridPane.rowIndex="0">
+                            <children><Label style="-fx-font-size: 42px;" text="S" /></children>
+                        </StackPane>
+                        <StackPane prefHeight="113.0" prefWidth="140.0" style="-fx-background-color: #f4a742; -fx-border-color: #111111; -fx-border-width: 0 1 1 0;" GridPane.columnIndex="0" GridPane.rowIndex="1">
+                            <children><Label style="-fx-font-size: 42px;" text="A" /></children>
+                        </StackPane>
+                        <StackPane style="-fx-background-color: #f0df58; -fx-border-color: #111111; -fx-border-width: 0 1 1 0;" GridPane.columnIndex="0" GridPane.rowIndex="2">
+                            <children><Label style="-fx-font-size: 42px;" text="B" /></children>
+                        </StackPane>
+                        <StackPane style="-fx-background-color: #9eef2b; -fx-border-color: #111111; -fx-border-width: 0 1 1 0;" GridPane.columnIndex="0" GridPane.rowIndex="3">
+                            <children><Label style="-fx-font-size: 42px;" text="C" /></children>
+                        </StackPane>
+                        <StackPane style="-fx-background-color: #36b44e; -fx-border-color: #111111; -fx-border-width: 0 1 1 0;" GridPane.columnIndex="0" GridPane.rowIndex="4">
+                            <children><Label style="-fx-font-size: 42px;" text="D" /></children>
+                        </StackPane>
+                        <StackPane style="-fx-background-color: #57d1dd; -fx-border-color: #111111; -fx-border-width: 0 1 1 0;" GridPane.columnIndex="0" GridPane.rowIndex="5">
+                            <children><Label style="-fx-font-size: 42px;" text="E" /></children>
+                        </StackPane>
+                        <StackPane style="-fx-background-color: #3e7db7; -fx-border-color: #111111; -fx-border-width: 0 1 1 0;" GridPane.columnIndex="0" GridPane.rowIndex="6">
+                            <children><Label style="-fx-font-size: 42px;" text="F" /></children>
+                        </StackPane>
+
+                        <StackPane style="-fx-border-color: #111111; -fx-border-width: 0 0 1 0;" GridPane.columnIndex="1" GridPane.rowIndex="0" />
+                        <StackPane style="-fx-border-color: #111111; -fx-border-width: 0 0 1 0;" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                        <StackPane style="-fx-border-color: #111111; -fx-border-width: 0 0 1 0;" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                        <StackPane style="-fx-border-color: #111111; -fx-border-width: 0 0 1 0;" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                        <StackPane style="-fx-border-color: #111111; -fx-border-width: 0 0 1 0;" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                        <StackPane style="-fx-border-color: #111111; -fx-border-width: 0 0 1 0;" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+                        <StackPane style="-fx-border-color: #111111; -fx-border-width: 0 0 1 0;" GridPane.columnIndex="1" GridPane.rowIndex="6" />
+                    </children>
+                </GridPane>
+
+                <Separator />
+
+                <Region prefHeight="255.0" style="-fx-background-color: #b7b7b7;" />
+            </children>
+        </VBox>
+    </center>
+</BorderPane>
