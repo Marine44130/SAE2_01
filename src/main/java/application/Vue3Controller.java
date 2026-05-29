@@ -12,9 +12,6 @@ import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
-import model.Tier;
-import model.TierList;
-import application.Item;
 
 import java.io.File;
 import java.net.URL;
