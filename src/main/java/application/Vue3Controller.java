@@ -1,6 +1,4 @@
-package org.example.sae2_01;
-
-package controller;
+package application;
 
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -9,33 +7,20 @@ import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.*;
-import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
-import model.Item;
 import model.Tier;
 import model.TierList;
 
 import java.io.File;
 import java.net.URL;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.ResourceBundle;
 
-/**
- * Contrôleur de la vue 3_2 : édition d'une tier-list.
- *
- * Responsabilités :
- *  - Afficher la zone "à classer" (items non encore classés)
- *  - Permettre l'ajout d'items texte ou image
- *  - Afficher les tiers existants et permettre d'y déposer des items (drag & drop)
- *  - Ajouter de nouveaux tiers (nom + couleur)
- *  - Naviguer vers la vue précédente ou terminer
- */
 public class Vue3Controller implements Initializable {
 
     @FXML private VBox unrankedArea;
