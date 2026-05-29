@@ -1,4 +1,4 @@
-package org.example.sae2_01;
+package application;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -11,7 +11,7 @@ public class TiersListApplication extends Application {
     @Override
     public void start(Stage stage) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(TiersListApplication.class.getResource("hello-view.fxml"));
-        Scene scene = new Scene(fxmlLoader.load(), 320, 240);
+        Scene scene = new Scene(fxmlLoader.load(), 550, 700);
         stage.setTitle("TiersList Creator");
         stage.setScene(scene);
         stage.show();

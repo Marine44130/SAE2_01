@@ -1,4 +1,4 @@
-package org.example.sae2_01;
+package application;
 
 import java.io.Serializable;
 

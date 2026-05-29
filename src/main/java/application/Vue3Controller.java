@@ -14,6 +14,7 @@ import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import model.Tier;
 import model.TierList;
+import application.Item;
 
 import java.io.File;
 import java.net.URL;
@@ -101,7 +102,7 @@ public class Vue3Controller implements Initializable {
         File file = chooser.showOpenDialog(stage);
         if (file == null) return;
 
-        Item item = new Item(file.toURI().toString(), true); // item image
+        Item item = new Item(file.toURI().toString(), true);
         tierList.addUnrankedItem(item);
         refreshUnrankedArea();
     }
