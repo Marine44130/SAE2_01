@@ -33,7 +33,6 @@ public class TierList implements Serializable {
         return unrankedItems;
     }
 
-    // Gestion des Tiers
     public void addTier(Tier tier) {
         if (tier != null) {
             tiers.add(tier);
@@ -44,7 +43,6 @@ public class TierList implements Serializable {
         tiers.remove(tier);
     }
 
-    // Gestion des éléments non classés
     public void addUnrankedItem(Item item) {
         if (item != null && !unrankedItems.contains(item)) {
             unrankedItems.add(item);
