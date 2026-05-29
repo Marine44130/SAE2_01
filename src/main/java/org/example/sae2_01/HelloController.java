@@ -34,6 +34,6 @@ public class HelloController {
 
     @FXML
     private void onMenuButtonClick() {
-        // Menu intentionally left empty for the current mockup.
+
     }
 }
