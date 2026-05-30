@@ -5,7 +5,6 @@ module org.example.sae2_01 {
     requires okhttp3;
     requires com.google.gson;
 
-
     opens application to javafx.fxml;
     exports application;
 }
