@@ -3,7 +3,8 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.SplitMenuButton?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
@@ -11,24 +12,17 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Region?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="550.0" style="-fx-background-color: #2F2F2F;" xmlns="http://javafx.com/javafx/21.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.Vue3Controller">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="550.0" style="-fx-background-color: #2F2F2F;" xmlns="http://javafx.com/javafx/26" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.Vue2Controller">
    <left>
       <VBox prefHeight="562.0" prefWidth="48.0" style="-fx-background-color: #242424;" BorderPane.alignment="CENTER">
          <children>
-            <ImageView fitHeight="46.0" fitWidth="46.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@images/Ham-removebg-preview.png" />
-               </image></ImageView>
-            <ImageView fitHeight="46.0" fitWidth="46.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="home" fitHeight="46.0" fitWidth="46.0" onMousePressed="#handlehome_btn" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@images/home-removebg-preview(1).png" />
                </image></ImageView>
-            <Region prefHeight="492.0" prefWidth="48.0" />
-            <ImageView fitHeight="19.0" fitWidth="56.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@images/dayNight-removebg-preview.png" />
-               </image></ImageView>
+            <Region prefWidth="50.0" />
             <ImageView fitHeight="46.0" fitWidth="46.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@images/partage-removebg-preview.png" />
@@ -43,140 +37,94 @@
    <center>
       <VBox prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER">
          <children>
-            <VBox prefHeight="200.0" prefWidth="100.0" style="-fx-background-color: #525252; -fx-background-radius: 15;">
+            <Label style="-fx-text-fill: white;" text="Mes Tiers-lists :">
                <VBox.margin>
-                  <Insets bottom="25.0" left="25.0" right="25.0" top="25.0" />
+                  <Insets left="30.0" top="30.0" />
                </VBox.margin>
-               <children>
-                  <HBox prefHeight="100.0" prefWidth="200.0">
-                     <VBox.margin>
-                        <Insets />
-                     </VBox.margin>
-                     <children>
-                        <Label alignment="CENTER" prefHeight="80.0" prefWidth="80.0" style="-fx-text-fill: white; -fx-background-radius: 15; -fx-background-color: #858585;" text="Item">
-                           <HBox.margin>
-                              <Insets bottom="5.0" left="10.0" right="10.0" top="5.0" />
-                           </HBox.margin>
-                        </Label>
-                        <Label alignment="CENTER" prefHeight="80.0" prefWidth="80.0" style="-fx-text-fill: white; -fx-background-radius: 15; -fx-background-color: #858585;" text="Item">
-                           <HBox.margin>
-                              <Insets bottom="5.0" left="10.0" right="10.0" top="5.0" />
-                           </HBox.margin>
-                        </Label>
-                     </children>
-                  </HBox>
-                  <HBox prefHeight="100.0" prefWidth="200.0">
-                     <VBox.margin>
-                        <Insets />
-                     </VBox.margin>
-                     <children>
-                        <Label alignment="CENTER" prefHeight="80.0" prefWidth="80.0" style="-fx-text-fill: white; -fx-background-radius: 15; -fx-background-color: #858585;" text="Item">
-                           <HBox.margin>
-                              <Insets bottom="5.0" left="10.0" right="10.0" top="5.0" />
-                           </HBox.margin>
-                        </Label>
-                     </children>
-                  </HBox>
-               </children>
-            </VBox>
+               <font>
+                  <Font size="20.0" />
+               </font>
+            </Label>
+            <Label fx:id="MesTierList" alignment="CENTER" prefHeight="200.0" prefWidth="432.0" style="-fx-text-fill: white; -fx-background-radius: 15; -fx-background-color: #525252;" />
             <HBox prefHeight="32.0" prefWidth="502.0">
-               <children>
-                  <TextField promptText="Add item text :" style="-fx-border-color: #525252; -fx-background-color: #2F2F2F; -fx-border-radius: 15; -fx-text-fill: blue;">
-                     <HBox.margin>
-                        <Insets left="25.0" />
-                     </HBox.margin>
-                  </TextField>
-                  <Button mnemonicParsing="false" style="-fx-background-color: #5865F2; -fx-text-fill: white; -fx-background-radius: 5;" text="+ Add item">
-                     <HBox.margin>
-                        <Insets left="25.0" />
-                     </HBox.margin>
-                  </Button>
-                  <Button mnemonicParsing="false" prefHeight="27.0" prefWidth="71.0" style="-fx-background-color: #2F2F2F; -fx-text-fill: white; -fx-background-radius: 5; -fx-border-color: #525252; -fx-border-radius: 5;" text="Image">
-                     <HBox.margin>
-                        <Insets left="25.0" />
-                     </HBox.margin>
-                  </Button>
-               </children>
-            </HBox>
-            <HBox prefHeight="297.0" prefWidth="502.0">
-               <children>
-                  <VBox prefHeight="200.0" prefWidth="100.0">
-                     <HBox.margin>
-                        <Insets left="25.0" right="25.0" />
-                     </HBox.margin>
-                     <children>
-                        <Label alignment="CENTER" prefHeight="100.0" prefWidth="100.0" style="-fx-border-color: white; -fx-background-color: #525252; -fx-text-fill: white;" text="Name" />
-                        <Label alignment="CENTER" prefHeight="100.0" prefWidth="100.0" style="-fx-border-color: white; -fx-background-color: #525252; -fx-text-fill: white;" text="Name" />
-                        <Label alignment="CENTER" prefHeight="100.0" prefWidth="100.0" style="-fx-border-color: white; -fx-background-color: #525252; -fx-text-fill: white;" text="Name" />
-                     </children>
-                  </VBox>
-                  <Separator orientation="VERTICAL" prefHeight="200.0" />
-                  <VBox prefHeight="200.0" prefWidth="100.0">
-                     <HBox.margin>
-                        <Insets left="25.0" right="25.0" />
-                     </HBox.margin>
-                     <children>
-                        <Label alignment="CENTER" prefHeight="100.0" prefWidth="100.0" style="-fx-border-color: white; -fx-background-color: #525252; -fx-text-fill: white;" text="Name" />
-                        <Label alignment="CENTER" prefHeight="100.0" prefWidth="100.0" style="-fx-border-color: white; -fx-background-color: #525252; -fx-text-fill: white;" text="Name" />
-                     </children>
-                  </VBox>
-                  <Separator orientation="VERTICAL" prefHeight="200.0" />
-                  <VBox prefHeight="200.0" prefWidth="100.0">
-                     <HBox.margin>
-                        <Insets left="25.0" right="25.0" />
-                     </HBox.margin>
-                     <children>
-                        <Label alignment="CENTER" prefHeight="100.0" prefWidth="100.0" style="-fx-border-color: white; -fx-background-color: #525252; -fx-text-fill: white;" text="Name" />
-                     </children>
-                  </VBox>
-               </children>
-               <VBox.margin>
-                  <Insets top="10.0" />
-               </VBox.margin>
-            </HBox>
-            <HBox prefHeight="32.0" prefWidth="502.0">
-               <children>
-                  <TextField promptText="Add text (S, A,B)" style="-fx-border-color: #525252; -fx-background-color: #2F2F2F; -fx-border-radius: 15; -fx-text-fill: blue;">
-                     <HBox.margin>
-                        <Insets left="25.0" />
-                     </HBox.margin>
-                  </TextField>
-                  <Button mnemonicParsing="false" prefHeight="27.0" prefWidth="71.0" style="-fx-background-color: #2F2F2F; -fx-text-fill: white; -fx-background-radius: 5; -fx-border-color: #525252; -fx-border-radius: 5;" text="Couleur">
-                     <HBox.margin>
-                        <Insets left="25.0" />
-                     </HBox.margin>
-                  </Button>
-                  <Button mnemonicParsing="false" style="-fx-background-color: #5865F2; -fx-text-fill: white; -fx-background-radius: 5;" text="+ Add tiers">
-                     <HBox.margin>
-                        <Insets left="25.0" />
-                     </HBox.margin>
-                  </Button>
-               </children>
                <VBox.margin>
                   <Insets top="15.0" />
                </VBox.margin>
+               <children>
+                  <Label style="-fx-text-fill: white;" text="Supprimer une Tier-list :">
+                     <font>
+                        <Font size="20.0" />
+                     </font>
+                     <HBox.margin>
+                        <Insets left="30.0" />
+                     </HBox.margin>
+                  </Label>
+                  <SplitMenuButton mnemonicParsing="false" prefHeight="30.0" prefWidth="195.0" text="Choisissez votre Tier-list">
+                    <items>
+                      <MenuItem mnemonicParsing="false" text="Action 1" />
+                      <MenuItem mnemonicParsing="false" text="Action 2" />
+                    </items>
+                     <HBox.margin>
+                        <Insets left="20.0" />
+                     </HBox.margin>
+                  </SplitMenuButton>
+               </children>
             </HBox>
             <HBox prefHeight="32.0" prefWidth="502.0">
                <children>
-                  <Button mnemonicParsing="false" prefHeight="27.0" prefWidth="95.0" style="-fx-background-color: white; -fx-text-fill: black; -fx-background-radius: 15; -fx-border-color: #525252; -fx-border-radius: 5;" text="Précedent">
+                  <Label style="-fx-text-fill: white;" text="Dupliquer une Tier-list :">
+                     <font>
+                        <Font size="20.0" />
+                     </font>
                      <HBox.margin>
-                        <Insets left="10.0" />
+                        <Insets left="30.0" />
                      </HBox.margin>
-                  </Button>
-                  <Region prefHeight="32.0" prefWidth="276.0">
-                     <HBox.margin>
-                        <Insets />
-                     </HBox.margin>
-                  </Region>
-                  <Button mnemonicParsing="false" prefHeight="27.0" prefWidth="89.0" style="-fx-background-color: white; -fx-text-fill: black; -fx-background-radius: 15; -fx-border-color: #525252; -fx-border-radius: 5;" text="Finir">
+                  </Label>
+                  <SplitMenuButton mnemonicParsing="false" prefHeight="30.0" prefWidth="195.0" style="-fx-background-color: #525252;" text="Choisissez votre Tier-list">
+                     <items>
+                        <MenuItem mnemonicParsing="false" text="Action 1" />
+                        <MenuItem mnemonicParsing="false" text="Action 2" />
+                     </items>
                      <HBox.margin>
                         <Insets left="25.0" />
                      </HBox.margin>
-                  </Button>
+                  </SplitMenuButton>
                </children>
                <VBox.margin>
-                  <Insets top="15.0" />
+                  <Insets top="20.0" />
                </VBox.margin>
+            </HBox>
+            <HBox prefHeight="32.0" prefWidth="502.0">
+               <children>
+                  <Label style="-fx-text-fill: white;" text="Créer une Tier-list:">
+                     <font>
+                        <Font size="20.0" />
+                     </font>
+                     <HBox.margin>
+                        <Insets left="30.0" />
+                     </HBox.margin>
+                  </Label>
+                  <TextField fx:id="nom" prefHeight="30.0" prefWidth="195.0" style="-fx-border-color: #525252; -fx-background-color: #2F2F2F; -fx-border-radius: 15; -fx-text-fill: #525252;" text=" Nom de votre Tier-list">
+                     <HBox.margin>
+                        <Insets left="70.0" />
+                     </HBox.margin>
+                  </TextField>
+               </children>
+               <VBox.margin>
+                  <Insets top="20.0" />
+               </VBox.margin>
+            </HBox>
+            <HBox prefHeight="358.0" prefWidth="502.0">
+               <children>
+                  <Button fx:id="confirmer_btn" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#handleConfirmer_btn" style="-fx-text-fill: white; -fx-background-color: #5865F2; -fx-background-radius: 5; -fx-border-color: #525252; -fx-border-radius: 5;" text="Confirmer l'action ">
+                     <HBox.margin>
+                        <Insets left="150.0" top="30.0" />
+                     </HBox.margin>
+                     <font>
+                        <Font size="20.0" />
+                     </font>
+                  </Button>
+               </children>
             </HBox>
          </children>
       </VBox>
