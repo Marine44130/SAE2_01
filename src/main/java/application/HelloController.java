@@ -1,5 +1,4 @@
-package org.example.sae2_01;
-
+package application;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 
