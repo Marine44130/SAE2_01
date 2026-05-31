@@ -12,6 +12,8 @@ import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
+import application.Tier;
+import application.TierList;
 import model.Tier;
 import model.TierList;
 import application.Item;
@@ -114,6 +116,8 @@ public class Vue3Controller implements Initializable {
             return;
         }
 
+        //Tier tier = new Tier(name, selectedTierColor);
+        //tierList.addTier(tier);
         Tier tier = new Tier(name, selectedTierColor);
         tierList.addTier(tier);
         tierNameField.clear();

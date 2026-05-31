@@ -10,6 +10,7 @@ import java.io.IOException;
 public class TiersListApplication extends Application {
     @Override
     public void start(Stage stage) throws IOException {
+        FXMLLoader fxmlLoader = new FXMLLoader(TiersListApplication.class.getResource("vue3.fxml"));
         FXMLLoader fxmlLoader = new FXMLLoader(TiersListApplication.class.getResource("hello-view.fxml"));
         Scene scene = new Scene(fxmlLoader.load(), 550, 700);
         stage.setTitle("TiersList Creator");
