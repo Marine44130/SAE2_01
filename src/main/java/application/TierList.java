@@ -68,4 +68,34 @@ public class TierList implements Serializable {
     public void tri(){
         tiers.sort(Comparator.comparingInt(Tier::getPlace));
     }
+
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        sb.append("╔══════════════════════════════╗\n");
+        sb.append("║  TierList : ").append(String.format("%-18s", name)).append("║\n");
+        sb.append("╠══════════════════════════════╣\n");
+
+        if (tiers.isEmpty()) {
+            sb.append("║  Aucun tier défini           ║\n");
+        } else {
+            for (Tier tier : tiers) {
+                sb.append("║  [").append(tier.getPlace()).append("] ")
+                        .append(String.format("%-25s", tier.toString()))
+                        .append("║\n");
+            }
+        }
+
+        sb.append("╠══════════════════════════════╣\n");
+        sb.append("║  Non classés (").append(String.format("%-2d", unrankedItems.size())).append(")           ║\n");
+
+        if (!unrankedItems.isEmpty()) {
+            for (Item item : unrankedItems) {
+                sb.append("║    - ").append(String.format("%-25s", item.toString())).append("║\n");
+            }
+        }
+
+        sb.append("╚══════════════════════════════╝");
+        return sb.toString();
+    }
 }

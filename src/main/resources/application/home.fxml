@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<VBox alignment="CENTER" spacing="15.0" style="-fx-background-color: #242424;" xmlns="http://javafx.com/javafx/26" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.HomeController">
+    <padding>
+        <Insets bottom="40.0" left="40.0" right="40.0" top="40.0" />
+    </padding>
+    <children>
+        <Label style="-fx-text-fill: WHITE;" text="BIENVENUE SUR TIERLIST CREATOR !">
+            <font>
+                <Font size="20.0" />
+            </font>
+        </Label>
+        <Button fx:id="importer_btn" maxWidth="Infinity" mnemonicParsing="false" style="-fx-background-color: #6572ff; -fx-text-fill: white; -fx-background-radius: 7;" text="Importer une Tier-List" />
+      <Button fx:id="creer_btn" maxWidth="Infinity" mnemonicParsing="false" style="-fx-background-color: #6572ff; -fx-text-fill: white; -fx-background-radius: 7;" text="Creer une Tier-List" />
+      <Button fx:id="home_btn" maxWidth="Infinity" mnemonicParsing="false" onAction="#handlehome_btn" style="-fx-background-color: #6572ff; -fx-text-fill: white; -fx-background-radius: 7;" text="Voir les Tier-List existantes" />
+    </children>
+</VBox>
