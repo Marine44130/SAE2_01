@@ -15,7 +15,6 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 
 public class Vue2Controller {
@@ -24,6 +23,9 @@ public class Vue2Controller {
 
     @FXML
     SplitMenuButton supprimer_menu;
+
+    @FXML
+    SplitMenuButton dupliquer_menu;
 
     @FXML
     Button confirmer_btn;
@@ -40,7 +42,7 @@ public class Vue2Controller {
         List<TierList> toutesLesTierLists = DataManager.getInstance().getToutesLesTierLists();
 
         for (TierList tierList : toutesLesTierLists) {
-            if (tierList.getName().equals(nomTL)) {
+            if(tierList.getName().equals(nomTL)){
                 return;
             }
         }
@@ -51,7 +53,7 @@ public class Vue2Controller {
 
     @FXML
     public void handleConfirmer_btn() {
-        if (nom.getText() != null && !nom.getText().equals("")) {
+        if(nom.getText() != null && !nom.getText().equals("")){
             addTierList(nom.getText());
         }
     }
@@ -59,7 +61,8 @@ public class Vue2Controller {
     @FXML
     public void afficherListDansMesList() {
         supprimer_menu.getItems().clear();
-        afficherListSupprimable();
+        afficherListSupprimables();
+        afficherListDupliquables();
         MesTierList.getChildren().clear();
 
         List<TierList> toutesLesTierLists = DataManager.getInstance().getToutesLesTierLists();
@@ -83,7 +86,7 @@ public class Vue2Controller {
     }
 
     @FXML
-    public void afficherListSupprimable() {
+    public void afficherListSupprimables() {
         supprimer_menu.getItems().clear();
 
         List<TierList> toutesLesTierLists = DataManager.getInstance().getToutesLesTierLists();
@@ -96,17 +99,37 @@ public class Vue2Controller {
     }
 
     @FXML
+    public void afficherListDupliquables() {
+        dupliquer_menu.getItems().clear();
+
+        List<TierList> toutesLesTierLists = DataManager.getInstance().getToutesLesTierLists();
+
+        for (TierList tierList : toutesLesTierLists) {
+            MenuItem nomTL = new MenuItem(tierList.getName());
+            nomTL.setOnAction(e -> dupliquerTierList(tierList));
+            dupliquer_menu.getItems().add(nomTL);
+        }
+    }
+
+    @FXML
     private void supprimerTierList(TierList tierList) {
         DataManager.getInstance().removeTierList(tierList);
         afficherListDansMesList();
     }
 
+    @FXML
+    private void dupliquerTierList(TierList tierList) {
+        DataManager.getInstance().addTierList(tierList);
+        afficherListDansMesList();
+    }
+
+
     private void ouvrirTierList(TierList tierList) {
-        System.out.println("Ouverture de : " + tierList.getName());
+        System.out.println(tierList.getName());
     }
 
     @FXML
-    public void handleouvrir_btn(ActionEvent event, TierList TL) throws IOException {
+    public void handleouvrir_btn(ActionEvent event) throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("vue3.fxml"));
         Parent root = loader.load();
 
