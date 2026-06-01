@@ -284,6 +284,7 @@ public class Vue3Controller implements Initializable {
         // En attente d'implémentation (si vous voulez ajouter depuis le PC plus tard)
     }
 
+
     @FXML
     private void handlePrevious() {
         try {
