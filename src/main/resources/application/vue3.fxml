@@ -12,22 +12,13 @@
 <?import javafx.scene.layout.Region?>
 <?import javafx.scene.layout.VBox?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="550.0" style="-fx-background-color: #2F2F2F;" xmlns="http://javafx.com/javafx/21.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.Vue3Controller">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="550.0" style="-fx-background-color: #2F2F2F;" xmlns="http://javafx.com/javafx/26" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.Vue3Controller">
    <left>
       <VBox prefHeight="562.0" prefWidth="48.0" style="-fx-background-color: #242424;" BorderPane.alignment="CENTER">
          <children>
-            <ImageView fx:id="menuIcon" fitHeight="46.0" fitWidth="46.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@images/Ham-removebg-preview.png" />
-               </image></ImageView>
-            <ImageView fx:id="homeIcon" fitHeight="46.0" fitWidth="46.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fitHeight="46.0" fitWidth="46.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@images/home-removebg-preview(1).png" />
-               </image></ImageView>
-            <Region prefHeight="492.0" prefWidth="48.0" />
-            <ImageView fx:id="themeIcon" fitHeight="19.0" fitWidth="56.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@images/dayNight-removebg-preview.png" />
                </image></ImageView>
             <ImageView fx:id="shareIcon" fitHeight="46.0" fitWidth="46.0" pickOnBounds="true" preserveRatio="true">
                <image>
