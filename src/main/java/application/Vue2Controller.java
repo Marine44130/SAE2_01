@@ -125,10 +125,10 @@ public class Vue2Controller {
 
     private void ouvrirTierList(TierList tierList) {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("vue1.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("vue3.fxml"));
             Parent root = loader.load();
 
-            Vue1Controller controller = loader.getController();
+            Vue3Controller controller = loader.getController();
 
             Scene scene = new Scene(root);
             Stage stage = (Stage) MesTierList.getScene().getWindow();

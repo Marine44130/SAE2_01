@@ -82,13 +82,54 @@
                                     </children>
                                 </StackPane>
 
-                                <Region style="-fx-background-color: #f4f4f4; -fx-border-color: #202020; -fx-border-width: 0 0 1 0;" GridPane.columnIndex="1" GridPane.rowIndex="0" />
-                                <Region style="-fx-background-color: #f4f4f4; -fx-border-color: #202020; -fx-border-width: 0 0 1 0;" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                                <Region maxHeight="Infinity" maxWidth="Infinity" style="-fx-background-color: #f4f4f4; -fx-border-color: #202020; -fx-border-width: 0 0 1 0;" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-                                <Region maxHeight="Infinity" maxWidth="Infinity" style="-fx-background-color: #f4f4f4; -fx-border-color: #202020; -fx-border-width: 0 0 1 0;" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-                                <Region style="-fx-background-color: #f4f4f4; -fx-border-color: #202020; -fx-border-width: 0 0 1 0;" GridPane.columnIndex="1" GridPane.rowIndex="4" />
-                                <Region style="-fx-background-color: #f4f4f4; -fx-border-color: #202020; -fx-border-width: 0 0 1 0;" GridPane.columnIndex="1" GridPane.rowIndex="5" />
-                                <Region style="-fx-background-color: #f4f4f4; -fx-border-color: #202020; -fx-border-width: 0 0 1 0;" GridPane.columnIndex="1" GridPane.rowIndex="6" />
+                                <FlowPane fx:id="tierS"
+                                          GridPane.columnIndex="1"
+                                          GridPane.rowIndex="0"
+                                          hgap="5"
+                                          vgap="5"
+                                          style="-fx-background-color: #f4f4f4; -fx-border-color: #202020; -fx-border-width: 0 0 1 0;" />
+
+                                <FlowPane fx:id="tierA"
+                                          GridPane.columnIndex="1"
+                                          GridPane.rowIndex="1"
+                                          hgap="5"
+                                          vgap="5"
+                                          style="-fx-background-color: #f4f4f4; -fx-border-color: #202020; -fx-border-width: 0 0 1 0;" />
+
+                                <FlowPane fx:id="tierB"
+                                          GridPane.columnIndex="1"
+                                          GridPane.rowIndex="2"
+                                          hgap="5"
+                                          vgap="5"
+                                          style="-fx-background-color: #f4f4f4; -fx-border-color: #202020; -fx-border-width: 0 0 1 0;" />
+
+                                <FlowPane fx:id="tierC"
+                                          GridPane.columnIndex="1"
+                                          GridPane.rowIndex="3"
+                                          hgap="5"
+                                          vgap="5"
+                                          style="-fx-background-color: #f4f4f4; -fx-border-color: #202020; -fx-border-width: 0 0 1 0;" />
+
+                                <FlowPane fx:id="tierD"
+                                          GridPane.columnIndex="1"
+                                          GridPane.rowIndex="4"
+                                          hgap="5"
+                                          vgap="5"
+                                          style="-fx-background-color: #f4f4f4; -fx-border-color: #202020; -fx-border-width: 0 0 1 0;" />
+
+                                <FlowPane fx:id="tierE"
+                                          GridPane.columnIndex="1"
+                                          GridPane.rowIndex="5"
+                                          hgap="5"
+                                          vgap="5"
+                                          style="-fx-background-color: #f4f4f4; -fx-border-color: #202020; -fx-border-width: 0 0 1 0;" />
+
+                                <FlowPane fx:id="tierF"
+                                          GridPane.columnIndex="1"
+                                          GridPane.rowIndex="6"
+                                          hgap="5"
+                                          vgap="5"
+                                          style="-fx-background-color: #f4f4f4; -fx-border-color: #202020; -fx-border-width: 0 0 1 0;" />
                             </children>
                         </GridPane>
 
