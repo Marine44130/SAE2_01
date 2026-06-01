@@ -87,6 +87,12 @@
                         <Insets left="25.0" />
                      </HBox.margin>
                   </Button>
+
+                  <Button fx:id="addMovieApiButton" mnemonicParsing="false" prefHeight="27.0" prefWidth="90.0" style="-fx-background-color: #ff9800; -fx-text-fill: white; -fx-background-radius: 5; -fx-border-color: #525252; -fx-border-radius: 5;" text="Film (API)">
+                     <HBox.margin>
+                        <Insets left="15.0" />
+                     </HBox.margin>
+                  </Button>
                </children>
             </HBox>
             <HBox prefHeight="297.0" prefWidth="502.0">

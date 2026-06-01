@@ -17,7 +17,6 @@ public class Tier implements Serializable {
     private int place;
 
     public Tier(String name, String color, int place, int hauteur) {
-
         this.name = name;
         this.color = color;
         this.items = new ArrayList<>();
@@ -29,12 +28,15 @@ public class Tier implements Serializable {
         this(name, color, place, DEFAULT_HAUTEUR);
     }
 
+    public Tier(String name, String color) {
+        this(name, color, 0, DEFAULT_HAUTEUR);
+    }
+
     public void setTierList(TierList tierList) {
 
         if (tierList != null) {
             tierlist = tierList;
         }
-
     }
 
     public TierList getTierList() {

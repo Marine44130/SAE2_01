@@ -21,33 +21,50 @@ import java.util.ResourceBundle;
 
 public class Vue3Controller implements Initializable {
 
-    @FXML private VBox unrankedArea;
+    @FXML
+    private VBox unrankedArea;
 
-    @FXML private TextField itemTextField;
-    @FXML private Button    addItemButton;
-    @FXML private Button    addImageButton;
+    @FXML
+    private TextField itemTextField;
+    @FXML
+    private Button addItemButton;
+    @FXML
+    private Button addImageButton;
 
-    @FXML private VBox tiersColumn1;
-    @FXML private VBox tiersColumn2;
-    @FXML private VBox tiersColumn3;
+    @FXML
+    private VBox tiersColumn1;
+    @FXML
+    private VBox tiersColumn2;
+    @FXML
+    private VBox tiersColumn3;
 
-    @FXML private TextField tierNameField;
-    @FXML private Button    colorButton;
-    @FXML private Button    addTierButton;
+    @FXML
+    private TextField tierNameField;
+    @FXML
+    private Button colorButton;
+    @FXML
+    private Button addTierButton;
 
-    @FXML private Button previousButton;
-    @FXML private Button finishButton;
+    @FXML
+    private Button previousButton;
+    @FXML
+    private Button finishButton;
+    @FXML
+    private Button addMovieApiButton;
 
-    @FXML private ImageView menuIcon;
-    @FXML private ImageView homeIcon;
-    @FXML private ImageView themeIcon;
-    @FXML private ImageView shareIcon;
-    @FXML private ImageView saveIcon;
+    @FXML
+    private ImageView menuIcon;
+    @FXML
+    private ImageView homeIcon;
+    @FXML
+    private ImageView themeIcon;
+    @FXML
+    private ImageView shareIcon;
+    @FXML
+    private ImageView saveIcon;
 
     private TierList tierList;
-
     private String selectedTierColor = "#858585";
-
     private Label draggedItemLabel;
 
     @Override
@@ -62,17 +79,18 @@ public class Vue3Controller implements Initializable {
     }
 
     private void setupButtonActions() {
-        if (addItemButton  != null) addItemButton .setOnAction(e -> handleAddTextItem());
+        if (addItemButton != null) addItemButton.setOnAction(e -> handleAddTextItem());
         if (addImageButton != null) addImageButton.setOnAction(e -> handleAddImageItem());
-        if (addTierButton  != null) addTierButton .setOnAction(e -> handleAddTier());
-        if (colorButton    != null) colorButton   .setOnAction(e -> handleChooseColor());
+        if (addTierButton != null) addTierButton.setOnAction(e -> handleAddTier());
+        if (colorButton != null) colorButton.setOnAction(e -> handleChooseColor());
         if (previousButton != null) previousButton.setOnAction(e -> handlePrevious());
-        if (finishButton   != null) finishButton  .setOnAction(e -> handleFinish());
+        if (finishButton != null) finishButton.setOnAction(e -> handleFinish());
+        if (addMovieApiButton != null) addMovieApiButton.setOnAction(e -> handleAddMovieApi());
 
-        if (saveIcon  != null) saveIcon .setOnMouseClicked(e -> handleSave());
+        if (saveIcon != null) saveIcon.setOnMouseClicked(e -> handleSave());
         if (shareIcon != null) shareIcon.setOnMouseClicked(e -> handleShare());
         if (themeIcon != null) themeIcon.setOnMouseClicked(e -> handleToggleTheme());
-        if (homeIcon  != null) homeIcon .setOnMouseClicked(e -> handleGoHome());
+        if (homeIcon != null) homeIcon.setOnMouseClicked(e -> handleGoHome());
     }
 
     private void handleAddTextItem() {
@@ -104,6 +122,29 @@ public class Vue3Controller implements Initializable {
         refreshUnrankedArea();
     }
 
+    private void handleAddMovieApi() {
+        String text = itemTextField.getText().trim();
+        if (text.isEmpty()) {
+            showAlert(Alert.AlertType.WARNING, "Champ vide", "Veuillez saisir le nom d'un film.");
+            return;
+        }
+
+        String apiKey = DataManager.getInstance().getConfig().getTmdbApiKey();
+        if (apiKey == null || apiKey.isBlank()) {
+            showAlert(Alert.AlertType.ERROR, "Configuration requise", "Clé API manquante. Veuillez la configurer sur la page d'accueil.");
+            return;
+        }
+
+        try {
+            Item item = TMDBApiManager.searchMovieAsItem(text, apiKey);
+            tierList.addUnrankedItem(item);
+            itemTextField.clear();
+            refreshUnrankedArea();
+        } catch (Exception e) {
+            showAlert(Alert.AlertType.ERROR, "Erreur API TMDB", e.getMessage());
+        }
+    }
+
     private void handleAddTier() {
         String name = tierNameField.getText().trim();
         if (name.isEmpty()) {
@@ -111,7 +152,7 @@ public class Vue3Controller implements Initializable {
             return;
         }
 
-        Tier tier = new Tier(name, selectedTierColor, tierList.NbTiers() +1 );
+        Tier tier = new Tier(name, selectedTierColor, tierList.NbTiers() + 1);
         tierList.addTier(tier);
         tierNameField.clear();
         selectedTierColor = "#858585";
@@ -132,9 +173,9 @@ public class Vue3Controller implements Initializable {
             if (btn == ButtonType.OK) {
                 Color c = picker.getValue();
                 return String.format("#%02X%02X%02X",
-                        (int)(c.getRed()   * 255),
-                        (int)(c.getGreen() * 255),
-                        (int)(c.getBlue()  * 255));
+                        (int) (c.getRed() * 255),
+                        (int) (c.getGreen() * 255),
+                        (int) (c.getBlue() * 255));
             }
             return null;
         });
@@ -142,8 +183,7 @@ public class Vue3Controller implements Initializable {
         Optional<String> result = dialog.showAndWait();
         result.ifPresent(hex -> {
             selectedTierColor = hex;
-            colorButton.setStyle(colorButton.getStyle()
-                    + "-fx-background-color: " + hex + ";");
+            colorButton.setStyle(colorButton.getStyle() + "-fx-background-color: " + hex + ";");
         });
     }
 
@@ -155,7 +195,7 @@ public class Vue3Controller implements Initializable {
         int count = 0;
 
         for (Item item : tierList.getUnrankedItems()) {
-            if (count % 4 == 0) {           // 4 items par ligne
+            if (count % 4 == 0) {
                 currentRow = new HBox();
                 currentRow.setPrefHeight(100);
                 unrankedArea.getChildren().add(currentRow);
@@ -207,7 +247,7 @@ public class Vue3Controller implements Initializable {
             draggedItemLabel = lbl;
             Dragboard db = lbl.startDragAndDrop(TransferMode.MOVE);
             ClipboardContent cc = new ClipboardContent();
-            cc.putString(item.getContent()); // identifiant transporté
+            cc.putString(item.getContent());
             db.setContent(cc);
             e.consume();
         });
@@ -221,10 +261,7 @@ public class Vue3Controller implements Initializable {
         Label lbl = new Label(tier.getName());
         lbl.setPrefSize(100, 100);
         lbl.setAlignment(javafx.geometry.Pos.CENTER);
-        lbl.setStyle(
-                "-fx-border-color: white; -fx-text-fill: white;"
-                        + "-fx-background-color: " + tier.getColor() + ";"
-        );
+        lbl.setStyle("-fx-border-color: white; -fx-text-fill: white; -fx-background-color: " + tier.getColor() + ";");
 
         lbl.setOnDragOver(e -> {
             if (e.getGestureSource() != lbl && e.getDragboard().hasString()) {
@@ -290,29 +327,26 @@ public class Vue3Controller implements Initializable {
     }
 
     private void handleSave() {
-        // TODO : sérialiser tierList dans un fichier binaire (ObjectOutputStream)
         showAlert(Alert.AlertType.INFORMATION, "Sauvegarde", "Tier-list sauvegardée.");
     }
 
     private void handleShare() {
-        // TODO : export (JSON / image snapshot)
         showAlert(Alert.AlertType.INFORMATION, "Partage", "Fonctionnalité d'export à venir.");
     }
 
     private void handleToggleTheme() {
-        // TODO : basculer entre thème clair et sombre via une CSS alternée
+        // Optionnel : implémentation future du CSS theme
     }
 
     private void handleGoHome() {
-        // TODO : naviguer vers la vue d'accueil
+        // Optionnel : retour à l'accueil
     }
 
     private void handlePrevious() {
-        // TODO : revenir à la vue précédente (ex. choix du nom de la tier-list)
+        // Optionnel : navigation arrière
     }
 
     private void handleFinish() {
-        // TODO : valider et sauvegarder, puis naviguer vers la vue de visualisation
         handleSave();
     }
 

@@ -9,18 +9,27 @@ import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
+import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.ObjectInputStream;
 import java.io.IOException;
 
 public class HomeController {
 
-    @FXML Button importer_btn;
-    @FXML Button creer_btn;
-    @FXML Button home_btn;
+    @FXML
+    private Button importer_btn;
+    @FXML
+    private Button creer_btn;
+    @FXML
+    private Button home_btn;
 
-    @FXML TextField apiKeyField;
-    @FXML Button saveApi_btn;
+    @FXML
+    private TextField apiKeyField;
+    @FXML
+    private Button saveApi_btn;
 
     @FXML
     public void initialize() {
@@ -47,11 +56,45 @@ public class HomeController {
     public void handlehome_btn(ActionEvent event) throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("vue2.fxml"));
         Parent root = loader.load();
+
         Vue2Controller controller = loader.getController();
         controller.afficherList();
+
         Scene scene = new Scene(root, 550, 700);
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         stage.setScene(scene);
         stage.show();
+    }
+
+    @FXML
+    public void handleCreerBtn(ActionEvent event) throws IOException {
+        handlehome_btn(event);
+    }
+
+    @FXML
+    public void handleImporterBtn(ActionEvent event) {
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.setTitle("Sélectionner une sauvegarde binaire");
+        fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("Fichiers Tier-List (*.ser)", "*.ser"));
+
+        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        File file = fileChooser.showOpenDialog(stage);
+
+        if (file != null) {
+            try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream(file))) {
+                TierList loadedList = (TierList) ois.readObject();
+                DataManager.getInstance().addTierList(loadedList);
+
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("vue3.fxml"));
+                Parent root = loader.load();
+                Vue3Controller controller = loader.getController();
+                controller.setTierList(loadedList);
+
+                stage.setScene(new Scene(root, 550, 700));
+                stage.show();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
     }
 }
