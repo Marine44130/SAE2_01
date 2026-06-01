@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<BorderPane prefHeight="952.0" prefWidth="987.0" style="-fx-background-color: #2f2f2f;" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1">
+    <top>
+        <Region prefHeight="6.0" style="-fx-background-color: #2f2f2f;" />
+    </top>
+
+    <center>
+        <VBox spacing="0.0">
+            <children>
+                <GridPane VBox.vgrow="ALWAYS">
+                    <columnConstraints>
+                        <ColumnConstraints minWidth="0.0" prefWidth="138.0" />
+                        <ColumnConstraints hgrow="ALWAYS" minWidth="0.0" />
+                    </columnConstraints>
+                    <rowConstraints>
+                        <RowConstraints percentHeight="14.2857" />
+                        <RowConstraints percentHeight="14.2857" />
+                        <RowConstraints percentHeight="14.2857" />
+                        <RowConstraints percentHeight="14.2857" />
+                        <RowConstraints percentHeight="14.2857" />
+                        <RowConstraints percentHeight="14.2857" />
+                        <RowConstraints percentHeight="14.2857" />
+                    </rowConstraints>
+
+                    <children>
+                        <StackPane style="-fx-background-color: #ff3333; -fx-border-color: #202020; -fx-border-width: 0 1 1 1;" GridPane.columnIndex="0" GridPane.rowIndex="0">
+                            <children>
+                                <Label style="-fx-font-size: 24px; -fx-text-fill: #000000;" text="S" />
+                            </children>
+                        </StackPane>
+                        <StackPane style="-fx-background-color: #ffb444; -fx-border-color: #202020; -fx-border-width: 0 1 1 1;" GridPane.columnIndex="0" GridPane.rowIndex="1">
+                            <children>
+                                <Label style="-fx-font-size: 24px; -fx-text-fill: #000000;" text="A" />
+                            </children>
+                        </StackPane>
+                        <StackPane style="-fx-background-color: #ffe95c; -fx-border-color: #202020; -fx-border-width: 0 1 1 1;" GridPane.columnIndex="0" GridPane.rowIndex="2">
+                            <children>
+                                <Label style="-fx-font-size: 24px; -fx-text-fill: #000000;" text="B" />
+                            </children>
+                        </StackPane>
+                        <StackPane style="-fx-background-color: #a6ff28; -fx-border-color: #202020; -fx-border-width: 0 1 1 1;" GridPane.columnIndex="0" GridPane.rowIndex="3">
+                            <children>
+                                <Label style="-fx-font-size: 24px; -fx-text-fill: #000000;" text="C" />
+                            </children>
+                        </StackPane>
+                        <StackPane style="-fx-background-color: #35b44b; -fx-border-color: #202020; -fx-border-width: 0 1 1 1;" GridPane.columnIndex="0" GridPane.rowIndex="4">
+                            <children>
+                                <Label style="-fx-font-size: 24px; -fx-text-fill: #000000;" text="D" />
+                            </children>
+                        </StackPane>
+                        <StackPane style="-fx-background-color: #55d4df; -fx-border-color: #202020; -fx-border-width: 0 1 1 1;" GridPane.columnIndex="0" GridPane.rowIndex="5">
+                            <children>
+                                <Label style="-fx-font-size: 24px; -fx-text-fill: #000000;" text="E" />
+                            </children>
+                        </StackPane>
+                        <StackPane style="-fx-background-color: #3d80bd; -fx-border-color: #202020; -fx-border-width: 0 1 1 1;" GridPane.columnIndex="0" GridPane.rowIndex="6">
+                            <children>
+                                <Label style="-fx-font-size: 24px; -fx-text-fill: #000000;" text="F" />
+                            </children>
+                        </StackPane>
+
+                        <Region style="-fx-background-color: #f4f4f4; -fx-border-color: #202020; -fx-border-width: 0 0 1 0;" GridPane.columnIndex="1" GridPane.rowIndex="0" />
+                        <Region style="-fx-background-color: #f4f4f4; -fx-border-color: #202020; -fx-border-width: 0 0 1 0;" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                        <Region style="-fx-background-color: #f4f4f4; -fx-border-color: #202020; -fx-border-width: 0 0 1 0;" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                        <Region style="-fx-background-color: #f4f4f4; -fx-border-color: #202020; -fx-border-width: 0 0 1 0;" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                        <Region style="-fx-background-color: #f4f4f4; -fx-border-color: #202020; -fx-border-width: 0 0 1 0;" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                        <Region style="-fx-background-color: #f4f4f4; -fx-border-color: #202020; -fx-border-width: 0 0 1 0;" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+                        <Region style="-fx-background-color: #f4f4f4; -fx-border-color: #202020; -fx-border-width: 0 0 1 0;" GridPane.columnIndex="1" GridPane.rowIndex="6" />
+                    </children>
+                </GridPane>
+
+                <VBox prefHeight="205.0" spacing="0.0" style="-fx-background-color: #2f2f2f; -fx-border-color: #202020; -fx-border-width: 1 0 0 0;">
+                    <children>
+                        <HBox alignment="CENTER_LEFT" spacing="10.0" VBox.vgrow="ALWAYS">
+                            <padding>
+                                <Insets bottom="12.0" left="46.0" right="16.0" top="16.0" />
+                            </padding>
+                            <children>
+                                <StackPane prefHeight="116.0" prefWidth="108.0" style="-fx-background-color: #8f8f8f; -fx-background-radius: 8; -fx-border-color: #a7a7a7; -fx-border-radius: 8;">
+                                    <children>
+                                        <Label style="-fx-font-size: 16px; -fx-text-fill: white;" text="item 1" />
+                                    </children>
+                                </StackPane>
+                                <StackPane prefHeight="116.0" prefWidth="108.0" style="-fx-background-color: #8f8f8f; -fx-background-radius: 8; -fx-border-color: #a7a7a7; -fx-border-radius: 8;">
+                                    <children>
+                                        <Label style="-fx-font-size: 16px; -fx-text-fill: white;" text="item 2" />
+                                    </children>
+                                </StackPane>
+                                <StackPane prefHeight="116.0" prefWidth="108.0" style="-fx-background-color: #8f8f8f; -fx-background-radius: 8; -fx-border-color: #a7a7a7; -fx-border-radius: 8;">
+                                    <children>
+                                        <Label style="-fx-font-size: 16px; -fx-text-fill: white;" text="item 3" />
+                                    </children>
+                                </StackPane>
+                                <StackPane prefHeight="116.0" prefWidth="108.0" style="-fx-background-color: #8f8f8f; -fx-background-radius: 8; -fx-border-color: #a7a7a7; -fx-border-radius: 8;">
+                                    <children>
+                                        <Label style="-fx-font-size: 16px; -fx-text-fill: white;" text="item 4" />
+                                    </children>
+                                </StackPane>
+                                <StackPane prefHeight="116.0" prefWidth="108.0" style="-fx-background-color: #454545; -fx-background-radius: 8; -fx-border-color: #7a7a7a; -fx-border-radius: 8; -fx-border-style: dashed;">
+                                    <children>
+                                        <Label style="-fx-font-size: 16px; -fx-text-fill: white;" text="image" />
+                                    </children>
+                                </StackPane>
+                                <Region HBox.hgrow="ALWAYS" />
+                            </children>
+                        </HBox>
+
+                        <HBox alignment="CENTER_LEFT" prefHeight="32.0" spacing="8.0" style="-fx-background-color: #3b3b3b;">
+                            <padding>
+                                <Insets left="48.0" right="12.0" />
+                            </padding>
+                            <children>
+                                <Label style="-fx-font-size: 13px; -fx-text-fill: white;" text="Add item text :" />
+                                <TextField prefHeight="22.0" prefWidth="126.0" style="-fx-background-color: #262626; -fx-border-color: #727272; -fx-border-radius: 4; -fx-background-radius: 4; -fx-text-fill: white; -fx-font-size: 12px;" />
+                                <Button prefHeight="22.0" style="-fx-background-color: #6572ff; -fx-background-radius: 9; -fx-text-fill: white; -fx-font-size: 12px;" text="+ Add item" />
+                                <Button prefHeight="22.0" style="-fx-background-color: #4c4c4c; -fx-background-radius: 9; -fx-border-color: #8a8a8a; -fx-border-radius: 9; -fx-text-fill: white; -fx-font-size: 12px;" text="Image" />
+                            </children>
+                        </HBox>
+                    </children>
+                </VBox>
+            </children>
+        </VBox>
+    </center>
+</BorderPane>
