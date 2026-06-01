@@ -15,6 +15,7 @@
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 
+
 <StackPane maxHeight="Infinity" maxWidth="Infinity" prefHeight="952.0" prefWidth="1293.0" xmlns="http://javafx.com/javafx/26" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.Vue1Controller">
     <children>
         <BorderPane maxHeight="Infinity" maxWidth="Infinity" style="-fx-background-color: #2f2f2f;">
