@@ -37,4 +37,15 @@ public class DataManager {
     public void removeTierList(TierList tl) {
         ToutesLesTierLists.remove(tl);
     }
+
+    public TierList getTierlist (String name) {
+        TierList trouve = null;
+        for (TierList tl : ToutesLesTierLists){
+            if (tl.getName() == name){
+                trouve = tl;
+            }
+        }
+
+        return trouve ;
+    }
 }

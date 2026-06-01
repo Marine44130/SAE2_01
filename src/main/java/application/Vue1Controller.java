@@ -6,15 +6,15 @@ import javafx.geometry.Bounds;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.ColorPicker;
+import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
 import javafx.scene.input.ClipboardContent;
 import javafx.scene.input.Dragboard;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.input.TransferMode;
-import javafx.scene.layout.FlowPane;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.Pane;
-import javafx.scene.layout.StackPane;
-import javafx.scene.layout.VBox;
+import javafx.scene.layout.*;
+import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -35,9 +35,7 @@ public class Vue1Controller {
 
     @FXML
     private GridPane grille;
-    
-    @FXML
-    private VBox tierConfigPopup;
+
 
     @FXML
     private FlowPane tierS;
@@ -197,7 +195,6 @@ public class Vue1Controller {
             stackpane.getChildren().add(nom);
             System.out.println("tier ajouté, le nom de la tierlist est" + tierlist.getName());
         }
-
     }
 
     @FXML
@@ -207,18 +204,15 @@ public class Vue1Controller {
     
     @FXML
     void retourPressEvent(MouseEvent event) {
-
         try {
 
-            FXMLLoader loader =
-                    new FXMLLoader(getClass().getResource("vue2.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("vue2.fxml"));
 
             Parent root = loader.load();
 
             Scene scene = new Scene(root);
 
-            Stage stage =
-                    (Stage) tierConfigPopup.getScene().getWindow();
+            Stage stage = (Stage) tierConfigPopup.getScene().getWindow();
 
             stage.setScene(scene);
             stage.show();

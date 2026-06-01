@@ -129,6 +129,7 @@ public class Vue2Controller {
             Parent root = loader.load();
 
             Vue3Controller controller = loader.getController();
+            controller.setTierList(tierList);
 
             Scene scene = new Scene(root);
             Stage stage = (Stage) MesTierList.getScene().getWindow();
@@ -145,7 +146,7 @@ public class Vue2Controller {
         Parent root = loader.load();
 
         Vue3Controller controller = loader.getController();
-        //controller.envoyer(TL);
+
 
         Scene scene = new Scene(root, 550, 700);
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
