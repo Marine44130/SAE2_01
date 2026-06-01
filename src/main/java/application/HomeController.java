@@ -53,7 +53,6 @@ public class HomeController {
 
     @FXML
     public void handleCreerBtn(ActionEvent event) throws IOException {
-        // CORRECTION : Redirige correctement vers l'écran de création (vue2.fxml)
         FXMLLoader loader = new FXMLLoader(getClass().getResource("vue2.fxml"));
         Parent root = loader.load();
         Scene scene = new Scene(root, 550, 700);
@@ -98,7 +97,7 @@ public class HomeController {
         Parent root = loader.load();
 
         Vue2Controller controller = loader.getController();
-        //controller.afficherList();
+        controller.afficherListDansMesList();
 
         Scene scene = new Scene(root, 550, 700);
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
