@@ -18,7 +18,6 @@ import java.util.regex.Pattern;
 
 public class test {
     public static void main(String[] args) {
-        // 1. Initialisation et configuration de ta TierList (Code d'origine)
         TierList tierlist1 = new TierList("rank valo");
         Tier tier1 = new Tier("A", "#00000", 0);
         Tier tier2 = new Tier("B", "#00000", 1);
@@ -37,11 +36,9 @@ public class test {
 
         System.out.println("État des Tiers : " + listtier1.toString());
 
-        // Vos items de test d'origine
         Item item1 = new Item("Or", false);
         Item item2 = new Item("", false);
 
-        // ------------------------------- TEST API -------------------------------
         OkHttpClient client = new OkHttpClient();
         String jetonV4 = "eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJiNjg1YjNiZmE0MDljMDA3MGE1MTU4ZDlhOWJhYThhNSIsIm5iZiI6MTc4MDE1NzAwNi41NDQ5OTk4LCJzdWIiOiI2YTFiMGE0ZWIxNDg0YjQ5ZDQ5NzM4MzEiLCJzY29wZXMiOlsiYXBpX3JlYWQiXSwidmVyc2lvbiI6MX0.xm0NBheJuR2xNSbayHKaL04OgWcIZsr2KoSKQYVXGKI";
         String titre = "Hunger Games";
