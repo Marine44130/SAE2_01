@@ -3,21 +3,19 @@ package application;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextArea;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
-import application.TierList;
-import application.Tier;
-import application.Item;
+
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 public class Vue2Controller {
@@ -25,32 +23,100 @@ public class Vue2Controller {
     ImageView home;
 
     @FXML
-    Button confirmer_btn;
+    SplitMenuButton supprimer_menu;
 
     @FXML
-    Label MesTierList;
+    Button confirmer_btn;
+
+
+    @FXML
+    HBox MesTierList;
 
     @FXML
     TextField nom;
 
     @FXML
     public void addTierList(String nomTL) {
+        List<TierList> toutesLesTierLists = DataManager.getInstance().getToutesLesTierLists();
+
+        for (TierList tierList : toutesLesTierLists) {
+            if(tierList.getName().equals(nomTL)){
+                return;
+            }
+        }
         TierList tierList = new TierList(nomTL);
         DataManager.getInstance().addTierList(tierList);
-        afficherList();
-    }
-
-    public void handleConfirmer_btn() {
-        if(nom.getText() != null){
-            addTierList(nom.getText());
-        }
-
+        afficherListDansMesList();
     }
 
     @FXML
-    public void afficherList() {
-        List<TierList> ToutesLesTierLists = DataManager.getInstance().getToutesLesTierLists();
-        MesTierList.setText(ToutesLesTierLists.toString());
+    public void handleConfirmer_btn() {
+        if(nom.getText() != null && !nom.getText().equals("")){
+            addTierList(nom.getText());
+        }
+    }
+
+    @FXML
+    public void afficherListDansMesList() {
+        supprimer_menu.getItems().clear();
+        afficherListSupprimable();
+        MesTierList.getChildren().clear();
+
+        List<TierList> toutesLesTierLists = DataManager.getInstance().getToutesLesTierLists();
+
+        for (TierList tierList : toutesLesTierLists) {
+            VBox ligne = new VBox(10);
+            ligne.setAlignment(Pos.CENTER);
+            ligne.setStyle("-fx-padding: 8; -fx-background-color:  #525252; -fx-border-radius: 5; -fx-background-radius: 5; ");
+
+            Label nomLabel = new Label(tierList.getName());
+            nomLabel.setStyle("-fx-font-size: 14px; -fx-font-weight: bold; -fx-text-fill : white ;");
+            nomLabel.setPrefWidth(150);
+
+            Button ouvrirBtn = new Button("Ouvrir");
+            ouvrirBtn.setStyle("-fx-background-color: #5865F2; -fx-text-fill : white ; -fx-background-radius: 5; -fx-border-color: #525252; -fx-border-radius: 5");
+            ouvrirBtn.setOnAction(e -> ouvrirTierList(tierList));
+
+            ligne.getChildren().addAll(nomLabel, ouvrirBtn);
+            MesTierList.getChildren().add(ligne);
+        }
+    }
+
+    @FXML
+    public void afficherListSupprimable() {
+        supprimer_menu.getItems().clear();
+
+        List<TierList> toutesLesTierLists = DataManager.getInstance().getToutesLesTierLists();
+
+        for (TierList tierList : toutesLesTierLists) {
+            MenuItem nomTL = new MenuItem(tierList.getName());
+            nomTL.setOnAction(e -> supprimerTierList(tierList));
+            supprimer_menu.getItems().add(nomTL);
+        }
+    }
+
+    @FXML
+    private void supprimerTierList(TierList tierList) {
+        DataManager.getInstance().removeTierList(tierList);
+        afficherListDansMesList();
+    }
+
+    private void ouvrirTierList(TierList tierList) {
+        System.out.println("Ouverture de : " + tierList.getName());
+    }
+
+    @FXML
+    public void handleouvrir_btn(ActionEvent event, TierList TL) throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("vue3.fxml"));
+        Parent root = loader.load();
+
+        Vue3Controller controller = loader.getController();
+        //controller.envoyer(TL);
+
+        Scene scene = new Scene(root, 550, 700);
+        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        stage.setScene(scene);
+        stage.show();
     }
 
     @FXML
