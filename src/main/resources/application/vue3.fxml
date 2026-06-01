@@ -35,21 +35,23 @@
     <center>
         <VBox prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER">
             <children>
-                <VBox fx:id="unrankedArea" prefHeight="200.0" prefWidth="100.0" style="-fx-background-color: #525252; -fx-background-radius: 15;">
+                <VBox fx:id="unrankedArea" prefHeight="438.0" prefWidth="453.0" style="-fx-background-color: #525252; -fx-background-radius: 15;">
                     <VBox.margin>
                         <Insets bottom="25.0" left="25.0" right="25.0" top="25.0" />
                     </VBox.margin>
                     <children>
-                        <HBox prefHeight="100.0" prefWidth="200.0">
+                        <HBox prefHeight="121.0" prefWidth="453.0">
                             <VBox.margin>
                                 <Insets />
                             </VBox.margin>
                         </HBox>
-                        <HBox prefHeight="100.0" prefWidth="200.0">
+                        <HBox prefHeight="121.0" prefWidth="453.0">
                             <VBox.margin>
                                 <Insets />
                             </VBox.margin>
                         </HBox>
+                  <HBox prefHeight="121.0" prefWidth="453.0" />
+                  <HBox prefHeight="121.0" prefWidth="453.0" />
                     </children>
                 </VBox>
                 <HBox prefHeight="32.0" prefWidth="502.0">
@@ -69,6 +71,11 @@
                                 <Insets left="25.0" />
                             </HBox.margin>
                         </Button>
+                  <Button fx:id="APIopt" mnemonicParsing="false" onAction="#handleAddMovieApi" prefHeight="27.0" prefWidth="71.0" style="-fx-background-color: #2F2F2F; -fx-text-fill: white; -fx-background-radius: 5; -fx-border-color: #525252; -fx-border-radius: 5;" text="API">
+                     <HBox.margin>
+                        <Insets left="25.0" />
+                     </HBox.margin>
+                  </Button>
                     </children>
                 </HBox>
                 <HBox prefHeight="32.0" prefWidth="502.0">

@@ -23,35 +23,27 @@ public class Vue3Controller implements Initializable {
 
     private TierList currentTierList;
 
-    // Éléments FXML reliés strictement à vue3.fxml
     @FXML private VBox unrankedArea;
     @FXML private TextField itemTextField;
     @FXML private Button finishButton;
     @FXML private Button previousButton;
+    @FXML private Button APIopt; // Le bouton API
 
-    // Un conteneur FlowPane pour que les carrés 100x100 s'alignent proprement
     private FlowPane itemsContainer;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // Au lancement, on crée le FlowPane et on le met dans la VBox
         itemsContainer = new FlowPane();
-        itemsContainer.setHgap(10); // Espace horizontal entre les carrés
-        itemsContainer.setVgap(10); // Espace vertical entre les carrés
+        itemsContainer.setHgap(10);
+        itemsContainer.setVgap(10);
         unrankedArea.getChildren().add(itemsContainer);
     }
 
-    /**
-     * Réception de la TierList depuis la Vue 2
-     */
     public void setTierList(TierList tl) {
         this.currentTierList = tl;
         refreshUI();
     }
 
-    /**
-     * Action : Ajouter un texte
-     */
     @FXML
     private void handleAddItem() {
         String text = itemTextField.getText().trim();
@@ -64,9 +56,6 @@ public class Vue3Controller implements Initializable {
         }
     }
 
-    /**
-     * Action : Ajouter une image
-     */
     @FXML
     private void handleAddImage() {
         if (currentTierList == null) return;
@@ -86,9 +75,37 @@ public class Vue3Controller implements Initializable {
         }
     }
 
-    /**
-     * Action : Bouton Précédent
-     */
+    @FXML
+    private void handleAddMovieApi() {
+        if (currentTierList == null) return;
+
+        AppConfig config = DataManager.getInstance().getConfig();
+        String apiKey = (config != null) ? config.getTmdbApiKey() : null;
+
+        if (apiKey == null || apiKey.isBlank()) {
+            showAlert(Alert.AlertType.WARNING, "Clé API manquante", "Veuillez configurer votre clé API dans l'accueil (Vue 1) avant d'utiliser cette fonction.");
+            return;
+        }
+
+        TextInputDialog dialog = new TextInputDialog();
+        dialog.setTitle("Recherche TMDB");
+        dialog.setHeaderText("Rechercher via l'API");
+        dialog.setContentText("Recherche de votre theme API :");
+
+        dialog.showAndWait().ifPresent(title -> {
+            if (!title.trim().isEmpty()) {
+                try {
+                    Item movieItem = TMDBApiManager.searchMovieAsItem(title.trim(), apiKey);
+                    currentTierList.addUnrankedItem(movieItem);
+                    refreshUI();
+
+                } catch (Exception e) {
+                    showAlert(Alert.AlertType.ERROR, "Erreur de recherche", e.getMessage());
+                }
+            }
+        });
+    }
+
     @FXML
     private void handlePrevious() {
         try {
@@ -102,9 +119,6 @@ public class Vue3Controller implements Initializable {
         }
     }
 
-    /**
-     * Action : Bouton Finir
-     */
     @FXML
     private void handleFinish() {
         try {
@@ -119,9 +133,6 @@ public class Vue3Controller implements Initializable {
         }
     }
 
-    /**
-     * Met à jour l'affichage avec des éléments de 100x100
-     */
     private void refreshUI() {
         if (currentTierList == null) return;
 
@@ -129,26 +140,21 @@ public class Vue3Controller implements Initializable {
 
         for (Item item : currentTierList.getUnrankedItems()) {
             if (item.isImage()) {
-                // Créer une image 100x100
                 ImageView imageView = new ImageView(new Image(item.getContent(), true));
                 imageView.setFitWidth(100);
                 imageView.setFitHeight(100);
                 imageView.setPreserveRatio(false);
-                imageView.setStyle(
-                        "-fx-border-radius: 8;"
-                );// Force le format carré 100x100
+                imageView.setStyle("-fx-border-radius: 8;");
 
                 itemsContainer.getChildren().add(imageView);
             } else {
-                // Créer un label (carré de texte) 100x100
                 Label textLabel = new Label(item.getContent());
                 textLabel.setPrefSize(100, 100);
                 textLabel.setMinSize(100, 100);
                 textLabel.setMaxSize(100, 100);
                 textLabel.setAlignment(Pos.CENTER);
-                textLabel.setWrapText(true); // Retour à la ligne automatique
+                textLabel.setWrapText(true);
 
-                // Style graphique du carré
                 textLabel.setStyle(
                         "-fx-background-color: #616161; " +
                                 "-fx-text-fill: white; " +
@@ -161,5 +167,13 @@ public class Vue3Controller implements Initializable {
                 itemsContainer.getChildren().add(textLabel);
             }
         }
+    }
+
+    private void showAlert(Alert.AlertType type, String title, String content) {
+        Alert alert = new Alert(type);
+        alert.setTitle(title);
+        alert.setHeaderText(null);
+        alert.setContentText(content);
+        alert.showAndWait();
     }
 }

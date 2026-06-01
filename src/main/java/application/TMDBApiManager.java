@@ -17,23 +17,25 @@ public class TMDBApiManager {
         }
 
         OkHttpClient client = new OkHttpClient();
-        String query = URLEncoder.encode(title, StandardCharsets.UTF_8);
+        String query = URLEncoder.encode(title.trim(), StandardCharsets.UTF_8);
+
+        String url = "https://api.themoviedb.org/3/search/movie?query=" + query + "&api_key=" + apiKey.trim() + "&language=fr-FR";
 
         Request request = new Request.Builder()
-                .url("https://api.themoviedb.org/3/search/movie?query=" + query)
-                .header("Authorization", "Bearer " + apiKey)
+                .url(url)
                 .build();
 
         try (Response response = client.newCall(request).execute()) {
             if (!response.isSuccessful()) {
-                throw new Exception("Erreur de l'API TMDB : " + response.code());
+                String errorBody = response.body() != null ? response.body().string() : "Pas de détails";
+                throw new Exception("Code " + response.code() + " - " + errorBody);
             }
 
             String json = response.body().string();
             JsonObject root = JsonParser.parseString(json).getAsJsonObject();
 
             if (root.getAsJsonArray("results").isEmpty()) {
-                throw new Exception("Aucun film trouvé pour : " + title);
+                throw new Exception("Aucun film trouvé pour la recherche : " + title);
             }
 
             JsonObject firstResult = root.getAsJsonArray("results").get(0).getAsJsonObject();
