@@ -13,12 +13,6 @@ public class Item implements Serializable {
 
     public Item(String text) {
         this(text, false);
-
-    private boolean isImage;
-
-    public Item(String text) {
-        this.content = text;
-        this.isImage = false;
     }
 
     public Item(String content, boolean isImage) {
@@ -58,7 +52,7 @@ public class Item implements Serializable {
     }
 
     public void setTier(Tier nv_tier) {
-        if(nv_tier != null){
+        if (nv_tier != null) {
             tier = nv_tier;
         }
     }
