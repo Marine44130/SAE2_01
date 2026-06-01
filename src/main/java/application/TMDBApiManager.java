@@ -11,15 +11,20 @@ import java.nio.charset.StandardCharsets;
 
 public class TMDBApiManager {
 
+    // J'ai gardé le nom "searchMovieAsItem" pour ne pas casser ton Vue3Controller,
+    // mais on cherche bien des jeux vidéo maintenant !
     public static Item searchMovieAsItem(String title, String apiKey) throws Exception {
-        if (apiKey == null || apiKey.isBlank()) {
+        if (apiKey == null || apiKey.trim().isEmpty()) {
             throw new Exception("Clé API manquante. Veuillez la configurer dans l'accueil.");
         }
 
         OkHttpClient client = new OkHttpClient();
+
+        // Encodage du texte (remplace les espaces par %20 pour l'URL)
         String query = URLEncoder.encode(title.trim(), StandardCharsets.UTF_8);
 
-        String url = "https://api.themoviedb.org/3/search/movie?query=" + query + "&api_key=" + apiKey.trim() + "&language=fr-FR";
+        // NOUVELLE URL : On attaque les serveurs de RAWG avec ta clé
+        String url = "https://api.rawg.io/api/games?key=" + apiKey.trim() + "&search=" + query;
 
         Request request = new Request.Builder()
                 .url(url)
@@ -28,25 +33,28 @@ public class TMDBApiManager {
         try (Response response = client.newCall(request).execute()) {
             if (!response.isSuccessful()) {
                 String errorBody = response.body() != null ? response.body().string() : "Pas de détails";
-                throw new Exception("Code " + response.code() + " - " + errorBody);
+                throw new Exception("Erreur RAWG Code " + response.code() + " - " + errorBody);
             }
 
             String json = response.body().string();
             JsonObject root = JsonParser.parseString(json).getAsJsonObject();
 
+            // Vérifier si RAWG a trouvé des jeux
             if (root.getAsJsonArray("results").isEmpty()) {
-                throw new Exception("Aucun film trouvé pour la recherche : " + title);
+                throw new Exception("Aucun jeu trouvé pour : " + title);
             }
 
+            // Prendre le premier jeu de la liste
             JsonObject firstResult = root.getAsJsonArray("results").get(0).getAsJsonObject();
 
-            if (firstResult.has("poster_path") && !firstResult.get("poster_path").isJsonNull()) {
-                String posterPath = firstResult.get("poster_path").getAsString();
-                String urlImage = "https://image.tmdb.org/t/p/w500" + posterPath;
-                return new Item(urlImage, true);
+            // RAWG utilise "background_image" pour la jaquette/image du jeu
+            if (firstResult.has("background_image") && !firstResult.get("background_image").isJsonNull()) {
+                String imageUrl = firstResult.get("background_image").getAsString();
+                return new Item(imageUrl, true); // On renvoie l'image
             } else {
-                String movieTitle = firstResult.get("title").getAsString();
-                return new Item(movieTitle, false);
+                // Si le jeu n'a pas d'image, on renvoie son nom en texte
+                String gameTitle = firstResult.get("name").getAsString();
+                return new Item(gameTitle, false);
             }
         }
     }
