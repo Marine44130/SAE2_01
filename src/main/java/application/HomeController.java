@@ -19,10 +19,14 @@ import java.io.IOException;
 
 public class HomeController {
 
-    @FXML private Button importer_btn;
-    @FXML private Button creer_btn;
-    @FXML private TextField apiKeyField;
-    @FXML private Button saveApi_btn;
+    @FXML
+    private Button importer_btn;
+    @FXML
+    private Button creer_btn;
+    @FXML
+    private TextField apiKeyField;
+    @FXML
+    private Button saveApi_btn;
 
     @FXML
     public void initialize() {
