@@ -91,4 +91,18 @@ public class HomeController {
             }
         }
     }
+
+    @FXML
+    public void handlehome_btn(ActionEvent event) throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("vue2.fxml"));
+        Parent root = loader.load();
+
+        Vue2Controller controller = loader.getController();
+        //controller.afficherList();
+
+        Scene scene = new Scene(root, 550, 700);
+        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        stage.setScene(scene);
+        stage.show();
+    }
 }
