@@ -1,50 +1,46 @@
 package application;
 
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.geometry.Insets;
+import javafx.geometry.Pos;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.*;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
-import javafx.scene.paint.Color;
-import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
-import java.io.File;
+import java.io.IOException;
 import java.net.URL;
-import java.util.List;
-import java.util.Optional;
 import java.util.ResourceBundle;
 
 public class Vue3Controller implements Initializable {
 
+    private TierList currentTierList;
+
     @FXML
     private VBox unrankedArea;
-
     @FXML
     private TextField itemTextField;
     @FXML
     private Button addItemButton;
     @FXML
     private Button addImageButton;
-
     @FXML
     private VBox tiersColumn1;
     @FXML
     private VBox tiersColumn2;
     @FXML
     private VBox tiersColumn3;
-
     @FXML
     private TextField tierNameField;
     @FXML
-    private Button colorButton;
-    @FXML
     private Button addTierButton;
-
     @FXML
     private Button previousButton;
     @FXML
@@ -52,271 +48,221 @@ public class Vue3Controller implements Initializable {
     @FXML
     private Button addMovieApiButton;
 
-    @FXML
-    private ImageView menuIcon;
-    @FXML
-    private ImageView homeIcon;
-    @FXML
-    private ImageView themeIcon;
-    @FXML
-    private ImageView shareIcon;
-    @FXML
-    private ImageView saveIcon;
-
-    private TierList tierList;
-    private String selectedTierColor = "#858585";
-    private Label draggedItemLabel;
-
     @Override
-    public void initialize(URL url, ResourceBundle resourceBundle) {
-        setupButtonActions();
+    public void initialize(URL url, ResourceBundle rb) {
+        addItemButton.setOnAction(e -> handleAddItem());
+        addTierButton.setOnAction(e -> handleAddTier());
+        addMovieApiButton.setOnAction(e -> handleAddMovieApi());
+        previousButton.setOnAction(e -> handleGoHome());
+        finishButton.setOnAction(e -> handleSave());
     }
 
-    public void setTierList(TierList tierList) {
-        this.tierList = tierList;
-        refreshUnrankedArea();
+    public void setTierList(TierList tl) {
+        this.currentTierList = tl;
         refreshTiersGrid();
-    }
-
-    private void setupButtonActions() {
-        if (addItemButton != null) addItemButton.setOnAction(e -> handleAddTextItem());
-        if (addImageButton != null) addImageButton.setOnAction(e -> handleAddImageItem());
-        if (addTierButton != null) addTierButton.setOnAction(e -> handleAddTier());
-        if (colorButton != null) colorButton.setOnAction(e -> handleChooseColor());
-        if (previousButton != null) previousButton.setOnAction(e -> handlePrevious());
-        if (finishButton != null) finishButton.setOnAction(e -> handleFinish());
-        if (addMovieApiButton != null) addMovieApiButton.setOnAction(e -> handleAddMovieApi());
-
-        if (saveIcon != null) saveIcon.setOnMouseClicked(e -> handleSave());
-        if (shareIcon != null) shareIcon.setOnMouseClicked(e -> handleShare());
-        if (themeIcon != null) themeIcon.setOnMouseClicked(e -> handleToggleTheme());
-        if (homeIcon != null) homeIcon.setOnMouseClicked(e -> handleGoHome());
-    }
-
-    private void handleAddTextItem() {
-        String text = itemTextField.getText().trim();
-        if (text.isEmpty()) {
-            showAlert(Alert.AlertType.WARNING, "Champ vide", "Veuillez saisir un texte pour l'item.");
-            return;
-        }
-
-        Item item = new Item(text);
-        tierList.addUnrankedItem(item);
-        itemTextField.clear();
         refreshUnrankedArea();
     }
 
-    private void handleAddImageItem() {
-        FileChooser chooser = new FileChooser();
-        chooser.setTitle("Choisir une image");
-        chooser.getExtensionFilters().addAll(
-                new FileChooser.ExtensionFilter("Images", "*.png", "*.jpg", "*.jpeg", "*.gif", "*.bmp")
-        );
+    private void refreshTiersGrid() {
+        tiersColumn1.getChildren().clear();
+        tiersColumn2.getChildren().clear();
+        tiersColumn3.getChildren().clear();
 
-        Stage stage = (Stage) addImageButton.getScene().getWindow();
-        File file = chooser.showOpenDialog(stage);
-        if (file == null) return;
+        if (currentTierList == null) return;
 
-        Item item = new Item(file.toURI().toString(), true);
-        tierList.addUnrankedItem(item);
-        refreshUnrankedArea();
+        for (Tier tier : currentTierList.getTiers()) {
+            Label lblTier = new Label(tier.getName());
+            lblTier.setPrefHeight(tier.getHauteur());
+            lblTier.setPrefWidth(70);
+            lblTier.setAlignment(Pos.CENTER);
+            lblTier.setStyle("-fx-background-color: " + tier.getColor() + "; -fx-text-fill: white; -fx-font-weight: bold; -fx-border-color: #1e1e1e;");
+
+            ContextMenu menu = new ContextMenu();
+            MenuItem renameItem = new MenuItem("Renommer");
+            renameItem.setOnAction(e -> handleRenameTier(tier));
+            MenuItem deleteItem = new MenuItem("Supprimer");
+            deleteItem.setOnAction(e -> {
+                currentTierList.removeTier(tier);
+                refreshTiersGrid();
+            });
+            menu.getItems().addAll(renameItem, deleteItem);
+            lblTier.setContextMenu(menu);
+            tiersColumn1.getChildren().add(lblTier);
+
+            HBox itemsRow = new HBox(10);
+            itemsRow.setPrefHeight(tier.getHauteur());
+            itemsRow.setStyle("-fx-background-color: #3a3a3a; -fx-border-color: #1e1e1e; -fx-padding: 5;");
+            itemsRow.setAlignment(Pos.CENTER_LEFT);
+
+            itemsRow.setOnDragOver(event -> {
+                if (event.getGestureSource() != itemsRow && event.getDragboard().hasString()) {
+                    event.acceptTransferModes(TransferMode.MOVE);
+                }
+                event.consume();
+            });
+
+            itemsRow.setOnDragDropped(event -> {
+                Dragboard db = event.getDragboard();
+                boolean success = false;
+                if (db.hasString()) {
+                    Item dragItem = findItemInTierList(db.getString());
+                    if (dragItem != null) {
+                        if (dragItem.getTier() != null) {
+                            dragItem.getTier().removeItem(dragItem);
+                        } else {
+                            currentTierList.removeUnrankedItem(dragItem);
+                        }
+                        tier.addItem(dragItem);
+                        dragItem.setTier(tier);
+                        refreshTiersGrid();
+                        refreshUnrankedArea();
+                        success = true;
+                    }
+                }
+                event.setDropCompleted(success);
+                event.consume();
+            });
+
+            for (Item item : tier.getItems()) {
+                itemsRow.getChildren().add(createItemNode(item));
+            }
+            tiersColumn2.getChildren().add(itemsRow);
+
+            HBox controlBox = new HBox(2);
+            controlBox.setPrefHeight(tier.getHauteur());
+            controlBox.setAlignment(Pos.CENTER);
+            Button up = new Button("▲");
+            Button down = new Button("▼");
+            up.setStyle("-fx-font-size: 9;");
+            down.setStyle("-fx-font-size: 9;");
+
+            up.setOnAction(e -> {
+                int index = currentTierList.getTiers().indexOf(tier);
+                if (index > 0) {
+                    tier.setPlace(index - 1);
+                    currentTierList.getTiers().get(index - 1).setPlace(index);
+                    currentTierList.tri();
+                    refreshTiersGrid();
+                }
+            });
+            controlBox.getChildren().addAll(up, down);
+            tiersColumn3.getChildren().add(controlBox);
+        }
     }
 
-    private void handleAddMovieApi() {
-        String text = itemTextField.getText().trim();
-        if (text.isEmpty()) {
-            showAlert(Alert.AlertType.WARNING, "Champ vide", "Veuillez saisir le nom d'un film.");
-            return;
+    private void refreshUnrankedArea() {
+        unrankedArea.getChildren().clear();
+        if (currentTierList == null) return;
+
+        HBox container = new HBox(10);
+        container.setStyle("-fx-padding: 10;");
+        container.setOnDragOver(event -> {
+            if (event.getGestureSource() != container && event.getDragboard().hasString()) {
+                event.acceptTransferModes(TransferMode.MOVE);
+            }
+            event.consume();
+        });
+
+        container.setOnDragDropped(event -> {
+            Dragboard db = event.getDragboard();
+            boolean success = false;
+            if (db.hasString()) {
+                Item dragItem = findItemInTierList(db.getString());
+                if (dragItem != null) {
+                    if (dragItem.getTier() != null) {
+                        dragItem.getTier().removeItem(dragItem);
+                        dragItem.setTier(null);
+                    }
+                    currentTierList.addUnrankedItem(dragItem);
+                    refreshTiersGrid();
+                    refreshUnrankedArea();
+                    success = true;
+                }
+            }
+            event.setDropCompleted(success);
+            event.consume();
+        });
+
+        for (Item item : currentTierList.getUnrankedItems()) {
+            container.getChildren().add(createItemNode(item));
+        }
+        unrankedArea.getChildren().add(container);
+    }
+
+    private Node createItemNode(Item item) {
+        Node node;
+        if (item.isImage()) {
+            ImageView iv = new ImageView(new Image(item.getContent(), true));
+            iv.setFitWidth(50);
+            iv.setFitHeight(50);
+            iv.setPreserveRatio(true);
+            node = iv;
+        } else {
+            Label lbl = new Label(item.getContent());
+            lbl.setStyle("-fx-background-color: #555555; -fx-text-fill: white; -fx-padding: 5; -fx-background-radius: 5;");
+            node = lbl;
         }
 
-        String apiKey = DataManager.getInstance().getConfig().getTmdbApiKey();
-        if (apiKey == null || apiKey.isBlank()) {
-            showAlert(Alert.AlertType.ERROR, "Configuration requise", "Clé API manquante. Veuillez la configurer sur la page d'accueil.");
-            return;
-        }
+        node.setOnDragDetected(event -> {
+            Dragboard db = node.startDragAndDrop(TransferMode.MOVE);
+            ClipboardContent content = new ClipboardContent();
+            content.putString(item.getContent());
+            db.setContent(content);
+            event.consume();
+        });
 
-        try {
-            Item item = TMDBApiManager.searchMovieAsItem(text, apiKey);
-            tierList.addUnrankedItem(item);
+        return node;
+    }
+
+    private Item findItemInTierList(String content) {
+        for (Item item : currentTierList.getUnrankedItems()) {
+            if (item.getContent().equals(content)) return item;
+        }
+        for (Tier t : currentTierList.getTiers()) {
+            for (Item item : t.getItems()) {
+                if (item.getContent().equals(content)) return item;
+            }
+        }
+        return null;
+    }
+
+    private void handleAddItem() {
+        String txt = itemTextField.getText();
+        if (txt != null && !txt.isBlank() && currentTierList != null) {
+            currentTierList.addUnrankedItem(new Item(txt.trim(), false));
             itemTextField.clear();
             refreshUnrankedArea();
-        } catch (Exception e) {
-            showAlert(Alert.AlertType.ERROR, "Erreur API TMDB", e.getMessage());
         }
     }
 
     private void handleAddTier() {
-        String name = tierNameField.getText().trim();
-        if (name.isEmpty()) {
-            showAlert(Alert.AlertType.WARNING, "Champ vide", "Veuillez saisir un nom pour le tier.");
-            return;
-        }
-
-        Tier tier = new Tier(name, selectedTierColor, tierList.NbTiers() + 1);
-        tierList.addTier(tier);
-        tierNameField.clear();
-        selectedTierColor = "#858585";
-        colorButton.setStyle(colorButton.getStyle());
-        refreshTiersGrid();
-    }
-
-    private void handleChooseColor() {
-        Dialog<String> dialog = new Dialog<>();
-        dialog.setTitle("Choisir une couleur");
-        dialog.setHeaderText("Couleur du tier :");
-
-        ColorPicker picker = new ColorPicker(Color.web(selectedTierColor));
-        dialog.getDialogPane().setContent(picker);
-        dialog.getDialogPane().getButtonTypes().addAll(ButtonType.OK, ButtonType.CANCEL);
-
-        dialog.setResultConverter(btn -> {
-            if (btn == ButtonType.OK) {
-                Color c = picker.getValue();
-                return String.format("#%02X%02X%02X",
-                        (int) (c.getRed() * 255),
-                        (int) (c.getGreen() * 255),
-                        (int) (c.getBlue() * 255));
-            }
-            return null;
-        });
-
-        Optional<String> result = dialog.showAndWait();
-        result.ifPresent(hex -> {
-            selectedTierColor = hex;
-            colorButton.setStyle(colorButton.getStyle() + "-fx-background-color: " + hex + ";");
-        });
-    }
-
-    private void refreshUnrankedArea() {
-        if (unrankedArea == null || tierList == null) return;
-        unrankedArea.getChildren().clear();
-
-        HBox currentRow = null;
-        int count = 0;
-
-        for (Item item : tierList.getUnrankedItems()) {
-            if (count % 4 == 0) {
-                currentRow = new HBox();
-                currentRow.setPrefHeight(100);
-                unrankedArea.getChildren().add(currentRow);
-            }
-            Label lbl = buildItemLabel(item);
-            currentRow.getChildren().add(lbl);
-            count++;
-        }
-    }
-
-    private void refreshTiersGrid() {
-        if (tiersColumn1 == null || tierList == null) return;
-
-        VBox[] columns = {tiersColumn1, tiersColumn2, tiersColumn3};
-        for (VBox col : columns) col.getChildren().clear();
-
-        List<Tier> tiers = tierList.getTiers();
-        for (int i = 0; i < tiers.size(); i++) {
-            Tier tier = tiers.get(i);
-            Label lbl = buildTierLabel(tier);
-            columns[i % 3].getChildren().add(lbl);
-        }
-    }
-
-    private Label buildItemLabel(Item item) {
-        Label lbl = new Label();
-        lbl.setPrefSize(80, 80);
-        lbl.setAlignment(javafx.geometry.Pos.CENTER);
-        lbl.setStyle("-fx-text-fill: white; -fx-background-radius: 15; -fx-background-color: #858585;");
-        HBox.setMargin(lbl, new Insets(5, 10, 5, 10));
-
-        if (item.isImage()) {
-            ImageView iv = new ImageView(new Image(item.getContent(), 80, 80, true, true));
-            lbl.setGraphic(iv);
-        } else {
-            lbl.setText(item.getContent());
-        }
-
-        ContextMenu menu = new ContextMenu();
-        MenuItem deleteItem = new MenuItem("Supprimer");
-        deleteItem.setOnAction(e -> {
-            tierList.removeUnrankedItem(item);
-            refreshUnrankedArea();
-        });
-        menu.getItems().add(deleteItem);
-        lbl.setContextMenu(menu);
-
-        lbl.setOnDragDetected(e -> {
-            draggedItemLabel = lbl;
-            Dragboard db = lbl.startDragAndDrop(TransferMode.MOVE);
-            ClipboardContent cc = new ClipboardContent();
-            cc.putString(item.getContent());
-            db.setContent(cc);
-            e.consume();
-        });
-
-        lbl.setOnDragDone(e -> draggedItemLabel = null);
-
-        return lbl;
-    }
-
-    private Label buildTierLabel(Tier tier) {
-        Label lbl = new Label(tier.getName());
-        lbl.setPrefSize(100, 100);
-        lbl.setAlignment(javafx.geometry.Pos.CENTER);
-        lbl.setStyle("-fx-border-color: white; -fx-text-fill: white; -fx-background-color: " + tier.getColor() + ";");
-
-        lbl.setOnDragOver(e -> {
-            if (e.getGestureSource() != lbl && e.getDragboard().hasString()) {
-                e.acceptTransferModes(TransferMode.MOVE);
-            }
-            e.consume();
-        });
-
-        lbl.setOnDragEntered(e -> {
-            lbl.setStyle(lbl.getStyle() + "-fx-border-width: 3;");
-            e.consume();
-        });
-
-        lbl.setOnDragExited(e -> {
-            lbl.setStyle(lbl.getStyle().replace("-fx-border-width: 3;", ""));
-            e.consume();
-        });
-
-        lbl.setOnDragDropped(e -> {
-            Dragboard db = e.getDragboard();
-            if (db.hasString()) {
-                String content = db.getString();
-                tierList.getUnrankedItems().stream()
-                        .filter(it -> it.getContent().equals(content))
-                        .findFirst()
-                        .ifPresent(it -> {
-                            tierList.removeUnrankedItem(it);
-                            tier.addItem(it);
-                            refreshUnrankedArea();
-                            refreshTiersGrid();
-                        });
-                e.setDropCompleted(true);
-            } else {
-                e.setDropCompleted(false);
-            }
-            e.consume();
-        });
-
-        ContextMenu menu = new ContextMenu();
-        MenuItem renameItem = new MenuItem("Renommer");
-        renameItem.setOnAction(e -> handleRenameTier(tier));
-        MenuItem deleteItem = new MenuItem("Supprimer");
-        deleteItem.setOnAction(e -> {
-            tierList.removeTier(tier);
+        String name = tierNameField.getText();
+        if (name != null && !name.isBlank() && currentTierList != null) {
+            Tier t = new Tier(name.trim(), "#555555", currentTierList.getTiers().size());
+            currentTierList.addTier(t);
+            tierNameField.clear();
             refreshTiersGrid();
-        });
-        menu.getItems().addAll(renameItem, deleteItem);
-        lbl.setContextMenu(menu);
+        }
+    }
 
-        return lbl;
+    private void handleAddMovieApi() {
+        String title = itemTextField.getText();
+        if (title != null && !title.isBlank() && currentTierList != null) {
+            String apiKey = DataManager.getInstance().getConfig().getTmdbApiKey();
+            try {
+                Item movieItem = TMDBApiManager.searchMovieAsItem(title.trim(), apiKey);
+                currentTierList.addUnrankedItem(movieItem);
+                itemTextField.clear();
+                refreshUnrankedArea();
+            } catch (Exception e) {
+                showAlert(Alert.AlertType.ERROR, "Erreur API", e.getMessage());
+            }
+        }
     }
 
     private void handleRenameTier(Tier tier) {
         TextInputDialog dialog = new TextInputDialog(tier.getName());
-        dialog.setTitle("Renommer le tier");
+        dialog.setTitle("Renommer");
         dialog.setHeaderText("Nouveau nom :");
         dialog.showAndWait().ifPresent(name -> {
             if (!name.isBlank()) {
@@ -327,34 +273,23 @@ public class Vue3Controller implements Initializable {
     }
 
     private void handleSave() {
-        showAlert(Alert.AlertType.INFORMATION, "Sauvegarde", "Tier-list sauvegardée.");
-    }
-
-    private void handleShare() {
-        showAlert(Alert.AlertType.INFORMATION, "Partage", "Fonctionnalité d'export à venir.");
-    }
-
-    private void handleToggleTheme() {
-        // Optionnel : implémentation future du CSS theme
+        showAlert(Alert.AlertType.INFORMATION, "Sauvegarde", "Changements appliqués avec succès.");
     }
 
     private void handleGoHome() {
-        // Optionnel : retour à l'accueil
+        try {
+            Parent root = FXMLLoader.load(getClass().getResource("home.fxml"));
+            Stage stage = (Stage) previousButton.getScene().getWindow();
+            stage.setScene(new Scene(root, 550, 700));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
-    private void handlePrevious() {
-        // Optionnel : navigation arrière
-    }
-
-    private void handleFinish() {
-        handleSave();
-    }
-
-    private void showAlert(Alert.AlertType type, String title, String message) {
+    private void showAlert(Alert.AlertType type, String title, String msg) {
         Alert alert = new Alert(type);
         alert.setTitle(title);
-        alert.setHeaderText(null);
-        alert.setContentText(message);
+        alert.setContentText(msg);
         alert.showAndWait();
     }
 }

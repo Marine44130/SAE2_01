@@ -36,12 +36,16 @@ public class TMDBApiManager {
                 throw new Exception("Aucun film trouvé pour : " + title);
             }
 
-            String posterPath = root.getAsJsonArray("results")
-                    .get(0).getAsJsonObject()
-                    .get("poster_path").getAsString();
+            JsonObject firstResult = root.getAsJsonArray("results").get(0).getAsJsonObject();
 
-            String urlImage = "https://image.tmdb.org/t/p/w500" + posterPath;
-            return new Item(urlImage, true);
+            if (firstResult.has("poster_path") && !firstResult.get("poster_path").isJsonNull()) {
+                String posterPath = firstResult.get("poster_path").getAsString();
+                String urlImage = "https://image.tmdb.org/t/p/w500" + posterPath;
+                return new Item(urlImage, true);
+            } else {
+                String movieTitle = firstResult.get("title").getAsString();
+                return new Item(movieTitle, false);
+            }
         }
     }
 }

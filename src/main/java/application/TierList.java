@@ -11,13 +11,12 @@ public class TierList implements Serializable {
     private String name;
     private List<Tier> tiers;
     private List<Item> unrankedItems;
+
     public TierList(String name, List<Tier> tiers, List<Item> unrankedItems) {
         this.name = name;
         this.tiers = tiers;
         this.unrankedItems = unrankedItems;
     }
-
-
 
     public TierList(String name, List<Tier> tiers) {
         this(name, tiers, new ArrayList<>());
@@ -25,8 +24,6 @@ public class TierList implements Serializable {
 
     public TierList(String name) {
         this(name, new ArrayList<>(), new ArrayList<>());
-        this.tiers = new ArrayList<>();
-        this.unrankedItems = new ArrayList<>();
     }
 
     public String getName() {
@@ -49,12 +46,13 @@ public class TierList implements Serializable {
         if (tier != null) {
             tiers.add(tier);
             tier.setTierList(this);
-            tri();
         }
     }
 
     public void removeTier(Tier tier) {
-        tiers.remove(tier);
+        if (tier != null) {
+            tiers.remove(tier);
+        }
     }
 
     public void addUnrankedItem(Item item) {
@@ -67,41 +65,12 @@ public class TierList implements Serializable {
         unrankedItems.remove(item);
     }
 
-    public void tri(){
+    public void tri() {
         tiers.sort(Comparator.comparingInt(Tier::getPlace));
     }
 
     @Override
     public String toString() {
-        StringBuilder sb = new StringBuilder();
-        sb.append("╔══════════════════════════════╗\n");
-        sb.append("║  TierList : ").append(String.format("%-18s", name)).append("║\n");
-        sb.append("╠══════════════════════════════╣\n");
-
-        if (tiers.isEmpty()) {
-            sb.append("║  Aucun tier défini           ║\n");
-        } else {
-            for (Tier tier : tiers) {
-                sb.append("║  [").append(tier.getPlace()).append("] ")
-                        .append(String.format("%-25s", tier.toString()))
-                        .append("║\n");
-            }
-        }
-
-        sb.append("╠══════════════════════════════╣\n");
-        sb.append("║  Non classés (").append(String.format("%-2d", unrankedItems.size())).append(")           ║\n");
-
-        if (!unrankedItems.isEmpty()) {
-            for (Item item : unrankedItems) {
-                sb.append("║    - ").append(String.format("%-25s", item.toString())).append("║\n");
-            }
-        }
-
-        sb.append("╚══════════════════════════════╝");
-        return sb.toString();
-    }
-
-    public int NbTiers() {
-        return tiers.size();
+        return "TierList : " + name;
     }
 }

@@ -19,17 +19,10 @@ import java.io.IOException;
 
 public class HomeController {
 
-    @FXML
-    private Button importer_btn;
-    @FXML
-    private Button creer_btn;
-    @FXML
-    private Button home_btn;
-
-    @FXML
-    private TextField apiKeyField;
-    @FXML
-    private Button saveApi_btn;
+    @FXML private Button importer_btn;
+    @FXML private Button creer_btn;
+    @FXML private TextField apiKeyField;
+    @FXML private Button saveApi_btn;
 
     @FXML
     public void initialize() {
@@ -46,29 +39,23 @@ public class HomeController {
             DataManager.getInstance().getConfig().setTmdbApiKey(key.trim());
             DataManager.getInstance().saveConfig();
 
-            Alert alert = new Alert(Alert.AlertType.INFORMATION, "Clé API enregistrée avec succès !");
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Configuration");
             alert.setHeaderText(null);
-            alert.show();
+            alert.setContentText("Clé API sauvegardée avec succès !");
+            alert.showAndWait();
         }
     }
 
     @FXML
-    public void handlehome_btn(ActionEvent event) throws IOException {
+    public void handleCreerBtn(ActionEvent event) throws IOException {
+        // CORRECTION : Redirige correctement vers l'écran de création (vue2.fxml)
         FXMLLoader loader = new FXMLLoader(getClass().getResource("vue2.fxml"));
         Parent root = loader.load();
-
-        Vue2Controller controller = loader.getController();
-        controller.afficherList();
-
         Scene scene = new Scene(root, 550, 700);
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         stage.setScene(scene);
         stage.show();
-    }
-
-    @FXML
-    public void handleCreerBtn(ActionEvent event) throws IOException {
-        handlehome_btn(event);
     }
 
     @FXML
@@ -93,7 +80,10 @@ public class HomeController {
                 stage.setScene(new Scene(root, 550, 700));
                 stage.show();
             } catch (Exception e) {
-                e.printStackTrace();
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Erreur d'importation");
+                alert.setContentText("Impossible de charger le fichier sélectionné.");
+                alert.showAndWait();
             }
         }
     }
