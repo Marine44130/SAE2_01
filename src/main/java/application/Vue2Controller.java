@@ -30,7 +30,6 @@ public class Vue2Controller {
     @FXML
     Button confirmer_btn;
 
-
     @FXML
     HBox MesTierList;
 
@@ -42,7 +41,7 @@ public class Vue2Controller {
         List<TierList> toutesLesTierLists = DataManager.getInstance().getToutesLesTierLists();
 
         for (TierList tierList : toutesLesTierLists) {
-            if(tierList.getName().equals(nomTL)){
+            if (tierList.getName().equals(nomTL)) {
                 return;
             }
         }
@@ -53,7 +52,7 @@ public class Vue2Controller {
 
     @FXML
     public void handleConfirmer_btn() {
-        if(nom.getText() != null && !nom.getText().equals("")){
+        if (nom.getText() != null && !nom.getText().equals("")) {
             addTierList(nom.getText());
         }
     }

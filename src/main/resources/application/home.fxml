@@ -19,7 +19,7 @@
             </font>
         </Label>
 
-        <TextField fx:id="apiKeyField" promptText="Entrez votre Jeton V4 TMDB (Bearer Token)"
+        <TextField fx:id="apiKeyField" promptText="Entrez votre Jeton V4 (Cle API))"
                    style="-fx-background-color: #3d3d3d; -fx-text-fill: white; -fx-background-radius: 7;"/>
         <Button fx:id="saveApi_btn" maxWidth="Infinity" mnemonicParsing="false" onAction="#handleSaveApiBtn"
                 style="-fx-background-color: #4CAF50; -fx-text-fill: white; -fx-background-radius: 7;"
