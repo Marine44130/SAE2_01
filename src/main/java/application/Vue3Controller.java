@@ -278,21 +278,6 @@ public class Vue3Controller implements Initializable {
         }
     }
 
-    @FXML
-    private void handleAddMovieApi() {
-        if (!itemTextField.getText().isBlank() && currentTierList != null) {
-            String apiKey = DataManager.getInstance().getConfig().getTmdbApiKey();
-            String title = itemTextField.getText();
-            try {
-                Item movieItem = TMDBApiManager.searchMovieAsItem(title.trim(), apiKey);
-                currentTierList.addUnrankedItem(movieItem);
-                itemTextField.clear();
-                refreshUnrankedArea();
-            } catch (Exception e) {
-                showAlert(Alert.AlertType.ERROR, "Erreur API", e.getMessage());
-            }
-        }
-    }
 
     @FXML
     private void handleAddImage() {

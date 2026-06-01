@@ -21,6 +21,21 @@ import java.io.IOException;
 
 public class Vue1Controller {
 
+
+    @FXML
+    private VBox tierConfigPopup;
+
+    static TierList tierlist;
+
+    @FXML
+    private TextField nomTier;
+    
+    @FXML
+    private ColorPicker couleurTier;
+
+    @FXML
+    private GridPane grille;
+    
     @FXML
     private VBox tierConfigPopup;
 
@@ -166,6 +181,30 @@ public class Vue1Controller {
         tierConfigPopup.setVisible(false);
     }
 
+    @FXML
+    public void AddTier() {
+
+        Color couleur = couleurTier.getValue();
+        String hex = String.format("#%02X%02X%02X",
+                (int)(couleur.getRed() * 255),
+                (int)(couleur.getGreen() * 255),
+                (int)(couleur.getBlue() * 255)
+        );
+        if (!tierlist.equals("") && tierlist != null){
+           tierlist.addTier(new Tier(nomTier.getText(), hex,tierlist.getTiers().size() +1));
+            StackPane stackpane = new StackPane();
+            Label nom = new Label(nomTier.getText());
+            stackpane.getChildren().add(nom);
+            System.out.println("tier ajouté, le nom de la tierlist est" + tierlist.getName());
+        }
+
+    }
+
+    @FXML
+    public void envoyer(TierList tierList) {
+        tierlist = tierList;
+    }
+    
     @FXML
     void retourPressEvent(MouseEvent event) {
 
