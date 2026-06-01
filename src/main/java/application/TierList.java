@@ -100,4 +100,8 @@ public class TierList implements Serializable {
         sb.append("╚══════════════════════════════╝");
         return sb.toString();
     }
+
+    public int NbTiers() {
+        return tiers.size();
+    }
 }

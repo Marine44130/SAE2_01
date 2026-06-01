@@ -27,7 +27,6 @@ public class Vue2Controller {
     @FXML
     Button confirmer_btn;
 
-
     @FXML
     Label MesTierList;
 

@@ -111,7 +111,7 @@ public class Vue3Controller implements Initializable {
             return;
         }
 
-        Tier tier = new Tier(name, selectedTierColor);
+        Tier tier = new Tier(name, selectedTierColor, tierList.NbTiers() +1 );
         tierList.addTier(tier);
         tierNameField.clear();
         selectedTierColor = "#858585";

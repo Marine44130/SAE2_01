@@ -25,13 +25,13 @@ public class Tier implements Serializable {
         this.place = place;
     }
 
-    public Tier( String name, String color, int place) {
+    public Tier(String name, String color, int place) {
         this(name, color, place, DEFAULT_HAUTEUR);
     }
 
     public void setTierList(TierList tierList) {
 
-        if(tierList != null){
+        if (tierList != null) {
             tierlist = tierList;
         }
 
@@ -90,7 +90,7 @@ public class Tier implements Serializable {
         items.remove(item);
     }
 
-    public void tri(){
+    public void tri() {
         items.sort(Comparator.comparingInt(Item::getPlace));
     }
 
