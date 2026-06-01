@@ -7,7 +7,7 @@ public class DataManager {
 
     private static DataManager instance;
     private List<TierList> ToutesLesTierLists = new ArrayList<>();
-    private AppConfig config; // NOUVEAU
+    private AppConfig config;
 
     private DataManager() {
         config = ConfigManager.load();
