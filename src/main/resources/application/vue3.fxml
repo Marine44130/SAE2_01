@@ -11,9 +11,11 @@
 <?import javafx.scene.layout.Region?>
 <?import javafx.scene.layout.VBox?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="550.0" style="-fx-background-color: #2F2F2F;" xmlns="http://javafx.com/javafx/21.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.Vue3Controller">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="550.0" style="-fx-background-color: #2F2F2F;"
+            xmlns="http://javafx.com/javafx/21.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.Vue3Controller">
     <left>
-        <VBox prefHeight="562.0" prefWidth="48.0" style="-fx-background-color: #242424;" BorderPane.alignment="CENTER">
+        <VBox prefHeight="562.0" prefWidth="48.0" style="-fx-background-color: #242424;"
+              BorderPane.alignment="CENTER">
             <children>
                 <ImageView fitHeight="46.0" fitWidth="46.0" pickOnBounds="true" preserveRatio="true">
                     <image>
@@ -36,7 +38,8 @@
     <center>
         <VBox prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER">
             <children>
-                <VBox fx:id="unrankedArea" prefHeight="200.0" prefWidth="100.0" style="-fx-background-color: #525252; -fx-background-radius: 15;">
+                <VBox fx:id="unrankedArea" prefHeight="200.0" prefWidth="100.0" style="-fx-background-color: #525252;
+-fx-background-radius: 15;">
                     <VBox.margin>
                         <Insets bottom="25.0" left="25.0" right="25.0" top="25.0" />
                     </VBox.margin>
@@ -55,19 +58,28 @@
                 </VBox>
                 <HBox prefHeight="32.0" prefWidth="502.0">
                     <children>
-                        <TextField fx:id="itemTextField" promptText="Add item text :" style="-fx-border-color: #525252; -fx-background-color: #2F2F2F; -fx-border-radius: 15; -fx-text-fill: blue;">
+                        <TextField fx:id="itemTextField" promptText="Add item text :" style="-fx-border-color: #525252;
+-fx-background-color: #2F2F2F; -fx-border-radius: 15; -fx-text-fill: blue;">
                             <HBox.margin>
                                 <Insets left="25.0" />
                             </HBox.margin>
                         </TextField>
-                        <Button fx:id="addItemButton" mnemonicParsing="false" style="-fx-background-color: #5865F2; -fx-text-fill: white; -fx-background-radius: 5;" text="+ Add item">
+                        <Button fx:id="addItemButton" onAction="#handleAddItem" mnemonicParsing="false" style="-fx-background-color: #5865F2;
+-fx-text-fill: white; -fx-background-radius: 5;" text="+ Add item">
                             <HBox.margin>
                                 <Insets left="25.0" />
                             </HBox.margin>
                         </Button>
-                        <Button fx:id="addImageButton" mnemonicParsing="false" prefHeight="27.0" prefWidth="71.0" style="-fx-background-color: #2F2F2F; -fx-text-fill: white; -fx-background-radius: 5; -fx-border-color: #525252; -fx-border-radius: 5;" text="Image">
+                        <Button fx:id="addImageButton" onAction="#handleAddImage" mnemonicParsing="false" prefHeight="27.0" prefWidth="71.0" style="-fx-background-color: #2F2F2F;
+-fx-text-fill: white; -fx-background-radius: 5; -fx-border-color: #525252; -fx-border-radius: 5;" text="Image">
                             <HBox.margin>
                                 <Insets left="25.0" />
+                            </HBox.margin>
+                        </Button>
+                        <Button fx:id="addMovieApiButton" onAction="#handleAddMovieApi" mnemonicParsing="false" prefHeight="27.0" prefWidth="90.0" style="-fx-background-color: #ff9800;
+-fx-text-fill: white; -fx-background-radius: 5; -fx-border-color: #525252; -fx-border-radius: 5;" text="Film (API)">
+                            <HBox.margin>
+                                <Insets left="15.0" />
                             </HBox.margin>
                         </Button>
                     </children>
@@ -80,7 +92,7 @@
                             </HBox.margin>
                         </VBox>
                         <Separator orientation="VERTICAL" prefHeight="200.0" />
-                        <VBox fx:id="tiersColumn2" prefHeight="200.0" prefWidth="100.0">
+                        <VBox fx:id="tiersColumn2" prefHeight="200.0" prefWidth="100.0" HBox.hgrow="ALWAYS">
                             <HBox.margin>
                                 <Insets left="25.0" right="25.0" />
                             </HBox.margin>
@@ -98,17 +110,20 @@
                 </HBox>
                 <HBox prefHeight="32.0" prefWidth="502.0">
                     <children>
-                        <TextField fx:id="tierNameField" promptText="Add text (S, A,B)" style="-fx-border-color: #525252; -fx-background-color: #2F2F2F; -fx-border-radius: 15; -fx-text-fill: blue;">
+                        <TextField fx:id="tierNameField" promptText="Add text (S, A,B)" style="-fx-border-color: #525252;
+-fx-background-color: #2F2F2F; -fx-border-radius: 15; -fx-text-fill: blue;">
                             <HBox.margin>
                                 <Insets left="25.0" />
                             </HBox.margin>
                         </TextField>
-                        <Button fx:id="colorButton" mnemonicParsing="false" prefHeight="27.0" prefWidth="71.0" style="-fx-background-color: #2F2F2F; -fx-text-fill: white; -fx-background-radius: 5; -fx-border-color: #525252; -fx-border-radius: 5;" text="Couleur">
+                        <Button fx:id="colorButton" onAction="#handleColorAction" mnemonicParsing="false" prefHeight="27.0" prefWidth="71.0" style="-fx-background-color: #2F2F2F;
+-fx-text-fill: white; -fx-background-radius: 5; -fx-border-color: #525252; -fx-border-radius: 5;" text="Couleur">
                             <HBox.margin>
                                 <Insets left="25.0" />
                             </HBox.margin>
                         </Button>
-                        <Button fx:id="addTierButton" mnemonicParsing="false" style="-fx-background-color: #5865F2; -fx-text-fill: white; -fx-background-radius: 5;" text="+ Add tiers">
+                        <Button fx:id="addTierButton" onAction="#handleAddTier" mnemonicParsing="false" style="-fx-background-color: #5865F2;
+-fx-text-fill: white; -fx-background-radius: 5;" text="+ Add tiers">
                             <HBox.margin>
                                 <Insets left="25.0" />
                             </HBox.margin>
@@ -120,7 +135,8 @@
                 </HBox>
                 <HBox prefHeight="32.0" prefWidth="502.0">
                     <children>
-                        <Button fx:id="previousButton" mnemonicParsing="false" prefHeight="27.0" prefWidth="95.0" style="-fx-background-color: white; -fx-text-fill: black; -fx-background-radius: 15; -fx-border-color: #525252; -fx-border-radius: 5;" text="Précedent">
+                        <Button fx:id="previousButton" onAction="#handlePrevious" mnemonicParsing="false" prefHeight="27.0" prefWidth="95.0" style="-fx-background-color: white;
+-fx-text-fill: black; -fx-background-radius: 15; -fx-border-color: #525252; -fx-border-radius: 5;" text="Précedent">
                             <HBox.margin>
                                 <Insets left="10.0" />
                             </HBox.margin>
@@ -130,7 +146,8 @@
                                 <Insets />
                             </HBox.margin>
                         </Region>
-                        <Button fx:id="finishButton" mnemonicParsing="false" prefHeight="27.0" prefWidth="89.0" style="-fx-background-color: white; -fx-text-fill: black; -fx-background-radius: 15; -fx-border-color: #525252; -fx-border-radius: 5;" text="Finir">
+                        <Button fx:id="finishButton" onAction="#handleFinish" mnemonicParsing="false" prefHeight="27.0" prefWidth="89.0" style="-fx-background-color: white;
+-fx-text-fill: black; -fx-background-radius: 15; -fx-border-color: #525252; -fx-border-radius: 5;" text="Finir">
                             <HBox.margin>
                                 <Insets left="25.0" />
                             </HBox.margin>
