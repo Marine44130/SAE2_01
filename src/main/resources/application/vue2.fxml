@@ -83,7 +83,7 @@
                         <Insets left="30.0" />
                      </HBox.margin>
                   </Label>
-                  <SplitMenuButton mnemonicParsing="false" prefHeight="30.0" prefWidth="195.0" style="-fx-background-color: #525252;" text="Choisissez votre Tier-list">
+                  <SplitMenuButton fx:id="dupliquer_menu" mnemonicParsing="false" prefHeight="30.0" prefWidth="195.0" style="-fx-background-color: #525252;" text="Choisissez votre Tier-list">
                      <items>
                         <MenuItem mnemonicParsing="false" text="Action 1" />
                         <MenuItem mnemonicParsing="false" text="Action 2" />
@@ -119,7 +119,7 @@
             </HBox>
             <HBox prefHeight="358.0" prefWidth="502.0">
                <children>
-                  <Button fx:id="confirmer_btn" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#handleConfirmer_btn" style="-fx-text-fill: white; -fx-background-color: #5865F2; -fx-background-radius: 5; -fx-border-color: #525252; -fx-border-radius: 5;" text="Confirmer l'action ">
+                  <Button fx:id="confirmer_btn" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#handleConfirmer_btn" style="-fx-text-fill: white; -fx-background-color: #5865F2; -fx-background-radius: 5; -fx-border-color: #525252; -fx-border-radius: 5;" text="Créer la Tier-List">
                      <HBox.margin>
                         <Insets left="150.0" top="30.0" />
                      </HBox.margin>
