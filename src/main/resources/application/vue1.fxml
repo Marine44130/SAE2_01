@@ -1,22 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.Insets?>
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.control.TextField?>
-<?import javafx.scene.image.Image?>
-<?import javafx.scene.image.ImageView?>
-<?import javafx.scene.layout.BorderPane?>
-<?import javafx.scene.layout.ColumnConstraints?>
-<?import javafx.scene.layout.GridPane?>
-<?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.Region?>
-<?import javafx.scene.layout.RowConstraints?>
-<?import javafx.scene.layout.StackPane?>
-<?import javafx.scene.layout.VBox?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
 
-
-<StackPane maxHeight="Infinity" maxWidth="Infinity" prefHeight="952.0" prefWidth="1293.0" xmlns="http://javafx.com/javafx/26" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.Vue1Controller">
+<StackPane maxHeight="Infinity" maxWidth="Infinity" prefHeight="952.0" prefWidth="1293.0" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.Vue1Controller">
     <children>
         <BorderPane maxHeight="Infinity" maxWidth="Infinity" style="-fx-background-color: #2f2f2f;">
 
@@ -157,7 +146,7 @@
          <left>
             <VBox prefHeight="943.0" prefWidth="48.0" style="-fx-background-color: #242424;" BorderPane.alignment="CENTER">
                <children>
-                  <ImageView fitHeight="46.0" fitWidth="46.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fitHeight="46.0" fitWidth="46.0" onMouseClicked="#retourPressEvent" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@images/home-removebg-preview(1).png" />
                      </image>

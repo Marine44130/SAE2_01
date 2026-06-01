@@ -125,7 +125,19 @@ public class Vue2Controller {
 
 
     private void ouvrirTierList(TierList tierList) {
-        System.out.println(tierList.getName());
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("vue1.fxml"));
+            Parent root = loader.load();
+
+            Vue1Controller controller = loader.getController();
+
+            Scene scene = new Scene(root);
+            Stage stage = (Stage) MesTierList.getScene().getWindow();
+            stage.setScene(scene);
+            stage.show();
+        } catch (IOException e) {
+            System.out.println("Erreur : " + e.getMessage());
+        }
     }
 
     @FXML
