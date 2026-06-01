@@ -21,7 +21,7 @@ public class TMDBApiManager {
 
         Request request = new Request.Builder()
                 .url("https://api.themoviedb.org/3/search/movie?query=" + query)
-                .header("Authorization", "Bearer " + apiKey) // Injection de la clé dynamique
+                .header("Authorization", "Bearer " + apiKey)
                 .build();
 
         try (Response response = client.newCall(request).execute()) {
@@ -41,7 +41,7 @@ public class TMDBApiManager {
                     .get("poster_path").getAsString();
 
             String urlImage = "https://image.tmdb.org/t/p/w500" + posterPath;
-            return new Item(urlImage, true); // Retourne un Item configuré en mode Image
+            return new Item(urlImage, true);
         }
     }
 }

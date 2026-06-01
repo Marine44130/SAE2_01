@@ -18,11 +18,23 @@ public class DataManager {
         return instance;
     }
 
-    public AppConfig getConfig() { return config; }
+    public AppConfig getConfig() {
+        return config;
+    }
 
-    public void saveConfig() { ConfigManager.save(config); }
+    public void saveConfig() {
+        ConfigManager.save(config);
+    }
 
-    public void addTierList(TierList tl) { ToutesLesTierLists.add(tl); }
-    public List<TierList> getToutesLesTierLists() { return ToutesLesTierLists; }
-    public void removeTierList(TierList tl) { ToutesLesTierLists.remove(tl); }
+    public void addTierList(TierList tl) {
+        ToutesLesTierLists.add(tl);
+    }
+
+    public List<TierList> getToutesLesTierLists() {
+        return ToutesLesTierLists;
+    }
+
+    public void removeTierList(TierList tl) {
+        ToutesLesTierLists.remove(tl);
+    }
 }
