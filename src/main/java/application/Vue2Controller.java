@@ -10,6 +10,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.FileChooser;
@@ -50,7 +51,7 @@ public class Vue2Controller {
     Button confirmer_btn;
 
     @FXML
-    HBox MesTierList;
+    FlowPane MesTierList;
 
     @FXML
     TextField nom;
@@ -79,6 +80,8 @@ public class Vue2Controller {
     @FXML
     public void afficherListDansMesList() {
         supprimer_menu.getItems().clear();
+        MesTierList.setHgap(5);
+        MesTierList.setVgap(5);
         afficherListSupprimables();
         afficherListDupliquables();
         afficherListExportables();

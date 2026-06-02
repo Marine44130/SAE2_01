@@ -183,6 +183,26 @@ public class Vue1Controller {
         }
     }
 
+    private void adapterHauteurs() {
+        double hauteurTotale = tierlist.getTiers()
+                .stream()
+                .mapToDouble(Tier::getHauteur)
+                .sum();
+
+        // La grille prend la hauteur totale des tiers
+        grille.setPrefHeight(hauteurTotale);
+        grille.setMinHeight(hauteurTotale);
+        grille.setMaxHeight(hauteurTotale);
+
+        // La scène a une hauteur fixe (ex: 900), on déduit la grille + marges
+        double hauteurScene = grille.getScene() != null ? grille.getScene().getHeight() : 900;
+        double hauteurDisponible = hauteurScene - hauteurTotale - 60; // 60 = marges/toolbar
+
+        double hauteurUnranked = Math.max(120, hauteurDisponible); // minimum 120px
+        unrakedItemZone.setPrefHeight(hauteurUnranked);
+        unrakedItemZone.setMinHeight(hauteurUnranked);
+    }
+
     public void resetItem(){
         for (Tier tier : tierlist.getTiers()){
 
@@ -303,6 +323,7 @@ public class Vue1Controller {
                 flowPane.getChildren().add(vbox);
             }
         }
+        adapterHauteurs();
     }
 
     @FXML
@@ -414,7 +435,7 @@ public class Vue1Controller {
                 Vue1Controller controller = loader.getController();
                 controller.envoyer(loadedList);
 
-                stage.setScene(new Scene(root, 550, 700));
+                stage.setScene(new Scene(root, 1000, 900));
                 stage.show();
             } catch (Exception e) {
                 Alert alert = new Alert(Alert.AlertType.ERROR);

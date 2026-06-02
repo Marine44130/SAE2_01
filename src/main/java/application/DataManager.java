@@ -9,10 +9,11 @@ public class DataManager {
     private static DataManager instance;
     private List<TierList> ToutesLesTierLists = new ArrayList<>();
     private AppConfig config;
-    private  static final String FILE_PATH = "VosTierslist.ser";
+    private static final String FILE_PATH = "VosTierslist.ser";
 
     private DataManager() {
         config = ConfigManager.load();
+        ToutesLesTierLists = chargerToutesLesTierLists();
     }
 
     public static DataManager getInstance() {
@@ -30,7 +31,7 @@ public class DataManager {
 
     public void addTierList(TierList tl) {
         ToutesLesTierLists.removeIf(tls -> tls.getName().equalsIgnoreCase(tl.getName()));
-        this.ToutesLesTierLists.add(tl);
+        ToutesLesTierLists.add(tl);
     }
 
     public List<TierList> getToutesLesTierLists() {
@@ -39,40 +40,40 @@ public class DataManager {
 
     public void removeTierList(TierList tl) {
         ToutesLesTierLists.remove(tl);
+        sauvegarderTout();
     }
 
-    public TierList getTierlist (String name) {
-        TierList trouve = null;
-        for (TierList tl : ToutesLesTierLists){
-            if (tl.getName() == name){
-                trouve = tl;
-            }
-        }
-        return trouve ;
+    public TierList getTierlist(String name) {
+        return ToutesLesTierLists.stream()
+                .filter(tl -> tl.getName().equalsIgnoreCase(name))
+                .findFirst()
+                .orElse(null);
     }
 
-    public void enregistrerTiersList(TierList tierList){
+    public void enregistrerTiersList(TierList tierList) {
+        addTierList(tierList);
+        sauvegarderTout();
+    }
+
+    private void sauvegarderTout() {
         try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(FILE_PATH))) {
-            oos.writeObject(tierList);
-            System.out.println("TierList sauvegardée !");
+            oos.writeObject(ToutesLesTierLists);
+            System.out.println("Toutes les TierLists sauvegardées !");
         } catch (IOException e) {
-            System.err.println("Erreur lors de la sauvegarde (fichier pas enregistré): " + e.getMessage());
+            System.err.println("Erreur sauvegarde : " + e.getMessage());
         }
     }
 
-    public TierList chargerTiersList(){
+    @SuppressWarnings("unchecked")
+    public List<TierList> chargerToutesLesTierLists() {
         File file = new File(FILE_PATH);
-
-        if (!file.exists()){
-            return null;
-        }
+        if (!file.exists()) return new ArrayList<>();
 
         try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream(file))) {
-            return (TierList) ois.readObject();
+            return (List<TierList>) ois.readObject();
         } catch (IOException | ClassNotFoundException e) {
-            System.err.println("Erreur d'import : " + e.getMessage());
-            return null;
+            System.err.println("Erreur chargement : " + e.getMessage());
+            return new ArrayList<>();
         }
-
     }
 }

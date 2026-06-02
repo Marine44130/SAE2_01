@@ -11,7 +11,7 @@
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 
-<StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="550.0" style="-fx-background-color: #2F2F2F;" xmlns="http://javafx.com/javafx/21.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.Vue3Controller">
+<StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="550.0" style="-fx-background-color: #2F2F2F;" xmlns="http://javafx.com/javafx/26" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.Vue3Controller">
     <BorderPane>
         <left>
             <VBox prefHeight="562.0" prefWidth="48.0" style="-fx-background-color: #242424;" BorderPane.alignment="CENTER">
@@ -35,7 +35,7 @@
             </VBox>
         </left>
         <center>
-            <VBox prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER">
+            <VBox prefHeight="700.0" prefWidth="545.0" BorderPane.alignment="CENTER">
                 <children>
                     <VBox fx:id="unrankedArea" prefHeight="438.0" prefWidth="453.0" style="-fx-background-color: #525252; -fx-background-radius: 15;">
                         <VBox.margin>
@@ -63,15 +63,15 @@
                         <children>
                             <TextField fx:id="itemTextField" promptText="Add item text :" style="-fx-border-color: #525252; -fx-background-color: #2F2F2F; -fx-border-radius: 15; -fx-text-fill: white;">
                                 <HBox.margin>
-                                    <Insets left="25.0" />
+                                    <Insets />
                                 </HBox.margin>
                             </TextField>
-                            <Button fx:id="addItemButton" mnemonicParsing="false" onAction="#ajoutItem" style="-fx-background-color: #5865F2; -fx-text-fill: white; -fx-background-radius: 5;" text="+ Add item">
+                            <Button fx:id="addItemButton" mnemonicParsing="false" onAction="#ajoutItem" prefHeight="25.0" prefWidth="84.0" style="-fx-background-color: #5865F2; -fx-text-fill: white; -fx-background-radius: 5;" text="+ Add item">
                                 <HBox.margin>
                                     <Insets left="25.0" />
                                 </HBox.margin>
                             </Button>
-                            <Button fx:id="addImageButton" mnemonicParsing="false" onAction="#ajoutImage" prefHeight="27.0" prefWidth="71.0" style="-fx-background-color: #2F2F2F; -fx-text-fill: white; -fx-background-radius: 5; -fx-border-color: #525252; -fx-border-radius: 5;" text="Image">
+                            <Button fx:id="addImageButton" mnemonicParsing="false" onAction="#ajoutImage" prefHeight="27.0" prefWidth="133.0" style="-fx-background-color: #2F2F2F; -fx-text-fill: white; -fx-background-radius: 5; -fx-border-color: #525252; -fx-border-radius: 5;" text="Importer Image">
                                 <HBox.margin>
                                     <Insets left="25.0" />
                                 </HBox.margin>
