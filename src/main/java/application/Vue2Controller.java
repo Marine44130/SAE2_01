@@ -12,19 +12,30 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
+import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.ObjectInputStream;
 import java.util.List;
 
 import static application.Vue1Controller.tierlist;
 
 public class Vue2Controller {
+
     @FXML
-    ImageView home;
+    private ImageView home;
+
+    @FXML
+    private ImageView impor;
 
     @FXML
     private ImageView Maison;
+
+    @FXML
+    private ImageView sauv;
 
     @FXML
     SplitMenuButton supprimer_menu;
@@ -164,6 +175,37 @@ public class Vue2Controller {
     private void sauvegarderLocale() {
         if (tierlist != null) {
             DataManager.getInstance().enregistrerTiersList(tierlist);
+        }
+    }
+
+    @FXML
+    public void handleImporterBtn(MouseEvent event) {
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.setTitle("Sélectionner une sauvegarde binaire");
+        fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("Fichiers Tier-List (*.ser)", "*.ser"));
+
+        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        File file = fileChooser.showOpenDialog(stage);
+
+        if (file != null) {
+            try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream(file))) {
+                TierList loadedList = (TierList) ois.readObject();
+                DataManager.getInstance().addTierList(loadedList);
+
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("vue1.fxml"));
+                Parent root = loader.load();
+
+                Vue1Controller controller = loader.getController();
+                controller.envoyer(loadedList);
+
+                stage.setScene(new Scene(root, 550, 700));
+                stage.show();
+            } catch (Exception e) {
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Erreur d'importation");
+                alert.setContentText("Impossible de charger le fichier sélectionné.");
+                alert.showAndWait();
+            }
         }
     }
 }

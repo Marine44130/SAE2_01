@@ -21,12 +21,12 @@
                             <Image url="@images/home-removebg-preview(1).png" />
                         </image>
                     </ImageView>
-                    <ImageView fx:id="shareIcon" fitHeight="46.0" fitWidth="46.0" pickOnBounds="true" preserveRatio="true">
+                    <ImageView fx:id="impor" fitHeight="46.0" fitWidth="46.0" onMouseClicked="#handleImporterBtn" pickOnBounds="true" preserveRatio="true">
                         <image>
-                            <!--a remplir avec nouvelle image importer-->
+                            <Image url="@images/téléchargement.png" />
                         </image>
                     </ImageView>
-                    <ImageView fx:id="sauvIcon" fitHeight="46.0" fitWidth="46.0" onMouseClicked="#sauvegarderLocale" pickOnBounds="true" preserveRatio="true">
+                    <ImageView fx:id="sauv" fitHeight="46.0" fitWidth="46.0" onMouseClicked="#sauvegarderLocale" pickOnBounds="true" preserveRatio="true">
                         <image>
                             <Image url="@images/save-removebg-preview.png" />
                         </image>
