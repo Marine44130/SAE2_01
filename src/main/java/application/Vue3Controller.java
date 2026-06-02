@@ -106,7 +106,7 @@ public class Vue3Controller implements Initializable {
                 DataManager.getInstance().saveConfig();
             }
             Scene scene = new Scene(root, 1293, 952);
-            Stage stage = (Stage) itemsContainer.getScene().getWindow();
+            Stage stage = (Stage) root.getScene().getWindow();
             stage.setScene(scene);
             stage.show();
         } catch (IOException e) {
