@@ -97,14 +97,20 @@ public class Vue3Controller implements Initializable {
     @FXML
     private void boutonFinir() {
         try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("vue1.fxml"));
+            Parent root = loader.load();
+
+            Vue1Controller controller = loader.getController();
             if (tierList != null) {
+                controller.envoyer(tierList);
                 DataManager.getInstance().saveConfig();
             }
-            Parent root = FXMLLoader.load(getClass().getResource("vue1.fxml"));
-            Stage stage = (Stage) finishButton.getScene().getWindow();
-            stage.setScene(new Scene(root));
+            Scene scene = new Scene(root, 1293, 952);
+            Stage stage = (Stage) itemsContainer.getScene().getWindow();
+            stage.setScene(scene);
+            stage.show();
         } catch (IOException e) {
-            e.printStackTrace();
+            System.out.println("Erreur : " + e.getMessage());
         }
     }
 

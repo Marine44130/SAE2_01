@@ -228,4 +228,8 @@ public class Vue1Controller {
     private void onMenuButtonClick() {
 
     }
+
+    public void afficherTierList(TierList tl) {
+        this.tierlist = tl;
+    }
 }
