@@ -3,13 +3,11 @@ package application;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Bounds;
+import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.ColorPicker;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.*;
@@ -27,10 +25,19 @@ public class Vue1Controller {
     TextField nvNom;
 
     @FXML
+    private ImageView Maison;
+
+    @FXML
     TextField nvPlace;
 
     @FXML
+    FlowPane unrakedItemZone;
+
+    @FXML
     TextField nvHauteur;
+
+    @FXML
+    ImageView home;
 
     @FXML
     private ColorPicker nvCouleur;
@@ -101,6 +108,18 @@ public class Vue1Controller {
     }
 
     @FXML
+    public void resetItem(){
+        for (Tier tier : tierlist.getTiers()){
+            List<Item> tousLesItems = tier.getItems();
+            for (Item item : tousLesItems) {
+                tierlist.addUnrankedItem(item);
+                tier.removeItem(item);
+            }
+        }
+        afficherItems();
+    }
+
+    @FXML
     public void AddTier() {
 
         Color couleur = couleurTier.getValue();
@@ -122,7 +141,37 @@ public class Vue1Controller {
     }
 
     @FXML
+    public void afficherUnrankedItems(){
+        unrakedItemZone.getChildren().clear();
+        List<Item> tousLesItems = tierlist.getUnrankedItems();
+        for (Item item : tousLesItems) {
+            System.out.println("item unranked ajouté :" + item);
+            VBox vbox = new VBox();
+            if(item.isImage()){
+                ImageView image = new ImageView(item.getContent());
+                image.setFitHeight(100);
+                image.setFitWidth(100);
+                vbox.getChildren().add(image);
+            }
+            else {
+                Label label = new Label(item.getContent());
+                label.setStyle("-fx-text-fill: white");
+                label.setAlignment(Pos.CENTER);
+                label.setPrefSize(100, 100);
+                vbox.getChildren().add(label);
+                vbox.setStyle("-fx-border-color: white; -fx-border-radius: 5");
+            }
+            unrakedItemZone.getChildren().add(vbox);
+
+            vbox.setPrefSize( 100, 100);
+
+        }
+
+    }
+
+    @FXML
     public void afficherTiers() {
+        System.out.println("je suis sensé rafraichir les tiers");
         grille.getChildren().clear();
 
         List<Tier> tousLesTier = tierlist.getTiers();
@@ -144,6 +193,7 @@ public class Vue1Controller {
 
         }
     }
+
 
     @FXML
     public void afficherItems() {
@@ -169,8 +219,10 @@ public class Vue1Controller {
     @FXML
     public void envoyer(TierList tierList) {
         tierlist = tierList;
+
         afficherTiers();
         afficherItems();
+        afficherUnrankedItems();
     }
 
     @FXML
@@ -230,6 +282,24 @@ public class Vue1Controller {
             stage.show();
         } catch (IOException e) {
             System.out.println("Erreur : " + e.getMessage());
+        }
+    }
+
+    @FXML
+    public void handlehome_btn(MouseEvent event) throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("home.fxml"));
+        Parent root = loader.load();
+
+        Scene scene = new Scene(root, 550, 700);
+        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        stage.setScene(scene);
+        stage.show();
+    }
+
+    @FXML
+    private void sauvegarderLocale() {
+        if (tierlist != null) {
+            DataManager.getInstance().enregistrerTiersList(tierlist);
         }
     }
 }

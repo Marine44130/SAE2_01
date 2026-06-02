@@ -9,6 +9,7 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.FlowPane?>
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Region?>
@@ -16,7 +17,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<StackPane maxHeight="Infinity" maxWidth="Infinity" prefHeight="952.0" prefWidth="1293.0" xmlns="http://javafx.com/javafx/21.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.Vue1Controller">
+<StackPane maxHeight="Infinity" maxWidth="Infinity" prefHeight="952.0" prefWidth="1293.0" xmlns="http://javafx.com/javafx/26" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.Vue1Controller">
     <children>
         <BorderPane maxHeight="Infinity" maxWidth="Infinity" style="-fx-background-color: #2f2f2f;">
 
@@ -63,13 +64,13 @@
                                             </font>
                                         </Label>
                                         <Button fx:id="addItem" onAction="#ouvrirAjoutItem" prefHeight="22.0" style="-fx-background-color: #6572ff; -fx-background-radius: 9; -fx-text-fill: white; -fx-font-size: 12px;" text="+ Add item" />
+                                        <Button fx:id="addItem1" onAction="#resetItem" prefHeight="22.0" style="-fx-background-color: #6572ff; -fx-background-radius: 9; -fx-text-fill: white; -fx-font-size: 12px;" text="Reset items" />
                                     </children>
                                 </HBox>
-                                <HBox fx:id="reserveItems" alignment="CENTER_LEFT" spacing="10.0" VBox.vgrow="ALWAYS">
-                                    <padding>
-                                        <Insets bottom="12.0" left="22.0" right="16.0" top="16.0" />
-                                    </padding>
-                                </HBox>
+                                <FlowPane fx:id="unrakedItemZone" prefHeight="200.0" prefWidth="200.0">
+                                    <VBox.margin>
+                                        <Insets left="10.0" top="10.0" />
+                                    </VBox.margin></FlowPane>
                             </children>
                         </VBox>
                     </children>
@@ -78,7 +79,7 @@
             <left>
                 <VBox prefHeight="943.0" prefWidth="48.0" style="-fx-background-color: #242424;" BorderPane.alignment="CENTER">
                     <children>
-                        <ImageView fitHeight="46.0" fitWidth="46.0" pickOnBounds="true" preserveRatio="true">
+                        <ImageView fx:id="home" fitHeight="46.0" fitWidth="46.0" onDragDetected="#handlehome_btn" pickOnBounds="true" preserveRatio="true">
                             <image>
                                 <Image url="@images/home-removebg-preview(1).png" />
                             </image>
@@ -86,7 +87,6 @@
                         <Region prefWidth="50.0" />
                         <ImageView fitHeight="46.0" fitWidth="46.0" pickOnBounds="true" preserveRatio="true">
                             <image>
-                                <Image url="@images/partage-removebg-preview.png" />
                             </image>
                         </ImageView>
                         <ImageView fitHeight="46.0" fitWidth="46.0" pickOnBounds="true" preserveRatio="true">
@@ -122,9 +122,12 @@
                     <children>
                         <Button fx:id="suppTier" onAction="#supprimerTier" prefHeight="25.0" prefWidth="86.0" style="-fx-background-color: #6572ff; -fx-background-radius: 4; -fx-text-fill: #ffffff; -fx-font-size: 13px;" text="Supprimer">
                             <HBox.margin>
+                                <Insets />
+                            </HBox.margin></Button>
+                        <Button fx:id="validerModif" onAction="#hideTierConfig" prefHeight="25.0" prefWidth="86.0" style="-fx-background-color: #6572ff; -fx-background-radius: 4; -fx-text-fill: #ffffff; -fx-font-size: 13px;" text="Valider">
+                            <HBox.margin>
                                 <Insets left="20.0" />
                             </HBox.margin></Button>
-                        <Button fx:id="validerModif" onAction="#hideTierConfig" prefHeight="25.0" prefWidth="86.0" style="-fx-background-color: #6572ff; -fx-background-radius: 4; -fx-text-fill: #ffffff; -fx-font-size: 13px;" text="Valider" />
                     </children>
                 </HBox>
             </children>

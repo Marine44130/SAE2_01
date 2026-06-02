@@ -111,7 +111,7 @@ public class Vue3Controller implements Initializable {
         if (tierList != null) {
             try (java.io.ObjectOutputStream oos = new java.io.ObjectOutputStream(new java.io.FileOutputStream("tierlist_auto_save.ser"))) {
                 oos.writeObject(tierList);
-                System.out.println("👉 [Option A] Fichier de sauvegarde mis à jour automatiquement.");
+                System.out.println("Fichier de sauvegarde mis à jour automatiquement.");
             } catch (IOException e) {
                 System.err.println("Impossible de sauvegarder automatiquement : " + e.getMessage());
             }

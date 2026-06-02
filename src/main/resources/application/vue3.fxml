@@ -55,10 +55,13 @@
                             <HBox prefHeight="121.0" prefWidth="453.0" />
                             <HBox prefHeight="121.0" prefWidth="453.0" />
                         </children>
+                  <padding>
+                     <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                  </padding>
                     </VBox>
                     <HBox prefHeight="32.0" prefWidth="502.0">
                         <children>
-                            <TextField fx:id="itemTextField" promptText="Add item text :" style="-fx-border-color: #525252; -fx-background-color: #2F2F2F; -fx-border-radius: 15; -fx-text-fill: blue;">
+                            <TextField fx:id="itemTextField" promptText="Add item text :" style="-fx-border-color: #525252; -fx-background-color: #2F2F2F; -fx-border-radius: 15; -fx-text-fill: white;">
                                 <HBox.margin>
                                     <Insets left="25.0" />
                                 </HBox.margin>

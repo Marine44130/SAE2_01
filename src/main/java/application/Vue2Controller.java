@@ -24,6 +24,9 @@ public class Vue2Controller {
     ImageView home;
 
     @FXML
+    private ImageView Maison;
+
+    @FXML
     SplitMenuButton supprimer_menu;
 
     @FXML
@@ -157,4 +160,10 @@ public class Vue2Controller {
         stage.show();
     }
 
+    @FXML
+    private void sauvegarderLocale() {
+        if (tierlist != null) {
+            DataManager.getInstance().enregistrerTiersList(tierlist);
+        }
+    }
 }
