@@ -98,7 +98,6 @@ public class Vue1Controller {
         if(tierSelectionne != null ){
             modifierTier(tierSelectionne);
         }
-
     }
 
     @FXML
@@ -148,10 +147,6 @@ public class Vue1Controller {
 
     @FXML
     public void afficherItems() {
-        grille.getChildren().clear();
-
-
-
         for (Tier tier : tierlist.getTiers()){
             List<Item> tousLesItems = tier.getItems();
             tousLesItems.sort(Comparator.comparingInt(Item::getPlace));

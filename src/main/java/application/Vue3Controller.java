@@ -228,4 +228,5 @@ public class Vue3Controller implements Initializable {
         tierList.removeUnrankedItem(item);
         rafraichirPage();
     }
+
 }
