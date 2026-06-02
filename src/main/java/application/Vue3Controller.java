@@ -125,6 +125,8 @@ public class Vue3Controller implements Initializable {
         itemsContainer.getChildren().clear();
 
         for (Item item : tierList.getUnrankedItems()) {
+            javafx.scene.Node itemNode;
+
             if (item.isImage()) {
                 ImageView imageView = new ImageView(new Image(item.getContent(), true));
                 imageView.setFitWidth(100);
@@ -132,7 +134,7 @@ public class Vue3Controller implements Initializable {
                 imageView.setPreserveRatio(false);
                 imageView.setStyle("-fx-border-radius: 8;");
 
-                itemsContainer.getChildren().add(imageView);
+                itemNode = imageView;
             } else {
                 Label textLabel = new Label(item.getContent());
                 textLabel.setPrefSize(100, 100);
@@ -150,8 +152,22 @@ public class Vue3Controller implements Initializable {
                                 "-fx-border-radius: 8;"
                 );
 
-                itemsContainer.getChildren().add(textLabel);
+                itemNode = textLabel;
             }
+
+            itemNode.setOnMouseClicked(event -> {
+                ContextMenu contextMenu = new ContextMenu();
+
+                MenuItem deleteMenu = new MenuItem("Supprimer");
+
+                deleteMenu.setOnAction(e -> suppItem(item));
+
+                contextMenu.getItems().add(deleteMenu);
+
+                contextMenu.show(itemNode, event.getScreenX(), event.getScreenY());
+            });
+
+            itemsContainer.getChildren().add(itemNode);
         }
     }
 

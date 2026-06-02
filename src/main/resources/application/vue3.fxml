@@ -21,7 +21,7 @@
                 </ImageView>
                 <ImageView fx:id="shareIcon" fitHeight="46.0" fitWidth="46.0" pickOnBounds="true" preserveRatio="true">
                     <image>
-                        <Image url="@images/partage-removebg-preview.png" />
+                        <!--a remplir avec nouvelle image importer-->
                     </image>
                 </ImageView>
                 <ImageView fx:id="saveIcon" fitHeight="46.0" fitWidth="46.0" pickOnBounds="true" preserveRatio="true">
