@@ -140,9 +140,32 @@ public class Vue2Controller {
     }
 
     @FXML
-    private void dupliquerTierList(TierList tierList) {
-        DataManager.getInstance().addTierList(tierList);
-        afficherListDansMesList();
+    private void dupliquerTierList(TierList tierListOrigine) {
+        if (tierListOrigine == null) return;
+
+        TierList copieTierList = clonerTierList(tierListOrigine);
+
+        if (copieTierList != null) {
+            copieTierList.setName(tierListOrigine.getName() + " - Copie");
+            DataManager.getInstance().addTierList(copieTierList);
+            DataManager.getInstance().saveConfig();
+            afficherListDansMesList();
+        }
+    }
+
+    private TierList clonerTierList(TierList source) {
+        try {
+            java.io.ByteArrayOutputStream baos = new java.io.ByteArrayOutputStream();
+            java.io.ObjectOutputStream oos = new java.io.ObjectOutputStream(baos);
+            oos.writeObject(source);
+
+            java.io.ByteArrayInputStream bais = new java.io.ByteArrayInputStream(baos.toByteArray());
+            java.io.ObjectInputStream ois = new java.io.ObjectInputStream(bais);
+            return (TierList) ois.readObject();
+        } catch (Exception e) {
+            System.err.println("Erreur lors de la duplication de la TierList : " + e.getMessage());
+            return null;
+        }
     }
 
 
