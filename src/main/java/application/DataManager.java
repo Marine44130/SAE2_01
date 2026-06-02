@@ -47,7 +47,6 @@ public class DataManager {
                 trouve = tl;
             }
         }
-
         return trouve ;
     }
 
