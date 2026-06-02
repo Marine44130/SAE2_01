@@ -22,7 +22,7 @@ import java.util.ResourceBundle;
 
 public class Vue3Controller implements Initializable {
 
-    private TierList currentTierList;
+    private TierList tierList;
 
     @FXML
     private VBox unrankedArea;
@@ -46,16 +46,16 @@ public class Vue3Controller implements Initializable {
     }
 
     public void afficherTierList(TierList tl) {
-        this.currentTierList = tl;
+        this.tierList = tl;
         rafraichirPage();
     }
 
     @FXML
     private void ajoutItem() {
         String text = itemTextField.getText().trim();
-        if (!text.isEmpty() && currentTierList != null) {
+        if (!text.isEmpty() && tierList != null) {
             Item newItem = new Item(text, false);
-            currentTierList.addUnrankedItem(newItem);
+            tierList.addUnrankedItem(newItem);
 
             itemTextField.clear();
             rafraichirPage();
@@ -64,7 +64,7 @@ public class Vue3Controller implements Initializable {
 
     @FXML
     private void ajoutImage() {
-        if (currentTierList == null) return;
+        if (tierList == null) return;
 
         FileChooser fileChooser = new FileChooser();
         fileChooser.getExtensionFilters().add(
@@ -75,7 +75,7 @@ public class Vue3Controller implements Initializable {
 
         if (selectedFile != null) {
             Item newImageItem = new Item(selectedFile.toURI().toString(), true);
-            currentTierList.addUnrankedItem(newImageItem);
+            tierList.addUnrankedItem(newImageItem);
 
             rafraichirPage();
         }
@@ -97,7 +97,7 @@ public class Vue3Controller implements Initializable {
     @FXML
     private void boutonFinir() {
         try {
-            if (currentTierList != null) {
+            if (tierList != null) {
                 DataManager.getInstance().saveConfig();
             }
             Parent root = FXMLLoader.load(getClass().getResource("vue1.fxml"));
@@ -109,11 +109,11 @@ public class Vue3Controller implements Initializable {
     }
 
     private void rafraichirPage() {
-        if (currentTierList == null) return;
+        if (tierList == null) return;
 
         itemsContainer.getChildren().clear();
 
-        for (Item item : currentTierList.getUnrankedItems()) {
+        for (Item item : tierList.getUnrankedItems()) {
             if (item.isImage()) {
                 ImageView imageView = new ImageView(new Image(item.getContent(), true));
                 imageView.setFitWidth(100);
@@ -154,7 +154,7 @@ public class Vue3Controller implements Initializable {
 
     @FXML
     private void ajoutAPI() {
-        if (currentTierList == null) return;
+        if (tierList == null) return;
 
         List<String> choices = java.util.Arrays.asList("Film (TMDB)", "Jeu Vidéo (RAWG)");
         ChoiceDialog<String> typeDialog = new ChoiceDialog<>("Film (TMDB)", choices);
@@ -184,7 +184,7 @@ public class Vue3Controller implements Initializable {
                         }
 
                         if (newItem != null) {
-                            currentTierList.addUnrankedItem(newItem);
+                            tierList.addUnrankedItem(newItem);
                             rafraichirPage();
                         }
 
