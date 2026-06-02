@@ -24,11 +24,16 @@ public class Vue3Controller implements Initializable {
 
     private TierList currentTierList;
 
-    @FXML private VBox unrankedArea;
-    @FXML private TextField itemTextField;
-    @FXML private Button finishButton;
-    @FXML private Button previousButton;
-    @FXML private Button APIopt; // Le bouton API
+    @FXML
+    private VBox unrankedArea;
+    @FXML
+    private TextField itemTextField;
+    @FXML
+    private Button finishButton;
+    @FXML
+    private Button previousButton;
+    @FXML
+    private Button APIopt;
 
     private FlowPane itemsContainer;
 
@@ -40,25 +45,25 @@ public class Vue3Controller implements Initializable {
         unrankedArea.getChildren().add(itemsContainer);
     }
 
-    public void setTierList(TierList tl) {
+    public void afficherTierList(TierList tl) {
         this.currentTierList = tl;
-        refreshUI();
+        rafraichirPage();
     }
 
     @FXML
-    private void handleAddItem() {
+    private void ajoutItem() {
         String text = itemTextField.getText().trim();
         if (!text.isEmpty() && currentTierList != null) {
             Item newItem = new Item(text, false);
             currentTierList.addUnrankedItem(newItem);
 
             itemTextField.clear();
-            refreshUI();
+            rafraichirPage();
         }
     }
 
     @FXML
-    private void handleAddImage() {
+    private void ajoutImage() {
         if (currentTierList == null) return;
 
         FileChooser fileChooser = new FileChooser();
@@ -72,12 +77,12 @@ public class Vue3Controller implements Initializable {
             Item newImageItem = new Item(selectedFile.toURI().toString(), true);
             currentTierList.addUnrankedItem(newImageItem);
 
-            refreshUI();
+            rafraichirPage();
         }
     }
 
     @FXML
-    private void handlePrevious() {
+    private void boutonPrecedent() {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("vue2.fxml"));
             Parent root = loader.load();
@@ -90,7 +95,7 @@ public class Vue3Controller implements Initializable {
     }
 
     @FXML
-    private void handleFinish() {
+    private void boutonFinir() {
         try {
             if (currentTierList != null) {
                 DataManager.getInstance().saveConfig();
@@ -103,7 +108,7 @@ public class Vue3Controller implements Initializable {
         }
     }
 
-    private void refreshUI() {
+    private void rafraichirPage() {
         if (currentTierList == null) return;
 
         itemsContainer.getChildren().clear();
@@ -139,7 +144,7 @@ public class Vue3Controller implements Initializable {
         }
     }
 
-    private void showAlert(Alert.AlertType type, String title, String content) {
+    private void fenetreAlert(Alert.AlertType type, String title, String content) {
         Alert alert = new Alert(type);
         alert.setTitle(title);
         alert.setHeaderText(null);
@@ -148,7 +153,7 @@ public class Vue3Controller implements Initializable {
     }
 
     @FXML
-    private void handleAddMovieApi() {
+    private void ajoutAPI() {
         if (currentTierList == null) return;
 
         List<String> choices = java.util.Arrays.asList("Film (TMDB)", "Jeu Vidéo (RAWG)");
@@ -173,19 +178,18 @@ public class Vue3Controller implements Initializable {
                         if (selectedType.equals("Film (TMDB)")) {
                             String apiKey = (config != null) ? config.getTmdbApiKey() : null;
                             newItem = MultiApiManager.searchMovie(title, apiKey);
-                        }
-                        else if (selectedType.equals("Jeu Vidéo (RAWG)")) {
+                        } else if (selectedType.equals("Jeu Vidéo (RAWG)")) {
                             String apiKey = (config != null) ? config.getRawgApiKey() : null;
                             newItem = MultiApiManager.searchGame(title, apiKey);
                         }
 
                         if (newItem != null) {
                             currentTierList.addUnrankedItem(newItem);
-                            refreshUI();
+                            rafraichirPage();
                         }
 
                     } catch (Exception e) {
-                        showAlert(Alert.AlertType.ERROR, "Erreur de recherche", e.getMessage());
+                        fenetreAlert(Alert.AlertType.ERROR, "Erreur de recherche", e.getMessage());
                     }
                 }
             });

@@ -61,17 +61,17 @@
                                 <Insets left="25.0" />
                             </HBox.margin>
                         </TextField>
-                        <Button fx:id="addItemButton" mnemonicParsing="false" onAction="#handleAddItem" style="-fx-background-color: #5865F2; -fx-text-fill: white; -fx-background-radius: 5;" text="+ Add item">
+                        <Button fx:id="addItemButton" mnemonicParsing="false" onAction="#ajoutItem" style="-fx-background-color: #5865F2; -fx-text-fill: white; -fx-background-radius: 5;" text="+ Add item">
                             <HBox.margin>
                                 <Insets left="25.0" />
                             </HBox.margin>
                         </Button>
-                        <Button fx:id="addImageButton" mnemonicParsing="false" onAction="#handleAddImage" prefHeight="27.0" prefWidth="71.0" style="-fx-background-color: #2F2F2F; -fx-text-fill: white; -fx-background-radius: 5; -fx-border-color: #525252; -fx-border-radius: 5;" text="Image">
+                        <Button fx:id="addImageButton" mnemonicParsing="false" onAction="#ajoutImage" prefHeight="27.0" prefWidth="71.0" style="-fx-background-color: #2F2F2F; -fx-text-fill: white; -fx-background-radius: 5; -fx-border-color: #525252; -fx-border-radius: 5;" text="Image">
                             <HBox.margin>
                                 <Insets left="25.0" />
                             </HBox.margin>
                         </Button>
-                  <Button fx:id="APIopt" mnemonicParsing="false" onAction="#handleAddMovieApi" prefHeight="27.0" prefWidth="71.0" style="-fx-background-color: #2F2F2F; -fx-text-fill: white; -fx-background-radius: 5; -fx-border-color: #525252; -fx-border-radius: 5;" text="API">
+                  <Button fx:id="APIopt" mnemonicParsing="false" onAction="#ajoutAPI" prefHeight="27.0" prefWidth="71.0" style="-fx-background-color: #2F2F2F; -fx-text-fill: white; -fx-background-radius: 5; -fx-border-color: #525252; -fx-border-radius: 5;" text="API">
                      <HBox.margin>
                         <Insets left="25.0" />
                      </HBox.margin>
@@ -80,7 +80,7 @@
                 </HBox>
                 <HBox prefHeight="32.0" prefWidth="502.0">
                     <children>
-                        <Button fx:id="previousButton" mnemonicParsing="false" onAction="#handlePrevious" prefHeight="27.0" prefWidth="95.0" style="-fx-background-color: white; -fx-text-fill: black; -fx-background-radius: 15; -fx-border-color: #525252; -fx-border-radius: 5;" text="Précedent">
+                        <Button fx:id="previousButton" mnemonicParsing="false" onAction="#boutonPrecedent" prefHeight="27.0" prefWidth="95.0" style="-fx-background-color: white; -fx-text-fill: black; -fx-background-radius: 15; -fx-border-color: #525252; -fx-border-radius: 5;" text="Précedent">
                             <HBox.margin>
                                 <Insets left="10.0" />
                             </HBox.margin>
@@ -90,7 +90,7 @@
                                 <Insets />
                             </HBox.margin>
                         </Region>
-                        <Button fx:id="finishButton" mnemonicParsing="false" onAction="#handleFinish" prefHeight="27.0" prefWidth="89.0" style="-fx-background-color: white; -fx-text-fill: black; -fx-background-radius: 15; -fx-border-color: #525252; -fx-border-radius: 5;" text="Finir">
+                        <Button fx:id="finishButton" mnemonicParsing="false" onAction="#boutonFinir" prefHeight="27.0" prefWidth="89.0" style="-fx-background-color: white; -fx-text-fill: black; -fx-background-radius: 15; -fx-border-color: #525252; -fx-border-radius: 5;" text="Finir">
                             <HBox.margin>
                                 <Insets left="25.0" />
                             </HBox.margin>

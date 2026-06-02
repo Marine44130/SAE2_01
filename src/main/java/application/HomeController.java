@@ -100,7 +100,7 @@ public class HomeController {
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("vue3.fxml"));
                 Parent root = loader.load();
                 Vue3Controller controller = loader.getController();
-                controller.setTierList(loadedList);
+                controller.afficherTierList(loadedList);
 
                 stage.setScene(new Scene(root, 550, 700));
                 stage.show();

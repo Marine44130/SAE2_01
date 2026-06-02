@@ -129,7 +129,7 @@ public class Vue2Controller {
             Parent root = loader.load();
 
             Vue3Controller controller = loader.getController();
-            controller.setTierList(tierList);
+            controller.afficherTierList(tierList);
 
             Scene scene = new Scene(root);
             Stage stage = (Stage) MesTierList.getScene().getWindow();
