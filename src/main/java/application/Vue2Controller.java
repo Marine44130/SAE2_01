@@ -132,19 +132,19 @@ public class Vue2Controller {
 
     private void ouvrirTierList(TierList tierList) {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("vue3.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("vue1.fxml"));
             Parent root = loader.load();
-
-            Vue3Controller controller = loader.getController();
-            controller.afficherTierList(tierList);
-            System.out.println(tierList);
-
-            Scene scene = new Scene(root);
-            Stage stage = (Stage) MesTierList.getScene().getWindow();
+            Vue1Controller controller = loader.getController();
+            if (tierList != null) {
+                controller.envoyer(tierList);
+                DataManager.getInstance().saveConfig();
+            }
+            Scene scene = new Scene(root, 1293, 952);
+            Stage stage = (Stage) confirmer_btn.getScene().getWindow();
             stage.setScene(scene);
             stage.show();
         } catch (IOException e) {
-            System.out.println("Erreur : " + e.getMessage());
+            System.out.println("Erreur de redirection : " + e.getMessage());
         }
     }
 
