@@ -23,10 +23,13 @@
                   <Image url="@images/home-removebg-preview(1).png" />
                </image></ImageView>
             <Region prefWidth="50.0" />
-            <ImageView fx:id="impor" fitHeight="46.0" fitWidth="46.0" onMouseClicked="#handleImporterBtn" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="impor" fitHeight="37.0" fitWidth="41.0" onMouseClicked="#handleImporterBtn" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@images/téléchargement.png" />
-               </image></ImageView>
+               </image>
+               <VBox.margin>
+                  <Insets left="3.0" />
+               </VBox.margin></ImageView>
             <ImageView fx:id="sauv" fitHeight="46.0" fitWidth="46.0" onMouseClicked="#sauvegarderLocale" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@images/save-removebg-preview.png" />
@@ -84,6 +87,30 @@
                      </HBox.margin>
                   </Label>
                   <SplitMenuButton fx:id="dupliquer_menu" mnemonicParsing="false" prefHeight="30.0" prefWidth="195.0" style="-fx-background-color: #525252;" text="Choisissez votre Tier-list">
+                     <items>
+                        <MenuItem mnemonicParsing="false" text="Action 1" />
+                        <MenuItem mnemonicParsing="false" text="Action 2" />
+                     </items>
+                     <HBox.margin>
+                        <Insets left="25.0" />
+                     </HBox.margin>
+                  </SplitMenuButton>
+               </children>
+               <VBox.margin>
+                  <Insets top="20.0" />
+               </VBox.margin>
+            </HBox>
+            <HBox prefHeight="32.0" prefWidth="502.0">
+               <children>
+                  <Label prefHeight="30.0" prefWidth="207.0" style="-fx-text-fill: white;" text="Exporter une Tier-list :">
+                     <font>
+                        <Font size="20.0" />
+                     </font>
+                     <HBox.margin>
+                        <Insets left="30.0" />
+                     </HBox.margin>
+                  </Label>
+                  <SplitMenuButton fx:id="dupliquer_menu1" mnemonicParsing="false" prefHeight="30.0" prefWidth="195.0" style="-fx-background-color: #525252;" text="Choisissez votre Tier-list">
                      <items>
                         <MenuItem mnemonicParsing="false" text="Action 1" />
                         <MenuItem mnemonicParsing="false" text="Action 2" />
