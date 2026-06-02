@@ -17,6 +17,8 @@ import javafx.stage.Stage;
 import java.io.IOException;
 import java.util.List;
 
+import static application.Vue1Controller.tierlist;
+
 public class Vue2Controller {
     @FXML
     ImageView home;
@@ -74,6 +76,8 @@ public class Vue2Controller {
             Label nomLabel = new Label(tierList.getName());
             nomLabel.setStyle("-fx-font-size: 14px; -fx-font-weight: bold; -fx-text-fill : white ;");
             nomLabel.setPrefWidth(150);
+            nomLabel.setTextAlignment(javafx.scene.text.TextAlignment.CENTER);
+            nomLabel.setAlignment(Pos.CENTER);
 
             Button ouvrirBtn = new Button("Ouvrir");
             ouvrirBtn.setStyle("-fx-background-color: #5865F2; -fx-text-fill : white ; -fx-background-radius: 5; -fx-border-color: #525252; -fx-border-radius: 5");
@@ -125,11 +129,12 @@ public class Vue2Controller {
 
     private void ouvrirTierList(TierList tierList) {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("vue3.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("vue1.fxml"));
             Parent root = loader.load();
 
-            Vue3Controller controller = loader.getController();
-            controller.afficherTierList(tierList);
+            Vue1Controller controller = loader.getController();
+            controller.envoyer(tierList);
+            System.out.println(tierList);
 
             Scene scene = new Scene(root);
             Stage stage = (Stage) MesTierList.getScene().getWindow();
@@ -140,19 +145,6 @@ public class Vue2Controller {
         }
     }
 
-    @FXML
-    public void handleouvrir_btn(ActionEvent event) throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("vue3.fxml"));
-        Parent root = loader.load();
-
-        Vue3Controller controller = loader.getController();
-
-
-        Scene scene = new Scene(root, 550, 700);
-        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        stage.setScene(scene);
-        stage.show();
-    }
 
     @FXML
     public void handlehome_btn(MouseEvent event) throws IOException {

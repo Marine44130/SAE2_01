@@ -1,12 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.image.*?>
-<?import javafx.scene.layout.*?>
-<?import javafx.scene.text.*?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.SplitMenuButton?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="550.0" style="-fx-background-color: #2F2F2F;" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.Vue2Controller">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="550.0" style="-fx-background-color: #2F2F2F;" xmlns="http://javafx.com/javafx/26" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.Vue2Controller">
    <left>
       <VBox prefHeight="562.0" prefWidth="48.0" style="-fx-background-color: #242424;" BorderPane.alignment="CENTER">
          <children>
@@ -55,10 +63,10 @@
                      </HBox.margin>
                   </Label>
                   <SplitMenuButton fx:id="supprimer_menu" mnemonicParsing="false" prefHeight="30.0" prefWidth="195.0" text="Choisissez votre Tier-list">
-                    <items>
-                      <MenuItem mnemonicParsing="false" text="Action 1" />
-                      <MenuItem mnemonicParsing="false" text="Action 2" />
-                    </items>
+                     <items>
+                        <MenuItem mnemonicParsing="false" text="Action 1" />
+                        <MenuItem mnemonicParsing="false" text="Action 2" />
+                     </items>
                      <HBox.margin>
                         <Insets left="20.0" />
                      </HBox.margin>
@@ -99,7 +107,7 @@
                         <Insets left="30.0" />
                      </HBox.margin>
                   </Label>
-                  <TextField fx:id="nom" prefHeight="30.0" prefWidth="195.0" promptText=" Nom de votre Tier-list" style="-fx-border-color: #525252; -fx-background-color: #2F2F2F; -fx-border-radius: 15; -fx-text-fill: #525252;">
+                  <TextField fx:id="nom" prefHeight="30.0" prefWidth="195.0" promptText=" Nom de votre Tier-list" style="-fx-border-color: #525252; -fx-background-color: #2F2F2F; -fx-border-radius: 15; -fx-text-fill: white;">
                      <HBox.margin>
                         <Insets left="70.0" />
                      </HBox.margin>
