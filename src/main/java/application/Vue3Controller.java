@@ -17,6 +17,7 @@ import javafx.stage.Stage;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
+import java.util.List;
 import java.util.ResourceBundle;
 
 public class Vue3Controller implements Initializable {
@@ -73,37 +74,6 @@ public class Vue3Controller implements Initializable {
 
             refreshUI();
         }
-    }
-
-    @FXML
-    private void handleAddMovieApi() {
-        if (currentTierList == null) return;
-
-        AppConfig config = DataManager.getInstance().getConfig();
-        String apiKey = (config != null) ? config.getTmdbApiKey() : null;
-
-        if (apiKey == null || apiKey.isBlank()) {
-            showAlert(Alert.AlertType.WARNING, "Clé API manquante", "Veuillez configurer votre clé API dans l'accueil (Vue 1) avant d'utiliser cette fonction.");
-            return;
-        }
-
-        TextInputDialog dialog = new TextInputDialog();
-        dialog.setTitle("Recherche TMDB");
-        dialog.setHeaderText("Rechercher via l'API");
-        dialog.setContentText("Recherche de votre theme API :");
-
-        dialog.showAndWait().ifPresent(title -> {
-            if (!title.trim().isEmpty()) {
-                try {
-                    Item movieItem = TMDBApiManager.searchMovieAsItem(title.trim(), apiKey);
-                    currentTierList.addUnrankedItem(movieItem);
-                    refreshUI();
-
-                } catch (Exception e) {
-                    showAlert(Alert.AlertType.ERROR, "Erreur de recherche", e.getMessage());
-                }
-            }
-        });
     }
 
     @FXML
@@ -175,5 +145,50 @@ public class Vue3Controller implements Initializable {
         alert.setHeaderText(null);
         alert.setContentText(content);
         alert.showAndWait();
+    }
+
+    @FXML
+    private void handleAddMovieApi() {
+        if (currentTierList == null) return;
+
+        List<String> choices = java.util.Arrays.asList("Film (TMDB)", "Jeu Vidéo (RAWG)");
+        ChoiceDialog<String> typeDialog = new ChoiceDialog<>("Film (TMDB)", choices);
+        typeDialog.setTitle("Type de recherche");
+        typeDialog.setHeaderText("Que voulez-vous ajouter ?");
+        typeDialog.setContentText("Choisissez la catégorie :");
+
+        typeDialog.showAndWait().ifPresent(selectedType -> {
+
+            TextInputDialog textDialog = new TextInputDialog();
+            textDialog.setTitle("Recherche " + selectedType);
+            textDialog.setHeaderText("Recherche sur internet");
+            textDialog.setContentText("Titre :");
+
+            textDialog.showAndWait().ifPresent(title -> {
+                if (!title.trim().isEmpty()) {
+                    try {
+                        AppConfig config = DataManager.getInstance().getConfig();
+                        Item newItem = null;
+
+                        if (selectedType.equals("Film (TMDB)")) {
+                            String apiKey = (config != null) ? config.getTmdbApiKey() : null;
+                            newItem = MultiApiManager.searchMovie(title, apiKey);
+                        }
+                        else if (selectedType.equals("Jeu Vidéo (RAWG)")) {
+                            String apiKey = (config != null) ? config.getRawgApiKey() : null;
+                            newItem = MultiApiManager.searchGame(title, apiKey);
+                        }
+
+                        if (newItem != null) {
+                            currentTierList.addUnrankedItem(newItem);
+                            refreshUI();
+                        }
+
+                    } catch (Exception e) {
+                        showAlert(Alert.AlertType.ERROR, "Erreur de recherche", e.getMessage());
+                    }
+                }
+            });
+        });
     }
 }

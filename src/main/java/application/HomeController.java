@@ -23,32 +23,54 @@ public class HomeController {
     private Button importer_btn;
     @FXML
     private Button creer_btn;
+
     @FXML
     private TextField apiKeyField;
+
+    @FXML
+    private TextField apiKeyField1;
+
     @FXML
     private Button saveApi_btn;
 
     @FXML
+    private Button saveApi_btn1;
+
+    @FXML
     public void initialize() {
-        String savedKey = DataManager.getInstance().getConfig().getTmdbApiKey();
-        if (savedKey != null) {
-            apiKeyField.setText(savedKey);
+        AppConfig config = DataManager.getInstance().getConfig();
+        if (config != null) {
+            if (config.getRawgApiKey() != null) {
+                apiKeyField.setText(config.getRawgApiKey());
+            }
+            if (config.getTmdbApiKey() != null) {
+                apiKeyField1.setText(config.getTmdbApiKey());
+            }
         }
     }
 
     @FXML
     public void handleSaveApiBtn() {
-        String key = apiKeyField.getText();
-        if (key != null && !key.isBlank()) {
-            DataManager.getInstance().getConfig().setTmdbApiKey(key.trim());
-            DataManager.getInstance().saveConfig();
-
-            Alert alert = new Alert(Alert.AlertType.INFORMATION);
-            alert.setTitle("Configuration");
-            alert.setHeaderText(null);
-            alert.setContentText("Clé API sauvegardée avec succès !");
-            alert.showAndWait();
+        AppConfig config = DataManager.getInstance().getConfig();
+        if (config == null) {
+            config = new AppConfig();
         }
+
+        if (apiKeyField != null && !apiKeyField.getText().isBlank()) {
+            config.setRawgApiKey(apiKeyField.getText().trim());
+        }
+
+        if (apiKeyField1 != null && !apiKeyField1.getText().isBlank()) {
+            config.setTmdbApiKey(apiKeyField1.getText().trim());
+        }
+
+        DataManager.getInstance().saveConfig();
+
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle("Configuration");
+        alert.setHeaderText(null);
+        alert.setContentText("Vos clés API (TMDB et RAWG) ont été sauvegardées avec succès !");
+        alert.showAndWait();
     }
 
     @FXML
