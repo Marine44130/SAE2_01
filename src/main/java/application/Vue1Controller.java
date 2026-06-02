@@ -178,7 +178,6 @@ public class Vue1Controller {
         afficherItems();
     }
 
-
     @FXML
     private void modifierTier(Tier tier) {
 
