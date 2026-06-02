@@ -84,11 +84,16 @@ public class Vue3Controller implements Initializable {
     @FXML
     private void boutonPrecedent() {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("vue2.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("vue1.fxml"));
             Parent root = loader.load();
 
-            Stage stage = (Stage) previousButton.getScene().getWindow();
-            stage.setScene(new Scene(root));
+            Vue1Controller controller = loader.getController();
+            controller.envoyer(tierList);
+
+            Scene scene = new Scene(root);
+            Stage stage = (Stage) itemsContainer.getScene().getWindow();
+            stage.setScene(scene);
+            stage.show();
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -106,7 +111,7 @@ public class Vue3Controller implements Initializable {
                 DataManager.getInstance().saveConfig();
             }
             Scene scene = new Scene(root, 1293, 952);
-            Stage stage = (Stage) root.getScene().getWindow();
+            Stage stage = (Stage) itemsContainer.getScene().getWindow();
             stage.setScene(scene);
             stage.show();
         } catch (IOException e) {
@@ -200,5 +205,11 @@ public class Vue3Controller implements Initializable {
                 }
             });
         });
+    }
+
+    @FXML
+    public void suppItem(Item item){
+        tierList.removeUnrankedItem(item);
+        rafraichirPage();
     }
 }

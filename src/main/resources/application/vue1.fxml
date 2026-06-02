@@ -14,8 +14,9 @@
 <?import javafx.scene.layout.Region?>
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
 
-<StackPane maxHeight="Infinity" maxWidth="Infinity" prefHeight="952.0" prefWidth="1293.0" xmlns="http://javafx.com/javafx/26" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.Vue1Controller">
+<StackPane maxHeight="Infinity" maxWidth="Infinity" prefHeight="952.0" prefWidth="1293.0" xmlns="http://javafx.com/javafx/21.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.Vue1Controller">
     <children>
         <BorderPane maxHeight="Infinity" maxWidth="Infinity" style="-fx-background-color: #2f2f2f;">
 
@@ -50,49 +51,24 @@
 
                         <VBox prefHeight="205.0" spacing="0.0" style="-fx-background-color: #2f2f2f; -fx-border-color: #202020; -fx-border-width: 1 0 0 0;">
                             <children>
-                                <HBox fx:id="reserveItems" alignment="CENTER_LEFT" spacing="10.0" VBox.vgrow="ALWAYS">
-                                    <padding>
-                                        <Insets bottom="12.0" left="22.0" right="16.0" top="16.0" />
-                                    </padding>
-                                    <children>
-                                        <StackPane prefHeight="116.0" prefWidth="108.0" style="-fx-background-color: #8f8f8f; -fx-background-radius: 8; -fx-border-color: #a7a7a7; -fx-border-radius: 8;">
-                                            <children>
-                                                <Label style="-fx-font-size: 16px; -fx-text-fill: white;" text="item 1" />
-                                            </children>
-                                        </StackPane>
-                                        <StackPane prefHeight="116.0" prefWidth="108.0" style="-fx-background-color: #8f8f8f; -fx-background-radius: 8; -fx-border-color: #a7a7a7; -fx-border-radius: 8;">
-                                            <children>
-                                                <Label style="-fx-font-size: 16px; -fx-text-fill: white;" text="item 2" />
-                                            </children>
-                                        </StackPane>
-                                        <StackPane prefHeight="116.0" prefWidth="108.0" style="-fx-background-color: #8f8f8f; -fx-background-radius: 8; -fx-border-color: #a7a7a7; -fx-border-radius: 8;">
-                                            <children>
-                                                <Label style="-fx-font-size: 16px; -fx-text-fill: white;" text="item 3" />
-                                            </children>
-                                        </StackPane>
-                                        <StackPane prefHeight="116.0" prefWidth="108.0" style="-fx-background-color: #8f8f8f; -fx-background-radius: 8; -fx-border-color: #a7a7a7; -fx-border-radius: 8;">
-                                            <children>
-                                                <Label style="-fx-font-size: 16px; -fx-text-fill: white;" text="item 4" />
-                                            </children>
-                                        </StackPane>
-                                        <StackPane prefHeight="116.0" prefWidth="108.0" style="-fx-background-color: #454545; -fx-background-radius: 8; -fx-border-color: #7a7a7a; -fx-border-radius: 8; -fx-border-style: dashed;">
-                                            <children>
-                                                <Label style="-fx-font-size: 16px; -fx-text-fill: white;" text="image" />
-                                            </children>
-                                        </StackPane>
-                                    </children>
-                                </HBox>
 
                                 <HBox alignment="CENTER_LEFT" prefHeight="32.0" spacing="8.0" style="-fx-background-color: #3b3b3b;">
                                     <padding>
                                         <Insets left="16.0" right="12.0" />
                                     </padding>
                                     <children>
-                                        <Label style="-fx-font-size: 13px; -fx-text-fill: white;" text="Add item text :" />
-                                        <TextField prefHeight="22.0" prefWidth="126.0" style="-fx-background-color: #262626; -fx-border-color: #727272; -fx-border-radius: 4; -fx-background-radius: 4; -fx-text-fill: white; -fx-font-size: 12px;" />
-                                        <Button prefHeight="22.0" style="-fx-background-color: #6572ff; -fx-background-radius: 9; -fx-text-fill: white; -fx-font-size: 12px;" text="+ Add item" />
-                                        <Button prefHeight="22.0" style="-fx-background-color: #4c4c4c; -fx-background-radius: 9; -fx-border-color: #8a8a8a; -fx-border-radius: 9; -fx-text-fill: white; -fx-font-size: 12px;" text="Image" />
+                                        <Label prefHeight="19.0" prefWidth="169.0" style="-fx-text-fill: white;" text="Liste des Items non classés :">
+                                            <font>
+                                                <Font size="13.0" />
+                                            </font>
+                                        </Label>
+                                        <Button fx:id="addItem" onAction="#ouvrirAjoutItem" prefHeight="22.0" style="-fx-background-color: #6572ff; -fx-background-radius: 9; -fx-text-fill: white; -fx-font-size: 12px;" text="+ Add item" />
                                     </children>
+                                </HBox>
+                                <HBox fx:id="reserveItems" alignment="CENTER_LEFT" spacing="10.0" VBox.vgrow="ALWAYS">
+                                    <padding>
+                                        <Insets bottom="12.0" left="22.0" right="16.0" top="16.0" />
+                                    </padding>
                                 </HBox>
                             </children>
                         </VBox>
@@ -144,11 +120,11 @@
                 <TextField fx:id="nvHauteur" prefHeight="23.0" prefWidth="142.0" promptText="Nouvelle hauteur" style="-fx-background-color: #454545; -fx-border-color: #777777; -fx-border-radius: 4; -fx-background-radius: 4; -fx-text-fill: #ffffff; -fx-prompt-text-fill: #ffffff; -fx-font-size: 13px;" />
                 <HBox prefHeight="22.0" prefWidth="188.0">
                     <children>
-                        <Button fx:id="validerModif" onAction="#hideTierConfig" prefHeight="25.0" prefWidth="86.0" style="-fx-background-color: #6572ff; -fx-background-radius: 4; -fx-text-fill: #ffffff; -fx-font-size: 13px;" text="Valider" />
                         <Button fx:id="suppTier" onAction="#supprimerTier" prefHeight="25.0" prefWidth="86.0" style="-fx-background-color: #6572ff; -fx-background-radius: 4; -fx-text-fill: #ffffff; -fx-font-size: 13px;" text="Supprimer">
                             <HBox.margin>
                                 <Insets left="20.0" />
                             </HBox.margin></Button>
+                        <Button fx:id="validerModif" onAction="#hideTierConfig" prefHeight="25.0" prefWidth="86.0" style="-fx-background-color: #6572ff; -fx-background-radius: 4; -fx-text-fill: #ffffff; -fx-font-size: 13px;" text="Valider" />
                     </children>
                 </HBox>
             </children>

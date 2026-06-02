@@ -75,8 +75,14 @@ public class HomeController {
 
     @FXML
     public void handleCreerBtn(ActionEvent event) throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("vue2.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("vue1.fxml"));
         Parent root = loader.load();
+
+        Vue1Controller controller = loader.getController();
+
+        controller.envoyer(new TierList("sans nom"));
+        DataManager.getInstance().saveConfig();
+
         Scene scene = new Scene(root, 550, 700);
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         stage.setScene(scene);
@@ -97,10 +103,11 @@ public class HomeController {
                 TierList loadedList = (TierList) ois.readObject();
                 DataManager.getInstance().addTierList(loadedList);
 
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("vue3.fxml"));
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("vue1.fxml"));
                 Parent root = loader.load();
-                Vue3Controller controller = loader.getController();
-                controller.afficherTierList(loadedList);
+
+                Vue1Controller controller = loader.getController();
+                controller.envoyer(loadedList);
 
                 stage.setScene(new Scene(root, 550, 700));
                 stage.show();

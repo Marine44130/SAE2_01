@@ -6,31 +6,12 @@ import javafx.geometry.Bounds;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.ColorPicker;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
-import javafx.scene.input.ClipboardContent;
-import javafx.scene.input.Dragboard;
-import javafx.scene.input.MouseEvent;
-import javafx.scene.input.TransferMode;
-import javafx.scene.layout.*;
-import javafx.scene.paint.Color;
-import javafx.stage.Stage;
-import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.geometry.Bounds;
-import javafx.geometry.Pos;
-import javafx.scene.Node;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ColorPicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
-import javafx.scene.input.ClipboardContent;
-import javafx.scene.input.Dragboard;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.input.TransferMode;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
@@ -38,9 +19,6 @@ import javafx.stage.Stage;
 import java.io.IOException;
 import java.util.Comparator;
 import java.util.List;
-
-
-import java.io.IOException;
 
 public class Vue1Controller {
 
@@ -76,12 +54,16 @@ public class Vue1Controller {
     @FXML
     private GridPane grille;
 
+    @FXML
+    private Button addItem;
+
 
     @FXML
     private void onTierClicked(MouseEvent event) {
 
         Node clickedTier = (Node) event.getSource();
         tierSelectionne = (Tier) clickedTier.getUserData();
+        nvCouleur.setValue(null);
         Node root = tierConfigPopup.getParent();
 
         Bounds tierBounds =
@@ -135,6 +117,7 @@ public class Vue1Controller {
             stackpane.getChildren().add(nom);
             System.out.println("tier ajouté, le nom de la tierlist est" + tierlist.getName());
             afficherTiers();
+            nomTier.setText(null);
         }
 
     }
@@ -164,20 +147,50 @@ public class Vue1Controller {
     }
 
     @FXML
-    public void envoyer(TierList tierList) {
-        tierlist = tierList;
-        afficherTiers();
+    public void afficherItems() {
+        grille.getChildren().clear();
+
+
+
+        for (Tier tier : tierlist.getTiers()){
+            List<Item> tousLesItems = tier.getItems();
+            tousLesItems.sort(Comparator.comparingInt(Item::getPlace));
+            for (Item item : tousLesItems) {
+                VBox vbox = new VBox();
+                if(item.isImage()){
+                    ImageView image = new ImageView(item.getContent());
+                    vbox.getChildren().add(image);
+                }
+                else {
+                    Label label = new Label(item.getContent());
+                    vbox.getChildren().add(label);
+                }
+
+                vbox.setPrefSize( 100, 100);
+
+            }   }
     }
 
     @FXML
+    public void envoyer(TierList tierList) {
+        tierlist = tierList;
+        afficherTiers();
+        afficherItems();
+    }
+
+
+    @FXML
     private void modifierTier(Tier tier) {
-        Color couleur = nvCouleur.getValue();
-        String hex = String.format("#%02X%02X%02X",
-                (int)(couleur.getRed() * 255),
-                (int)(couleur.getGreen() * 255),
-                (int)(couleur.getBlue() * 255)
-        );
-        tier.setColor(hex);
+
+        if(nvCouleur.getValue() != null){
+            Color couleur = nvCouleur.getValue();
+            String hex = String.format("#%02X%02X%02X",
+                    (int)(couleur.getRed() * 255),
+                    (int)(couleur.getGreen() * 255),
+                    (int)(couleur.getBlue() * 255)
+            );
+            tier.setColor(hex);
+        }
 
         if (!nvNom.getText().isEmpty()) {
             tier.setName(nvNom.getText());
@@ -199,8 +212,6 @@ public class Vue1Controller {
         System.out.println("nv tier = " + tier);
         afficherTiers();
     }
-
-    @FXML
     public void supprimerTier(){
         tierlist.removeTier(tierSelectionne);
         hideTierConfig();
@@ -210,7 +221,21 @@ public class Vue1Controller {
         afficherTiers();
     }
 
-    public void afficherTierList(TierList tl) {
-        this.tierlist = tl;
+    @FXML
+    private void ouvrirAjoutItem() {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("vue3.fxml"));
+            Parent root = loader.load();
+
+            Vue3Controller controller = loader.getController();
+            controller.afficherTierList(tierlist);
+
+            Scene scene = new Scene(root);
+            Stage stage = (Stage) nomTier.getScene().getWindow();
+            stage.setScene(scene);
+            stage.show();
+        } catch (IOException e) {
+            System.out.println("Erreur : " + e.getMessage());
+        }
     }
 }
