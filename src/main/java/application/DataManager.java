@@ -29,7 +29,8 @@ public class DataManager {
     }
 
     public void addTierList(TierList tl) {
-        ToutesLesTierLists.add(tl);
+        ToutesLesTierLists.removeIf(tls -> tls.getName().equalsIgnoreCase(tl.getName()));
+        this.ToutesLesTierLists.add(tl);
     }
 
     public List<TierList> getToutesLesTierLists() {
