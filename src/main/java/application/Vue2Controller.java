@@ -153,6 +153,7 @@ public class Vue2Controller {
         }
     }
 
+
     private TierList clonerTierList(TierList source) {
         try {
             java.io.ByteArrayOutputStream baos = new java.io.ByteArrayOutputStream();
