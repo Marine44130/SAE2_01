@@ -123,8 +123,6 @@ public class Vue3Controller implements Initializable {
                 System.err.println("Impossible de sauvegarder automatiquement : " + e.getMessage());
             }
 
-
-            DataManager.getInstance().addTierList(tierList);
             DataManager.getInstance().saveConfig();
         }
 
