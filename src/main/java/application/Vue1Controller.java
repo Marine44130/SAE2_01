@@ -249,7 +249,7 @@ public class Vue1Controller {
 
     @FXML
     public void afficherTiersEtItems() {
-        System.out.println("je suis sensé rafraichir les tiers");
+
         grille.getChildren().clear();
 
         List<Tier> tousLesTier = tierlist.getTiers();
@@ -282,6 +282,7 @@ public class Vue1Controller {
             tousLesItems.sort(Comparator.comparingInt(Item::getPlace));
 
             for (Item item : tousLesItems) {
+                System.out.println(item);
                 VBox vbox = new VBox();
                 if(item.isImage()){
                     ImageView image = new ImageView(item.getContent());
@@ -378,6 +379,9 @@ public class Vue1Controller {
 
     @FXML
     public void handlehome_btn(MouseEvent event) throws IOException {
+        if (tierlist != null) {
+            DataManager.getInstance().enregistrerTiersList(tierlist);
+        }
         FXMLLoader loader = new FXMLLoader(getClass().getResource("home.fxml"));
         Parent root = loader.load();
 

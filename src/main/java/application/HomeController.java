@@ -49,23 +49,18 @@ public class HomeController {
                 apiKeyField1.setText(config.getTmdbApiKey());
             }
         }
-
-        File fichierSauvegarde = new File(AUTO_SAVE_FILE);
-        if (fichierSauvegarde.exists()) {
-            try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream(fichierSauvegarde))) {
-                TierList listRecuperee = (TierList) ois.readObject();
-
-                DataManager.getInstance().addTierList(listRecuperee);
-
-                System.out.println("Une sauvegarde locale a été détectée et chargée automatiquement !");
-            } catch (Exception e) {
-                System.err.println("Impossible de lire le fichier de sauvegarde automatique : " + e.getMessage());
+        if (DataManager.getInstance().getToutesLesTierLists().isEmpty()) {
+            File fichierSauvegarde = new File(AUTO_SAVE_FILE);
+            if (fichierSauvegarde.exists()) {
+                try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream(fichierSauvegarde))) {
+                    TierList listRecuperee = (TierList) ois.readObject();
+                    DataManager.getInstance().addTierList(listRecuperee);
+                } catch (Exception e) {
+                    System.err.println("Erreur : " + e.getMessage());
+                }
             }
-        } else {
-            System.out.println("Aucune sauvegarde locale trouvée. Premier démarrage ou fichier inexistant.");
         }
     }
-
     @FXML
     public void handleSaveApiBtn() {
         AppConfig config = DataManager.getInstance().getConfig();

@@ -9,8 +9,7 @@ public class DataManager {
     private static DataManager instance;
     private List<TierList> ToutesLesTierLists = new ArrayList<>();
     private AppConfig config;
-    private  static final String FILE_PATH = "VosTierslist.ser";
-
+    private static final String FILE_PATH = "tierlist_auto_save.ser";
     private DataManager() {
         config = ConfigManager.load();
     }
