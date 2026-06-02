@@ -18,6 +18,7 @@ import java.io.ObjectInputStream;
 import java.io.IOException;
 
 public class HomeController {
+    private static final String AUTO_SAVE_FILE = "tierlist_auto_save.ser";
 
     @FXML
     private Button importer_btn;
@@ -38,6 +39,7 @@ public class HomeController {
 
     @FXML
     public void initialize() {
+
         AppConfig config = DataManager.getInstance().getConfig();
         if (config != null) {
             if (config.getRawgApiKey() != null) {
@@ -46,6 +48,21 @@ public class HomeController {
             if (config.getTmdbApiKey() != null) {
                 apiKeyField1.setText(config.getTmdbApiKey());
             }
+        }
+
+        File fichierSauvegarde = new File(AUTO_SAVE_FILE);
+        if (fichierSauvegarde.exists()) {
+            try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream(fichierSauvegarde))) {
+                TierList listRecuperee = (TierList) ois.readObject();
+
+                DataManager.getInstance().addTierList(listRecuperee);
+
+                System.out.println("Une sauvegarde locale a été détectée et chargée automatiquement !");
+            } catch (Exception e) {
+                System.err.println("Impossible de lire le fichier de sauvegarde automatique : " + e.getMessage());
+            }
+        } else {
+            System.out.println("Aucune sauvegarde locale trouvée. Premier démarrage ou fichier inexistant.");
         }
     }
 

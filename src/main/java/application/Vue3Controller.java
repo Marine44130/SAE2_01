@@ -4,11 +4,13 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.geometry.Pos;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.FileChooser;
@@ -23,6 +25,11 @@ import java.util.ResourceBundle;
 public class Vue3Controller implements Initializable {
 
     private TierList tierList;
+
+    @FXML
+    private ImageView sauvIcon;
+    @FXML
+    private ImageView Maison;
 
     @FXML
     private VBox unrankedArea;
@@ -100,22 +107,28 @@ public class Vue3Controller implements Initializable {
     }
 
     @FXML
-    private void boutonFinir() {
-        try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("vue1.fxml"));
-            Parent root = loader.load();
-
-            Vue1Controller controller = loader.getController();
-            if (tierList != null) {
-                controller.envoyer(tierList);
-                DataManager.getInstance().saveConfig();
+    public void boutonFinir() {
+        if (tierList != null) {
+            try (java.io.ObjectOutputStream oos = new java.io.ObjectOutputStream(new java.io.FileOutputStream("tierlist_auto_save.ser"))) {
+                oos.writeObject(tierList);
+                System.out.println("👉 [Option A] Fichier de sauvegarde mis à jour automatiquement.");
+            } catch (IOException e) {
+                System.err.println("Impossible de sauvegarder automatiquement : " + e.getMessage());
             }
-            Scene scene = new Scene(root, 1293, 952);
-            Stage stage = (Stage) itemsContainer.getScene().getWindow();
+
+            DataManager.getInstance().addTierList(tierList);
+            DataManager.getInstance().saveConfig();
+        }
+
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("vue2.fxml"));
+            Parent root = loader.load();
+            Scene scene = new Scene(root, 550, 700);
+            Stage stage = (Stage) finishButton.getScene().getWindow();
             stage.setScene(scene);
             stage.show();
         } catch (IOException e) {
-            System.out.println("Erreur : " + e.getMessage());
+            System.out.println("Erreur de redirection : " + e.getMessage());
         }
     }
 
@@ -227,6 +240,25 @@ public class Vue3Controller implements Initializable {
     public void suppItem(Item item){
         tierList.removeUnrankedItem(item);
         rafraichirPage();
+    }
+
+    @FXML
+    private void sauvegarderLocale() {
+        if (tierList != null) {
+            DataManager.getInstance().enregistrerTiersList(tierList);
+            fenetreAlert(Alert.AlertType.INFORMATION, "Sauvegarde réussie", "Votre progression a été enregistrée en local.");
+        }
+    }
+
+    @FXML
+    public void handlehome_btn(MouseEvent event) throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("home.fxml"));
+        Parent root = loader.load();
+
+        Scene scene = new Scene(root, 550, 700);
+        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        stage.setScene(scene);
+        stage.show();
     }
 
 }

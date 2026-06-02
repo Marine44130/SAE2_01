@@ -1,5 +1,6 @@
 package application;
 
+import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -8,6 +9,7 @@ public class DataManager {
     private static DataManager instance;
     private List<TierList> ToutesLesTierLists = new ArrayList<>();
     private AppConfig config;
+    private  static final String FILE_PATH = "VosTierslist.ser";
 
     private DataManager() {
         config = ConfigManager.load();
@@ -47,5 +49,30 @@ public class DataManager {
         }
 
         return trouve ;
+    }
+
+    public void enregistrerTiersList(TierList tierList){
+        try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(FILE_PATH))) {
+            oos.writeObject(tierList);
+            System.out.println("TierList sauvegardée !");
+        } catch (IOException e) {
+            System.err.println("Erreur lors de la sauvegarde (fichier pas enregistré): " + e.getMessage());
+        }
+    }
+
+    public TierList chargerTiersList(){
+        File file = new File(FILE_PATH);
+
+        if (!file.exists()){
+            return null;
+        }
+
+        try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream(file))) {
+            return (TierList) ois.readObject();
+        } catch (IOException | ClassNotFoundException e) {
+            System.err.println("Erreur d'import : " + e.getMessage());
+            return null;
+        }
+
     }
 }
