@@ -19,9 +19,8 @@
         </Label>
 
         <TextField fx:id="apiKeyField" promptText="Entrez votre cle RAWG" style="-fx-background-color: #3d3d3d; -fx-text-fill: white; -fx-background-radius: 7;" />
-        <Button fx:id="saveApi_btn" maxWidth="Infinity" mnemonicParsing="false" onAction="#handleSaveApiBtn" style="-fx-background-color: #4CAF50; -fx-text-fill: white; -fx-background-radius: 7;" text="Sauvegarder la clé API" />
       <TextField fx:id="apiKeyField1" promptText="Entrtez votre cle TMBD" style="-fx-background-color: #3d3d3d; -fx-text-fill: white; -fx-background-radius: 7;" />
-      <Button fx:id="saveApi_btn1" maxWidth="Infinity" mnemonicParsing="false" onAction="#handleSaveApiBtn" style="-fx-background-color: #4CAF50; -fx-text-fill: white; -fx-background-radius: 7;" text="Sauvegarder la clé API" />
+        <Button fx:id="saveApi_btn" maxWidth="Infinity" mnemonicParsing="false" onAction="#handleSaveApiBtn" style="-fx-background-color: #4CAF50; -fx-text-fill: white; -fx-background-radius: 7;" text="Sauvegarder la clé API" />
 
         <Button fx:id="importer_btn" maxWidth="Infinity" mnemonicParsing="false" onAction="#handleImporterBtn" style="-fx-background-color: #6572ff; -fx-text-fill: white; -fx-background-radius: 7;" text="Importer une Tier-List" />
         <Button fx:id="creer_btn" maxWidth="Infinity" mnemonicParsing="false" onAction="#handleCreerBtn" style="-fx-background-color: #6572ff; -fx-text-fill: white; -fx-background-radius: 7;" text="Creer une Tier-List" />
