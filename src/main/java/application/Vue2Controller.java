@@ -41,6 +41,9 @@ public class Vue2Controller {
     SplitMenuButton supprimer_menu;
 
     @FXML
+    private SplitMenuButton exporter_menu;
+
+    @FXML
     SplitMenuButton dupliquer_menu;
 
     @FXML
@@ -78,6 +81,8 @@ public class Vue2Controller {
         supprimer_menu.getItems().clear();
         afficherListSupprimables();
         afficherListDupliquables();
+        afficherListExportables();
+
         MesTierList.getChildren().clear();
 
         List<TierList> toutesLesTierLists = DataManager.getInstance().getToutesLesTierLists();
@@ -204,6 +209,48 @@ public class Vue2Controller {
                 Alert alert = new Alert(Alert.AlertType.ERROR);
                 alert.setTitle("Erreur d'importation");
                 alert.setContentText("Impossible de charger le fichier sélectionné.");
+                alert.showAndWait();
+            }
+        }
+    }
+
+    @FXML
+    public void afficherListExportables() {
+        exporter_menu.getItems().clear();
+
+        List<TierList> toutesLesTierLists = DataManager.getInstance().getToutesLesTierLists();
+
+        for (TierList tierList : toutesLesTierLists) {
+            MenuItem nomTL = new MenuItem(tierList.getName());
+            nomTL.setOnAction(e -> exporterTierList(tierList));
+            exporter_menu.getItems().add(nomTL);
+        }
+    }
+
+    private void exporterTierList(TierList tierList) {
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.setTitle("Exporter la Tier-List : " + tierList.getName());
+
+        fileChooser.setInitialFileName(tierList.getName() + ".ser");
+        fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("Fichiers Tier-List (*.ser)", "*.ser"));
+
+        Stage stage = (Stage) confirmer_btn.getScene().getWindow();
+        File file = fileChooser.showSaveDialog(stage);
+
+        if (file != null) {
+            try (java.io.ObjectOutputStream oos = new java.io.ObjectOutputStream(new java.io.FileOutputStream(file))) {
+                oos.writeObject(tierList);
+
+                Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                alert.setTitle("Exportation réussie");
+                alert.setHeaderText(null);
+                alert.setContentText("La Tier-List \"" + tierList.getName() + "\" a bien été exportée !");
+                alert.showAndWait();
+
+            } catch (IOException e) {
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Erreur d'exportation");
+                alert.setContentText("Impossible d'exporter la Tier-List : " + e.getMessage());
                 alert.showAndWait();
             }
         }

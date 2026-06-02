@@ -183,12 +183,13 @@ public class Vue3Controller implements Initializable {
             itemNode.setOnMouseClicked(event -> {
                 ContextMenu contextMenu = new ContextMenu();
 
-                MenuItem deleteMenu = new MenuItem("Supprimer");
+                MenuItem modifyMenu = new MenuItem("Modifier");
+                modifyMenu.setOnAction(e -> modifierItem(item));
 
+                MenuItem deleteMenu = new MenuItem("Supprimer");
                 deleteMenu.setOnAction(e -> suppItem(item));
 
-                contextMenu.getItems().add(deleteMenu);
-
+                contextMenu.getItems().addAll(modifyMenu, deleteMenu);
                 contextMenu.show(itemNode, event.getScreenX(), event.getScreenY());
             });
 
@@ -301,6 +302,35 @@ public class Vue3Controller implements Initializable {
                 alert.setContentText("Impossible de charger le fichier sélectionné.");
                 alert.showAndWait();
             }
+        }
+    }
+
+    private void modifierItem(Item item) {
+        if (item.isImage()) {
+            FileChooser fileChooser = new FileChooser();
+            fileChooser.setTitle("Modifier l'image");
+            fileChooser.getExtensionFilters().add(
+                    new FileChooser.ExtensionFilter("Images", "*.jpg", "*.png", "*.jpeg", "*.gif")
+            );
+
+            File selectedFile = fileChooser.showOpenDialog(unrankedArea.getScene().getWindow());
+
+            if (selectedFile != null) {
+                item.setContent(selectedFile.toURI().toString());
+                rafraichirPage();
+            }
+        } else {
+            TextInputDialog textDialog = new TextInputDialog(item.getContent());
+            textDialog.setTitle("Modifier le texte");
+            textDialog.setHeaderText("Modification de l'élément");
+            textDialog.setContentText("Nouveau texte :");
+
+            textDialog.showAndWait().ifPresent(nouveauTexte -> {
+                if (!nouveauTexte.trim().isEmpty()) {
+                    item.setContent(nouveauTexte.trim());
+                    rafraichirPage();
+                }
+            });
         }
     }
 
