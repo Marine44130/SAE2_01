@@ -1,141 +1,56 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.image.*?>
-<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ColorPicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
 
-<StackPane maxHeight="Infinity" maxWidth="Infinity" prefHeight="952.0" prefWidth="1293.0" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.Vue1Controller">
+<StackPane maxHeight="Infinity" maxWidth="Infinity" prefHeight="952.0" prefWidth="1293.0" xmlns="http://javafx.com/javafx/26" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.Vue1Controller">
     <children>
         <BorderPane maxHeight="Infinity" maxWidth="Infinity" style="-fx-background-color: #2f2f2f;">
 
             <center>
                 <VBox maxHeight="Infinity" maxWidth="Infinity" spacing="0.0">
                     <children>
-                      <HBox prefHeight="34.0" style="-fx-background-color: #353535; -fx-border-color: #1e1e1e; -fx-border-width: 0 0 1 0;">
-                          <children>
-                              <TextField prefHeight="24.0" prefWidth="170.0" promptText="Add text (S,A,B)" style="-fx-background-color: #3d3d3d; -fx-border-color: #8b8b8b; -fx-border-radius: 7; -fx-background-radius: 7; -fx-text-fill: #f2f2f2; -fx-prompt-text-fill: #eeeeee; -fx-font-size: 14px;">
-                                  <HBox.margin>
-                                      <Insets bottom="5.0" left="8.0" top="5.0" />
-                                  </HBox.margin>
-                              </TextField>
-                              <Button prefHeight="24.0" prefWidth="96.0" style="-fx-background-color: #3d3d3d; -fx-background-radius: 8; -fx-border-color: #8b8b8b; -fx-border-radius: 8; -fx-text-fill: #ffffff; -fx-font-size: 13px;" text="Couleur">
-                                  <HBox.margin>
-                                      <Insets bottom="5.0" left="8.0" top="5.0" />
-                                  </HBox.margin>
-                              </Button>
-                              <Button prefHeight="24.0" prefWidth="86.0" style="-fx-background-color: #6572ff; -fx-background-radius: 7; -fx-text-fill: #ffffff; -fx-font-size: 13px;" text="+ Add tier">
-                                  <HBox.margin>
-                                      <Insets bottom="5.0" left="8.0" top="5.0" />
-                                  </HBox.margin>
-                              </Button>
-                          </children>
-                      </HBox>
-                        <GridPane maxHeight="Infinity" maxWidth="Infinity" VBox.vgrow="ALWAYS">
+                        <HBox prefHeight="34.0" style="-fx-background-color: #353535; -fx-border-color: #1e1e1e; -fx-border-width: 0 0 1 0;">
+                            <children>
+                                <TextField fx:id="nomTier" prefHeight="24.0" prefWidth="170.0" promptText="Add text (S,A,B)" style="-fx-background-color: #3d3d3d; -fx-border-color: #8b8b8b; -fx-border-radius: 7; -fx-background-radius: 7; -fx-text-fill: #f2f2f2; -fx-prompt-text-fill: #eeeeee; -fx-font-size: 14px;">
+                                    <HBox.margin>
+                                        <Insets bottom="5.0" left="8.0" top="5.0" />
+                                    </HBox.margin>
+                                </TextField>
+                                <ColorPicker fx:id="couleurTier" prefHeight="30.0" prefWidth="140.0" promptText="ee" style="-fx-text-fill: white;">
+                                    <HBox.margin>
+                                        <Insets left="10.0" top="5.0" />
+                                    </HBox.margin>
+                                </ColorPicker>
+                                <Button fx:id="addTier" onAction="#AddTier" prefHeight="24.0" prefWidth="86.0" style="-fx-background-color: #6572ff; -fx-background-radius: 7; -fx-text-fill: #ffffff; -fx-font-size: 13px;" text="+ Add tier">
+                                    <HBox.margin>
+                                        <Insets bottom="5.0" left="8.0" top="5.0" />
+                                    </HBox.margin>
+                                </Button>
+                            </children>
+                        </HBox>
+                        <GridPane fx:id="grille" maxHeight="Infinity" maxWidth="Infinity" VBox.vgrow="ALWAYS">
                             <columnConstraints>
                                 <ColumnConstraints minWidth="0.0" prefWidth="126.0" />
                                 <ColumnConstraints hgrow="ALWAYS" minWidth="0.0" prefWidth="823.0" />
                             </columnConstraints>
-                            <rowConstraints>
-                                <RowConstraints percentHeight="14.2857" />
-                                <RowConstraints percentHeight="14.2857" />
-                                <RowConstraints percentHeight="14.2857" />
-                                <RowConstraints percentHeight="14.2857" />
-                                <RowConstraints percentHeight="14.2857" />
-                                <RowConstraints percentHeight="14.2857" />
-                                <RowConstraints percentHeight="14.2857" />
-                            </rowConstraints>
-                            <children>
-                                <StackPane onMouseClicked="#onTierClicked" prefHeight="101.0" prefWidth="89.0" style="-fx-background-color: #ff3333; -fx-border-color: #202020; -fx-border-width: 0 1 1 0;" GridPane.columnIndex="0" GridPane.rowIndex="0">
-                                    <children>
-                                        <Label style="-fx-font-size: 15px; -fx-text-fill: #000000;" text="S" />
-                                    </children>
-                                </StackPane>
-                                <StackPane onMouseClicked="#onTierClicked" style="-fx-background-color: #ffb444; -fx-border-color: #202020; -fx-border-width: 0 1 1 0;" GridPane.columnIndex="0" GridPane.rowIndex="1">
-                                    <children>
-                                        <Label style="-fx-font-size: 15px; -fx-text-fill: #000000;" text="A" />
-                                    </children>
-                                </StackPane>
-                                <StackPane onMouseClicked="#onTierClicked" style="-fx-background-color: #ffe95c; -fx-border-color: #202020; -fx-border-width: 0 1 1 0;" GridPane.columnIndex="0" GridPane.rowIndex="2">
-                                    <children>
-                                        <Label style="-fx-font-size: 15px; -fx-text-fill: #000000;" text="B" />
-                                    </children>
-                                </StackPane>
-                                <StackPane onMouseClicked="#onTierClicked" style="-fx-background-color: #a6ff28; -fx-border-color: #202020; -fx-border-width: 0 1 1 0;" GridPane.columnIndex="0" GridPane.rowIndex="3">
-                                    <children>
-                                        <Label style="-fx-font-size: 15px; -fx-text-fill: #000000;" text="C" />
-                                    </children>
-                                </StackPane>
-                                <StackPane onMouseClicked="#onTierClicked" style="-fx-background-color: #35b44b; -fx-border-color: #202020; -fx-border-width: 0 1 1 0;" GridPane.columnIndex="0" GridPane.rowIndex="4">
-                                    <children>
-                                        <Label style="-fx-font-size: 15px; -fx-text-fill: #000000;" text="D" />
-                                    </children>
-                                </StackPane>
-                                <StackPane onMouseClicked="#onTierClicked" style="-fx-background-color: #55d4df; -fx-border-color: #202020; -fx-border-width: 0 1 1 0;" GridPane.columnIndex="0" GridPane.rowIndex="5">
-                                    <children>
-                                        <Label style="-fx-font-size: 15px; -fx-text-fill: #000000;" text="E" />
-                                    </children>
-                                </StackPane>
-                                <StackPane onMouseClicked="#onTierClicked" style="-fx-background-color: #3d80bd; -fx-border-color: #202020; -fx-border-width: 0 1 1 0;" GridPane.columnIndex="0" GridPane.rowIndex="6">
-                                    <children>
-                                        <Label style="-fx-font-size: 15px; -fx-text-fill: #000000;" text="F" />
-                                    </children>
-                                </StackPane>
-
-                                <FlowPane fx:id="tierS"
-                                          GridPane.columnIndex="1"
-                                          GridPane.rowIndex="0"
-                                          hgap="5"
-                                          vgap="5"
-                                          style="-fx-background-color: #f4f4f4; -fx-border-color: #202020; -fx-border-width: 0 0 1 0;" />
-
-                                <FlowPane fx:id="tierA"
-                                          GridPane.columnIndex="1"
-                                          GridPane.rowIndex="1"
-                                          hgap="5"
-                                          vgap="5"
-                                          style="-fx-background-color: #f4f4f4; -fx-border-color: #202020; -fx-border-width: 0 0 1 0;" />
-
-                                <FlowPane fx:id="tierB"
-                                          GridPane.columnIndex="1"
-                                          GridPane.rowIndex="2"
-                                          hgap="5"
-                                          vgap="5"
-                                          style="-fx-background-color: #f4f4f4; -fx-border-color: #202020; -fx-border-width: 0 0 1 0;" />
-
-                                <FlowPane fx:id="tierC"
-                                          GridPane.columnIndex="1"
-                                          GridPane.rowIndex="3"
-                                          hgap="5"
-                                          vgap="5"
-                                          style="-fx-background-color: #f4f4f4; -fx-border-color: #202020; -fx-border-width: 0 0 1 0;" />
-
-                                <FlowPane fx:id="tierD"
-                                          GridPane.columnIndex="1"
-                                          GridPane.rowIndex="4"
-                                          hgap="5"
-                                          vgap="5"
-                                          style="-fx-background-color: #f4f4f4; -fx-border-color: #202020; -fx-border-width: 0 0 1 0;" />
-
-                                <FlowPane fx:id="tierE"
-                                          GridPane.columnIndex="1"
-                                          GridPane.rowIndex="5"
-                                          hgap="5"
-                                          vgap="5"
-                                          style="-fx-background-color: #f4f4f4; -fx-border-color: #202020; -fx-border-width: 0 0 1 0;" />
-
-                                <FlowPane fx:id="tierF"
-                                          GridPane.columnIndex="1"
-                                          GridPane.rowIndex="6"
-                                          hgap="5"
-                                          vgap="5"
-                                          style="-fx-background-color: #f4f4f4; -fx-border-color: #202020; -fx-border-width: 0 0 1 0;" />
-                            </children>
                         </GridPane>
 
                         <VBox prefHeight="205.0" spacing="0.0" style="-fx-background-color: #2f2f2f; -fx-border-color: #202020; -fx-border-width: 1 0 0 0;">
                             <children>
-                                <HBox alignment="CENTER_LEFT" spacing="10.0" VBox.vgrow="ALWAYS">
+                                <HBox fx:id="reserveItems" alignment="CENTER_LEFT" spacing="10.0" VBox.vgrow="ALWAYS">
                                     <padding>
                                         <Insets bottom="12.0" left="22.0" right="16.0" top="16.0" />
                                     </padding>
@@ -184,31 +99,31 @@
                     </children>
                 </VBox>
             </center>
-         <left>
-            <VBox prefHeight="943.0" prefWidth="48.0" style="-fx-background-color: #242424;" BorderPane.alignment="CENTER">
-               <children>
-                  <ImageView fitHeight="46.0" fitWidth="46.0" onMouseClicked="#retourPressEvent" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@images/home-removebg-preview(1).png" />
-                     </image>
-                  </ImageView>
-                  <Region prefWidth="50.0" />
-                  <ImageView fitHeight="46.0" fitWidth="46.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@images/partage-removebg-preview.png" />
-                     </image>
-                  </ImageView>
-                  <ImageView fitHeight="46.0" fitWidth="46.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@images/save-removebg-preview.png" />
-                     </image>
-                  </ImageView>
-               </children>
-            </VBox>
-         </left>
+            <left>
+                <VBox prefHeight="943.0" prefWidth="48.0" style="-fx-background-color: #242424;" BorderPane.alignment="CENTER">
+                    <children>
+                        <ImageView fitHeight="46.0" fitWidth="46.0" pickOnBounds="true" preserveRatio="true">
+                            <image>
+                                <Image url="@images/home-removebg-preview(1).png" />
+                            </image>
+                        </ImageView>
+                        <Region prefWidth="50.0" />
+                        <ImageView fitHeight="46.0" fitWidth="46.0" pickOnBounds="true" preserveRatio="true">
+                            <image>
+                                <Image url="@images/partage-removebg-preview.png" />
+                            </image>
+                        </ImageView>
+                        <ImageView fitHeight="46.0" fitWidth="46.0" pickOnBounds="true" preserveRatio="true">
+                            <image>
+                                <Image url="@images/save-removebg-preview.png" />
+                            </image>
+                        </ImageView>
+                    </children>
+                </VBox>
+            </left>
         </BorderPane>
 
-        <VBox fx:id="tierConfigPopup" alignment="TOP_CENTER" maxHeight="132.0" maxWidth="210.0" prefHeight="132.0" prefWidth="210.0" spacing="6.0" style="-fx-background-color: #3f3f3f; -fx-background-radius: 6; -fx-border-color: #1c1c1c; -fx-border-radius: 6; -fx-border-width: 1;" visible="false" StackPane.alignment="TOP_LEFT">
+        <VBox fx:id="tierConfigPopup" alignment="TOP_CENTER" maxHeight="228.0" maxWidth="210.0" prefHeight="228.0" prefWidth="210.0" spacing="6.0" style="-fx-background-color: #3f3f3f; -fx-background-radius: 6; -fx-border-color: #1c1c1c; -fx-border-radius: 6; -fx-border-width: 1;" visible="false" StackPane.alignment="TOP_LEFT">
             <StackPane.margin>
                 <Insets left="0.0" top="0.0" />
             </StackPane.margin>
@@ -223,10 +138,19 @@
                         <Button onAction="#hideTierConfig" prefHeight="22.0" prefWidth="24.0" style="-fx-background-color: #3f3f3f; -fx-background-radius: 3; -fx-border-color: #777777; -fx-border-radius: 3; -fx-text-fill: #ffffff; -fx-font-size: 12px; -fx-padding: 0;" text="X" />
                     </children>
                 </HBox>
-                <Button prefHeight="23.0" prefWidth="112.0" style="-fx-background-color: #454545; -fx-background-radius: 4; -fx-border-color: #777777; -fx-border-radius: 4; -fx-text-fill: #ffffff; -fx-font-size: 13px;" text="Couleur" />
-                <TextField prefHeight="23.0" prefWidth="142.0" promptText="Add text (S,A,B)" style="-fx-background-color: #454545; -fx-border-color: #777777; -fx-border-radius: 4; -fx-background-radius: 4; -fx-text-fill: #ffffff; -fx-prompt-text-fill: #ffffff; -fx-font-size: 13px;" />
-                <Region prefHeight="6.0" />
-                <Button onAction="#hideTierConfig" prefHeight="25.0" prefWidth="86.0" style="-fx-background-color: #6572ff; -fx-background-radius: 4; -fx-text-fill: #ffffff; -fx-font-size: 13px;" text="Valider" />
+                <TextField fx:id="nvNom" prefHeight="23.0" prefWidth="189.0" promptText="Nouveau nom" style="-fx-background-color: #454545; -fx-border-color: #777777; -fx-border-radius: 4; -fx-background-radius: 4; -fx-text-fill: #ffffff; -fx-prompt-text-fill: #ffffff; -fx-font-size: 13px;" />
+                <ColorPicker fx:id="nvCouleur" prefHeight="32.0" prefWidth="216.0" />
+                <TextField fx:id="nvPlace" prefHeight="23.0" prefWidth="142.0" promptText="Nouvelle place" style="-fx-background-color: #454545; -fx-border-color: #777777; -fx-border-radius: 4; -fx-background-radius: 4; -fx-text-fill: #ffffff; -fx-prompt-text-fill: #ffffff; -fx-font-size: 13px;" />
+                <TextField fx:id="nvHauteur" prefHeight="23.0" prefWidth="142.0" promptText="Nouvelle hauteur" style="-fx-background-color: #454545; -fx-border-color: #777777; -fx-border-radius: 4; -fx-background-radius: 4; -fx-text-fill: #ffffff; -fx-prompt-text-fill: #ffffff; -fx-font-size: 13px;" />
+                <HBox prefHeight="22.0" prefWidth="188.0">
+                    <children>
+                        <Button fx:id="validerModif" onAction="#hideTierConfig" prefHeight="25.0" prefWidth="86.0" style="-fx-background-color: #6572ff; -fx-background-radius: 4; -fx-text-fill: #ffffff; -fx-font-size: 13px;" text="Valider" />
+                        <Button fx:id="suppTier" onAction="#supprimerTier" prefHeight="25.0" prefWidth="86.0" style="-fx-background-color: #6572ff; -fx-background-radius: 4; -fx-text-fill: #ffffff; -fx-font-size: 13px;" text="Supprimer">
+                            <HBox.margin>
+                                <Insets left="20.0" />
+                            </HBox.margin></Button>
+                    </children>
+                </HBox>
             </children>
         </VBox>
     </children>
