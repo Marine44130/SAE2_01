@@ -7,7 +7,7 @@ import java.util.List;
 
 public class Tier implements Serializable {
     private static final long serialVersionUID = 1L;
-    private final static int DEFAULT_HAUTEUR = 50;
+    private final static int DEFAULT_HAUTEUR = 100;
 
     private TierList tierlist;
     private String name;

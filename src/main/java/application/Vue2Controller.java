@@ -129,11 +129,11 @@ public class Vue2Controller {
 
     private void ouvrirTierList(TierList tierList) {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("vue1.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("vue3.fxml"));
             Parent root = loader.load();
 
-            Vue1Controller controller = loader.getController();
-            controller.envoyer(tierList);
+            Vue3Controller controller = loader.getController();
+            controller.afficherTierList(tierList);
             System.out.println(tierList);
 
             Scene scene = new Scene(root);
