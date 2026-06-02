@@ -121,10 +121,15 @@ public class Vue3Controller implements Initializable {
         }
 
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("vue2.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("vue1.fxml"));
             Parent root = loader.load();
-            Scene scene = new Scene(root, 550, 700);
-            Stage stage = (Stage) finishButton.getScene().getWindow();
+            Vue1Controller controller = loader.getController();
+            if (tierList != null) {
+                controller.envoyer(tierList);
+                DataManager.getInstance().saveConfig();
+            }
+            Scene scene = new Scene(root, 1293, 952);
+            Stage stage = (Stage) itemsContainer.getScene().getWindow();
             stage.setScene(scene);
             stage.show();
         } catch (IOException e) {
